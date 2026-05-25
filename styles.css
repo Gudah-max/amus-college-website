@@ -1316,6 +1316,12 @@ ul { list-style: none; }
   gap: 20px;
   margin-top: 32px;
 }
+.alumni-portrait-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
 .alumni-card {
   background: var(--gray-light);
   border-radius: var(--radius);
@@ -1405,6 +1411,56 @@ ul { list-style: none; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 .reveal-delay-4 { transition-delay: 0.4s; }
 
+/* ---- Lightbox ---- */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.lightbox-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.lightbox-overlay img {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 10px;
+  object-fit: contain;
+  transform: scale(0.92);
+  transition: transform 0.25s ease;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+}
+.lightbox-overlay.active img {
+  transform: scale(1);
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: rgba(255,255,255,0.12);
+  border: none;
+  color: #fff;
+  font-size: 1.6rem;
+  line-height: 1;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.lightbox-close:hover { opacity: 0.75; transform: scale(1.1); }
+.alumni-portrait-grid img { cursor: zoom-in; }
+
 /* ---- Responsive ---- */
 @media (max-width: 1024px) {
   .welcome-content { grid-template-columns: 1fr; gap: 40px; }
@@ -1418,6 +1474,7 @@ ul { list-style: none; }
   .steps-grid::before { display: none; }
   /* News grid: 3 → 2 columns on tablet */
   .news-grid { grid-template-columns: repeat(2, 1fr); }
+  .alumni-portrait-grid { grid-template-columns: repeat(3, 1fr); }
   /* Reduce section padding on tablet */
   .section-padding { padding: 70px 0; }
   .section-padding-sm { padding: 48px 0; }
@@ -1441,6 +1498,7 @@ ul { list-style: none; }
   .form-row { grid-template-columns: 1fr; }
   /* News grid: single column on mobile */
   .news-grid { grid-template-columns: 1fr; }
+  .alumni-portrait-grid { grid-template-columns: repeat(2, 1fr); }
   /* Reduce section & page-hero padding */
   .section-padding { padding: 50px 0; }
   .section-padding-sm { padding: 36px 0; }

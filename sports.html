@@ -143,6 +143,10 @@
             <div class="alumni-name">Musabbah Hakim 🇺🇸</div>
             <div class="alumni-dest">2024 USSSA Golden Boot Winner → <strong>Virginia Commonwealth University</strong>, USA</div>
           </div>
+          <div class="alumni-card" style="margin-bottom:16px;">
+            <div class="alumni-name">Allan Oyirwoth 🇺🇸</div>
+            <div class="alumni-dest">MVP — 2023 Uganda National Football Championship → <strong>New England Revolution</strong> (MLS), USA</div>
+          </div>
 
         </div>
 
@@ -177,7 +181,7 @@
       </div>
 
       <!-- Alumni portrait grid -->
-      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:40px;" class="reveal">
+      <div class="alumni-portrait-grid reveal">
         <div style="text-align:center;">
           <img src="images/toto_majub_sendoff_atlanta.webp" alt="Toto Majub Bran" style="width:100%;border-radius:12px;height:240px;object-fit:cover;display:block;" />
           <div style="font-weight:700;color:var(--navy);margin-top:10px;font-size:0.95rem;font-family:'Montserrat',sans-serif;">Toto Majub Bran</div>
@@ -201,6 +205,21 @@
         <div style="text-align:center;">
           <img src="images/ssekamate_alvin_eastern_florida_college.webp" alt="Ssekamate Alvin" style="width:100%;border-radius:12px;height:240px;object-fit:cover;display:block;" />
           <div style="font-weight:700;color:var(--navy);margin-top:10px;font-size:0.95rem;font-family:'Montserrat',sans-serif;">Ssekamate Alvin</div>
+          <div style="font-size:0.8rem;color:var(--text-mid);margin-top:4px;">Eastern Florida State College, USA</div>
+        </div>
+        <div style="text-align:center;">
+          <img src="images/oyirwoth_allan.webp" alt="Allan Oyirwoth" style="width:100%;border-radius:12px;height:240px;object-fit:cover;object-position:center top;display:block;" />
+          <div style="font-weight:700;color:var(--navy);margin-top:10px;font-size:0.95rem;font-family:'Montserrat',sans-serif;">Allan Oyirwoth</div>
+          <div style="font-size:0.8rem;color:var(--text-mid);margin-top:4px;">New England Revolution (MLS), USA</div>
+        </div>
+        <div style="text-align:center;">
+          <img src="images/mukisa_emmanuel.webp" alt="Mukisa Emmanuel" style="width:100%;border-radius:12px;height:240px;object-fit:cover;object-position:center top;display:block;" />
+          <div style="font-weight:700;color:var(--navy);margin-top:10px;font-size:0.95rem;font-family:'Montserrat',sans-serif;">Mukisa Emmanuel</div>
+          <div style="font-size:0.8rem;color:var(--text-mid);margin-top:4px;">Eastern Florida State College, USA</div>
+        </div>
+        <div style="text-align:center;">
+          <img src="images/denis_ssemujju.webp" alt="Denis Ssemujju" style="width:100%;border-radius:12px;height:240px;object-fit:cover;object-position:center top;display:block;" />
+          <div style="font-weight:700;color:var(--navy);margin-top:10px;font-size:0.95rem;font-family:'Montserrat',sans-serif;">Denis Ssemujju</div>
           <div style="font-size:0.8rem;color:var(--text-mid);margin-top:4px;">Eastern Florida State College, USA</div>
         </div>
       </div>
@@ -359,7 +378,8 @@
       <div class="footer-bottom">
         <span>© 2025 Amus College School. All rights reserved.</span>
         <div class="footer-bottom-links">
-          <a href="#">Privacy Policy</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="cookies.html">Cookie Policy</a>
           <a href="contact.html">Contact</a>
         </div>
         <div class="footer-credit">Built with ❤ by <a href="https://vantadigital.co" target="_blank" rel="noopener">Vanta Digital</a></div>
@@ -367,6 +387,44 @@
     </div>
   </footer>
 
+  <!-- Lightbox -->
+  <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <img id="lightboxImg" src="" alt="" />
+  </div>
+
   <script src="script.js"></script>
+  <script>
+    (function () {
+      var overlay = document.getElementById('lightbox');
+      var img = document.getElementById('lightboxImg');
+      var closeBtn = document.getElementById('lightboxClose');
+
+      document.querySelectorAll('.alumni-portrait-grid img').forEach(function (el) {
+        el.addEventListener('click', function () {
+          img.src = el.src;
+          img.alt = el.alt;
+          overlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      function close() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      closeBtn.addEventListener('click', close);
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) close();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') close();
+      });
+    })();
+  </script>
+  <!-- ACS Chatbot Widget -->
+    <script>window.ACS_CHATBOT_URL = 'https://acs-chatbot-4oym.onrender.com';</script>
+    <script src="https://acs-chatbot-4oym.onrender.com/widget.js"></script>
 </body>
 </html>
