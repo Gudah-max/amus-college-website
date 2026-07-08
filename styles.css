@@ -19,13 +19,13 @@ ul { list-style: none; }
 
 /* ---- Utility Classes ---- */
 .container {
-  max-width: 1200px;
+  max-width: var(--container);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--gutter);
 }
 
-.section-padding { padding: 90px 0; }
-.section-padding-sm { padding: 60px 0; }
+.section-padding { padding: var(--space-9) 0; }
+.section-padding-sm { padding: var(--space-8) 0; }
 
 .text-center { text-align: center; }
 .text-gold { color: var(--gold); }
@@ -68,7 +68,7 @@ ul { list-style: none; }
   gap: 8px;
   padding: 14px 32px;
   border-radius: var(--radius);
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
@@ -151,9 +151,9 @@ ul { list-style: none; }
 }
 
 .brand-text-top {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-display);
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   line-height: 1.1;
   letter-spacing: -0.01em;
@@ -300,7 +300,7 @@ ul { list-style: none; }
   color: var(--white);
   line-height: 1.05;
   margin-bottom: 20px;
-  font-weight: 800;
+  font-weight: 500;
 }
 
 .hero h1 span { color: var(--gold); }
@@ -334,9 +334,9 @@ ul { list-style: none; }
 }
 
 .hero-stat-num {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-display);
   font-size: 2rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--gold);
   line-height: 1;
   letter-spacing: -0.03em;
@@ -372,9 +372,9 @@ ul { list-style: none; }
 }
 
 .welcome-img-badge-num {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.8rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--gold);
   line-height: 1;
   letter-spacing: -0.03em;
@@ -443,9 +443,9 @@ ul { list-style: none; }
 }
 
 .stat-number {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-display);
   font-size: 3rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--gold);
   line-height: 1;
   margin-bottom: 8px;
@@ -586,10 +586,10 @@ ul { list-style: none; }
   font-size: 4rem;
   color: var(--gold);
   line-height: 0.8;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-display);
   margin-bottom: 12px;
   opacity: 0.5;
-  font-weight: 800;
+  font-weight: 500;
 }
 
 .testimonial-text {
@@ -721,9 +721,9 @@ ul { list-style: none; }
 }
 
 .footer-brand-name {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-display);
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   letter-spacing: -0.01em;
 }
@@ -751,7 +751,7 @@ ul { list-style: none; }
 
 .footer-col h4 {
   color: var(--white);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.01em;
@@ -1003,7 +1003,7 @@ ul { list-style: none; }
   margin: 0 auto 20px;
   font-family: var(--font-display);
   font-size: 1.4rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--gold);
   border: 3px solid var(--gold);
   box-shadow: 0 0 0 6px rgba(201,162,39,0.1);
@@ -1139,7 +1139,7 @@ ul { list-style: none; }
 .academics-card-float-num {
   font-family: var(--font-display);
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--gold);
   line-height: 1;
 }
@@ -1229,7 +1229,7 @@ ul { list-style: none; }
   gap: 10px;
 }
 .img-placeholder .placeholder-id {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 0.8rem;
   letter-spacing: 1px;
@@ -1265,7 +1265,7 @@ ul { list-style: none; }
   border-top: 4px solid var(--gold);
 }
 .sports-stat-card .stat-val {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-display);
   font-size: 2.2rem;
   font-weight: 900;
   color: var(--gold);
@@ -1296,7 +1296,7 @@ ul { list-style: none; }
   border-left: 4px solid var(--gold);
 }
 .alumni-card .alumni-name {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 0.95rem;
   color: var(--navy);
@@ -1314,7 +1314,7 @@ ul { list-style: none; }
   margin-bottom: 16px;
 }
 .callup-block .callup-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 700;
   color: var(--gold);

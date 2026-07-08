@@ -129,12 +129,99 @@ body {
   line-height: var(--leading-body);
 }
 
+/* Fraunces loads weights 400-600 only; anything heavier would be
+   synthesized bold, so headings sit at 500 with scale doing the work. */
 h1, h2, h3, h4, h5 {
   font-family: var(--font-display);
   font-optical-sizing: auto;
+  font-weight: 500;
   line-height: var(--leading-tight);
   letter-spacing: -0.02em;
   color: var(--ink-900);
+}
+
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+
+p, li { max-width: 68ch; }
+.text-center p { margin-inline: auto; }
+
+/* Visible keyboard focus on every interactive element — accessibility
+   floor, not optional. Gold ring per DESIGN.md. */
+:focus-visible {
+  outline: 3px solid var(--brand-gold);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--brand-gold-soft);
+  color: var(--ink-900);
+}
+
+/* ---- Eyebrow: uppercase section label with short gold underline ---- */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-red);
+  padding-bottom: var(--space-2);
+  position: relative;
+}
+.eyebrow::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: var(--space-6);
+  height: 2px;
+  background: var(--brand-gold);
+  border-radius: var(--radius-full);
+}
+.text-center .eyebrow::after,
+.eyebrow.eyebrow-center::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ---- Signature "Let There Be Light" glow ----
+   The one bold move in the system: a soft radial gold glow placed
+   behind a headline (hero) or accent element. Subtle, never neon.
+   Apply .light-glow to the positioned parent of the headline. */
+.light-glow {
+  position: relative;
+}
+.light-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  width: min(620px, 90vw);
+  height: min(620px, 90vw);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, var(--brand-gold-soft) 0%, transparent 60%);
+  opacity: 0.22;
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+.light-glow > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Gold spark: tiny accent used under achievement stats. */
+.gold-spark {
+  display: block;
+  width: var(--space-5);
+  height: 3px;
+  margin-top: var(--space-2);
+  background: var(--brand-gold);
+  border-radius: var(--radius-full);
 }
 
 @media (prefers-reduced-motion: reduce) {
