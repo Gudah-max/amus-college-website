@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (lightbox) {
     lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox || e.target.id === 'lightboxClose') {
+      if (e.target === lightbox || e.target.closest('#lightboxClose')) {
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
       }
@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (contactForm) {
     contactForm.addEventListener('submit', () => {
       const btn = contactForm.querySelector('[type="submit"]');
-      btn.innerHTML = '⏳ Sending...';
+      btn.textContent = 'Sending…';
       btn.disabled = true;
     });
   }
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (admissionsForm) {
     admissionsForm.addEventListener('submit', () => {
       const btn = admissionsForm.querySelector('[type="submit"]');
-      btn.innerHTML = '⏳ Submitting...';
+      btn.textContent = 'Submitting…';
       btn.disabled = true;
     });
   }
