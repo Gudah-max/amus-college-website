@@ -99,7 +99,7 @@
      Aliasing here (instead of renaming ~150 usages across styles.css)
      means the brand hex swap applies everywhere at once with a single,
      low-risk, reviewable diff. New component work should reference the
-     --brand-*/--ink-*/--shadow-* names directly, not these aliases. */
+     newer brand / ink / shadow token names directly, not these aliases. */
   --navy:       var(--brand-navy);
   --navy-mid:   var(--brand-navy-mid);
   --navy-light: var(--brand-navy-light);
@@ -212,6 +212,61 @@ p, li { max-width: 68ch; }
 .light-glow > * {
   position: relative;
   z-index: 1;
+}
+
+/* ---- Icon badge: the one icon treatment, everywhere ----
+   48px circle, gold-soft fill, navy 1.5px-stroke Lucide icon inside.
+   On dark surfaces add .icon-badge-dark: navy-tint fill, gold icon. */
+.icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background: var(--brand-gold-soft);
+  color: var(--brand-navy);
+}
+.icon-badge svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+}
+.icon-badge-dark {
+  background: rgba(244,180,26,0.12);
+  color: var(--brand-gold);
+}
+/* Inline icon (footer contact rows, list markers) — no badge circle */
+.icon-inline {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: -0.15em;
+}
+.icon-inline svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+}
+
+/* ---- Card: shared surface treatment ----
+   Ambient warm shadow at rest, settles up on hover. */
+.ds-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.ds-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
 }
 
 /* Gold spark: tiny accent used under achievement stats. */

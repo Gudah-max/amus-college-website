@@ -55,6 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
   revealElements.forEach(el => revealObserver.observe(el));
 
   // ---- Counter Animation ----
+  // The markup carries the final number as its default text, so visitors
+  // without JS (or with reduced motion) always see the real stat, never "0".
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const counters = document.querySelectorAll('[data-count]');
   const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -65,10 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.5 });
 
-  counters.forEach(counter => counterObserver.observe(counter));
+  if (!prefersReducedMotion) {
+    counters.forEach(counter => counterObserver.observe(counter));
+  }
 
   function animateCounter(el) {
     const target = parseInt(el.dataset.count);
+    if (isNaN(target)) return;
     const suffix = el.dataset.suffix || '';
     const duration = 1800;
     const start = performance.now();
