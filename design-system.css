@@ -1,0 +1,289 @@
+/* ============================================================
+   AMUS COLLEGE SCHOOL — Design System
+   "Let There Be Light" — see DESIGN.md for the full rationale.
+   Load this file BEFORE styles.css. Every color, size, radius,
+   and shadow in the site should reference a token below — no
+   hard-coded hex values in components.
+   ============================================================ */
+
+:root {
+  /* ---- COLOR: brand ---- */
+  --brand-red:        #C0272D;
+  --brand-red-dark:   #9E1F24;
+  --brand-navy:       #14264A;
+  --brand-navy-dark:  #0E1B34;
+  --brand-gold:       #F4B41A;
+  --brand-gold-soft:  #FBE7B4;
+
+  /* ---- COLOR: text (navy-based, never pure black) ---- */
+  --ink-900: #0E1B34;
+  --ink-700: #2A3A57;
+  --ink-500: #5B6B85;
+  --ink-300: #A9B4C6;
+
+  /* ---- COLOR: surfaces (warm, not stark white) ---- */
+  --bg:           #F8F7F4;
+  --surface:      #FFFFFF;
+  --surface-tint: #F1EEE8;
+  --border:       #E7E2D9;
+
+  /* ---- COLOR: status ---- */
+  --success: #2E7D5B;
+  --error:   #C0272D;
+
+  /* ---- TYPE ---- */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'Plus Jakarta Sans', system-ui, sans-serif;
+
+  --text-display: clamp(2.5rem, 5vw, 4rem);
+  --text-h2:      clamp(2rem, 3.5vw, 2.75rem);
+  --text-h3:      1.5rem;
+  --text-h4:      1.25rem;
+  --text-body:    1.125rem;
+  --text-small:   0.9375rem;
+  --text-eyebrow: 0.8125rem;
+
+  --leading-tight: 1.1;
+  --leading-body:  1.65;
+
+  /* ---- SPACING: 8px grid ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* ---- RADIUS ---- */
+  --radius-sm:   8px;
+  --radius:     14px;
+  --radius-lg:  22px;
+  --radius-full: 999px;
+
+  /* ---- SHADOWS: soft, warm-tinted, layered — never flat/hard-black ---- */
+  --shadow-sm: 0 1px 2px rgba(14,27,52,0.06);
+  --shadow-md: 0 6px 20px rgba(14,27,52,0.08);
+  --shadow-lg: 0 18px 48px rgba(14,27,52,0.12);
+
+  /* ---- MOTION ---- */
+  --ease:      cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast:  180ms;
+  --dur:       320ms;
+  --dur-slow:  520ms;
+
+  /* ---- LAYOUT ---- */
+  --container: 1180px;
+  --gutter:    24px;
+
+  /* ---- Z-INDEX SCALE ---- */
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-overlay:  300;
+  --z-modal:    400;
+  --z-toast:    500;
+  --z-tooltip:  600;
+
+  /* ---- Extended brand tonal steps (not in the base brief palette,
+     needed to preserve existing 3-step navy/gold usage in styles.css) ---- */
+  --brand-navy-mid:   #1B2F58;
+  --brand-navy-light: #26407D;
+  --brand-gold-dark:  #C08F12;
+  --brand-gold-light: #F7C64C;
+
+  /* ---- Legacy token aliases ----
+     styles.css was written against these names before the redesign.
+     Aliasing here (instead of renaming ~150 usages across styles.css)
+     means the brand hex swap applies everywhere at once with a single,
+     low-risk, reviewable diff. New component work should reference the
+     newer brand / ink / shadow token names directly, not these aliases. */
+  --navy:       var(--brand-navy);
+  --navy-mid:   var(--brand-navy-mid);
+  --navy-light: var(--brand-navy-light);
+  --gold:       var(--brand-gold);
+  --gold-light: var(--brand-gold-light);
+  --gold-dark:  var(--brand-gold-dark);
+  --red:        var(--brand-red);
+  --white:      #FFFFFF;
+  --off-white:  var(--bg);
+  --gray-light: var(--surface-tint);
+  --gray:       var(--ink-300);
+  --text-dark:  var(--ink-900);
+  --text-mid:   var(--ink-700);
+  --shadow:     var(--shadow-md);
+  --transition: var(--dur) var(--ease);
+}
+
+@media (max-width: 640px) {
+  :root { --space-9: 56px; }
+}
+
+/* ---- Base typography (tokens applied) ---- */
+body {
+  font-family: var(--font-body);
+  color: var(--ink-700);
+  background: var(--bg);
+  line-height: var(--leading-body);
+}
+
+/* Fraunces loads weights 400-600 only; anything heavier would be
+   synthesized bold, so headings sit at 500 with scale doing the work. */
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 500;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+  color: var(--ink-900);
+}
+
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
+
+p, li { max-width: 68ch; }
+.text-center p { margin-inline: auto; }
+
+/* Visible keyboard focus on every interactive element — accessibility
+   floor, not optional. Gold ring per DESIGN.md. */
+:focus-visible {
+  outline: 3px solid var(--brand-gold);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+::selection {
+  background: var(--brand-gold-soft);
+  color: var(--ink-900);
+}
+
+/* ---- Eyebrow: uppercase section label with short gold underline ---- */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-red);
+  padding-bottom: var(--space-2);
+  position: relative;
+}
+.eyebrow::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: var(--space-6);
+  height: 2px;
+  background: var(--brand-gold);
+  border-radius: var(--radius-full);
+}
+.text-center .eyebrow::after,
+.eyebrow.eyebrow-center::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ---- Signature "Let There Be Light" glow ----
+   The one bold move in the system: a soft radial gold glow placed
+   behind a headline (hero) or accent element. Subtle, never neon.
+   Apply .light-glow to the positioned parent of the headline. */
+.light-glow {
+  position: relative;
+}
+.light-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  width: min(620px, 90vw);
+  height: min(620px, 90vw);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, var(--brand-gold-soft) 0%, transparent 60%);
+  opacity: 0.22;
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+.light-glow > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Icon badge: the one icon treatment, everywhere ----
+   48px circle, gold-soft fill, navy 1.5px-stroke Lucide icon inside.
+   On dark surfaces add .icon-badge-dark: navy-tint fill, gold icon. */
+.icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: var(--radius-full);
+  background: var(--brand-gold-soft);
+  color: var(--brand-navy);
+}
+.icon-badge svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+}
+.icon-badge-dark {
+  background: rgba(244,180,26,0.12);
+  color: var(--brand-gold);
+}
+/* Inline icon (footer contact rows, list markers) — no badge circle */
+.icon-inline {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: -0.15em;
+}
+.icon-inline svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
+}
+
+/* ---- Card: shared surface treatment ----
+   Ambient warm shadow at rest, settles up on hover. */
+.ds-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.ds-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Gold spark: tiny accent used under achievement stats. */
+.gold-spark {
+  display: block;
+  width: var(--space-5);
+  height: 3px;
+  margin-top: var(--space-2);
+  background: var(--brand-gold);
+  border-radius: var(--radius-full);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

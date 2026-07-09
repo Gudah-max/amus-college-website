@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-08T00:00:00Z",
+  "title": "Design System: Amus College School",
+  "extensions": {
+    "colorMeta": {
+      "brand-red": { "role": "primary", "displayName": "Amus Red", "canonical": "#C0272D", "tonalRamp": ["#3D0C0E", "#5C1216", "#7C181C", "#9E1F24", "#C0272D", "#D65A5E", "#E68F92", "#F5C6C7"] },
+      "brand-navy": { "role": "secondary", "displayName": "Founding Navy", "canonical": "#14264A", "tonalRamp": ["#050A15", "#0A1327", "#0E1B34", "#14264A", "#1D3565", "#2C4A85", "#5A76A8", "#A9BAD6"] },
+      "brand-gold": { "role": "tertiary", "displayName": "Signature Gold", "canonical": "#F4B41A", "tonalRamp": ["#5C4308", "#7C5A0B", "#9E730E", "#C08F12", "#F4B41A", "#F7C64C", "#FAD87E", "#FBE7B4"] },
+      "bg": { "role": "neutral", "displayName": "Warm Paper", "canonical": "#F8F7F4", "tonalRamp": ["#E7E2D9", "#EDE9E0", "#F1EEE8", "#F8F7F4", "#FBFAF8", "#FFFFFF"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero H1 only." },
+      "headline": { "displayName": "Headline", "purpose": "Section H2." },
+      "body": { "displayName": "Body", "purpose": "Paragraph copy, max ~68ch." }
+    },
+    "shadows": [
+      { "name": "ambient-sm", "value": "0 1px 2px rgba(14,27,52,0.06)", "purpose": "Resting state for inputs, chips." },
+      { "name": "ambient-md", "value": "0 6px 20px rgba(14,27,52,0.08)", "purpose": "Default resting shadow for cards." },
+      { "name": "ambient-lg", "value": "0 18px 48px rgba(14,27,52,0.12)", "purpose": "Hover/lift state, floating elements." }
+    ],
+    "motion": [
+      { "name": "ease-settle", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Default settle-out easing for hover/lift and reveal." },
+      { "name": "dur-fast", "value": "180ms", "purpose": "Button hover." },
+      { "name": "dur", "value": "320ms", "purpose": "Card hover, standard transitions." },
+      { "name": "dur-slow", "value": "520ms", "purpose": "Scroll reveal." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "480px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main call-to-action, e.g. Apply Now.",
+      "html": "<button class=\"ds-btn-primary\">Apply Now</button>",
+      "css": ".ds-btn-primary { background: #C0272D; color: #fff; padding: 14px 28px; border-radius: 14px; border: none; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; transition: background 180ms cubic-bezier(0.16,1,0.3,1), transform 180ms cubic-bezier(0.16,1,0.3,1), box-shadow 180ms cubic-bezier(0.16,1,0.3,1); } .ds-btn-primary:hover { background: #9E1F24; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(14,27,52,0.08); } .ds-btn-primary:focus-visible { outline: 3px solid #F4B41A; outline-offset: 2px; }"
+    },
+    {
+      "name": "Icon Badge",
+      "kind": "custom",
+      "refersTo": "icon-badge",
+      "description": "Signature 48px circular icon container replacing every emoji icon site-wide.",
+      "html": "<span class=\"ds-icon-badge\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#14264A\" stroke-width=\"1.5\"><circle cx=\"12\" cy=\"12\" r=\"9\"/></svg></span>",
+      "css": ".ds-icon-badge { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 999px; background: #FBE7B4; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Standard content card (program, feature, news).",
+      "html": "<div class=\"ds-card\"><h3>Title</h3><p>Description text.</p></div>",
+      "css": ".ds-card { background: #FFFFFF; border: 1px solid #E7E2D9; border-radius: 14px; padding: 24px; box-shadow: 0 1px 2px rgba(14,27,52,0.06); transition: transform 320ms cubic-bezier(0.16,1,0.3,1), box-shadow 320ms cubic-bezier(0.16,1,0.3,1); } .ds-card:hover { transform: translateY(-4px); box-shadow: 0 6px 20px rgba(14,27,52,0.08); } .ds-card h3 { font-family: 'Fraunces', serif; font-weight: 500; color: #0E1B34; } .ds-card p { font-family: 'Plus Jakarta Sans', sans-serif; color: #2A3A57; line-height: 1.65; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Let There Be Light",
+    "overview": "The school motto is the design thesis, not a decoration on top of it. Every premium choice traces back to warmth and clarity: a soft gold glow behind the hero headline, a thin gold underline on section labels, a gold spark on achievement stats. This is a tailored-suit system: the original gap was unfinished craft, not missing features, so this system fixes craft and rejects both generic AI-marketing defaults (cream bg, terracotta accent) and decorative clutter.",
+    "keyCharacteristics": [
+      "One signature move (gold light-glow), everything else quiet and consistent",
+      "Warm off-white surfaces, never stark white or cream-default",
+      "Fraunces serif paired against Plus Jakarta Sans",
+      "Soft, warm-tinted, layered shadows, never flat",
+      "Generous whitespace read as confidence"
+    ],
+    "rules": [
+      { "name": "The Rarity Rule", "body": "Gold appears as a glow, an underline, or a spark, never as a fill covering more than a sliver of any surface, and never as text on a light background.", "section": "colors" },
+      { "name": "The Two-Voice Rule", "body": "Only Fraunces and Plus Jakarta Sans exist in this system. No third family, no silent fallback to a browser default.", "section": "typography" },
+      { "name": "The No-Flat-Card Rule", "body": "A card never sits at shadow: none. If a surface needs to look flat, use a hairline border instead of removing elevation.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use Fraunces for every heading and Plus Jakarta Sans for every paragraph/label.",
+      "Do keep gold rare: glows, underlines, sparks, icon fills on dark backgrounds only.",
+      "Do give every card an ambient, warm-tinted shadow at rest and deepen it on hover.",
+      "Do give every interactive element a real hover, focus-visible (3px gold outline), and active state.",
+      "Do use the 48px circular icon badge for every icon, replacing every emoji site-wide.",
+      "Do reserve numbered 01/02/03 markers for genuine sequences only."
+    ],
+    "donts": [
+      "Don't use the generic AI-default look: cream background + high-contrast serif + terracotta accent.",
+      "Don't use emoji as icons anywhere in the interface.",
+      "Don't use pure saturated red (#FF0000) or pure yellow (#FFFF00).",
+      "Don't use border-left/border-right as a colored accent stripe.",
+      "Don't use gradient text.",
+      "Don't use decorative glassmorphism, the generic hero-metric template, or identical repeated card grids as default scaffolding.",
+      "Don't put a tiny uppercase tracked eyebrow above every section reflexively.",
+      "Don't ship a flat, shadowless card.",
+      "Don't use transition-all; animate only transform/opacity/color/shadow with a prefers-reduced-motion alternative."
+    ]
+  }
+}

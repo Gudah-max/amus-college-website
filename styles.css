@@ -1,31 +1,8 @@
 /* ============================================
    AMUS COLLEGE SCHOOL - Global Styles
-   Colors: Navy #0a1628 | Gold #c9a227 | Red #cc0000
+   Design tokens live in design-system.css (loaded before this file).
+   Colors: Founding Navy #14264A | Signature Gold #F4B41A | Amus Red #C0272D
    ============================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Poppins:wght@400;500;600;700;800&display=swap');
-
-/* ---- CSS Variables ---- */
-:root {
-  --navy: #0a1628;
-  --navy-mid: #132040;
-  --navy-light: #1e3060;
-  --gold: #c9a227;
-  --gold-light: #e8c547;
-  --gold-dark: #a07d1a;
-  --red: #cc0000;
-  --white: #ffffff;
-  --off-white: #f8f6f0;
-  --gray-light: #f2f4f8;
-  --gray: #8a9ab5;
-  --text-dark: #1a1a2e;
-  --text-mid: #4a5568;
-  --shadow: 0 4px 24px rgba(10, 22, 40, 0.12);
-  --shadow-lg: 0 12px 48px rgba(10, 22, 40, 0.2);
-  --radius: 8px;
-  --radius-lg: 16px;
-  --transition: 0.3s ease;
-}
 
 /* ---- Reset & Base ---- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -33,50 +10,56 @@
 html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
-  font-family: 'Open Sans', sans-serif;
-  color: var(--text-dark);
-  background: var(--white);
-  line-height: 1.65;
   overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5 {
-  font-family: 'Montserrat', sans-serif;
-  line-height: 1.18;
-  letter-spacing: -0.02em;
-}
-
-a { text-decoration: none; color: inherit; transition: var(--transition); }
-img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease); }
+img { max-width: 100%; height: auto; display: block; }
 ul { list-style: none; }
 
 /* ---- Utility Classes ---- */
 .container {
-  max-width: 1200px;
+  max-width: var(--container);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--gutter);
 }
 
-.section-padding { padding: 90px 0; }
-.section-padding-sm { padding: 60px 0; }
+.section-padding { padding: var(--space-9) 0; }
+.section-padding-sm { padding: var(--space-8) 0; }
 
 .text-center { text-align: center; }
 .text-gold { color: var(--gold); }
 .text-navy { color: var(--navy); }
 .text-white { color: var(--white); }
 
+/* Section eyebrow: uppercase red label, short gold underline (see
+   .eyebrow in design-system.css). Gold text on dark sections. */
 .badge {
   display: inline-block;
-  background: rgba(201, 162, 39, 0.15);
-  color: var(--gold);
-  border: 1px solid rgba(201, 162, 39, 0.4);
-  border-radius: 30px;
-  padding: 6px 18px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 1.5px;
+  position: relative;
+  color: var(--brand-red);
+  font-size: var(--text-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  padding-bottom: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+.badge::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: var(--space-6);
+  height: 2px;
+  background: var(--brand-gold);
+  border-radius: var(--radius-full);
+}
+.page-hero .badge,
+.cta-banner .badge,
+.stats-banner .badge {
+  color: var(--brand-gold);
 }
 
 .section-title {
@@ -98,30 +81,38 @@ ul { list-style: none; }
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 14px 32px;
+  min-height: 44px;
+  padding: 14px 28px;
   border-radius: var(--radius);
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
-  border: 2px solid transparent;
-  transition: all var(--transition);
+  border: 1.5px solid transparent;
+  transition: background var(--dur-fast) var(--ease),
+              color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease),
+              transform var(--dur-fast) var(--ease),
+              box-shadow var(--dur-fast) var(--ease);
   letter-spacing: 0.3px;
 }
+.btn:active { transform: translateY(0); }
 
 .btn-primary {
-  background: var(--gold);
-  color: var(--navy);
-  border-color: var(--gold);
+  background: var(--brand-red);
+  color: var(--white);
+  border-color: var(--brand-red);
 }
 .btn-primary:hover {
-  background: var(--gold-light);
-  border-color: var(--gold-light);
+  background: var(--brand-red-dark);
+  border-color: var(--brand-red-dark);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(201, 162, 39, 0.4);
+  box-shadow: var(--shadow-md);
 }
 
+/* Light-on-dark outline (hero, navy CTA band) */
 .btn-outline {
   background: transparent;
   color: var(--white);
@@ -129,19 +120,22 @@ ul { list-style: none; }
 }
 .btn-outline:hover {
   background: var(--white);
-  color: var(--navy);
+  color: var(--brand-navy);
+  border-color: var(--white);
   transform: translateY(-2px);
 }
 
+/* Navy-on-light secondary */
 .btn-navy {
-  background: var(--navy);
-  color: var(--gold);
-  border-color: var(--navy);
+  background: transparent;
+  color: var(--brand-navy);
+  border-color: var(--brand-navy);
 }
 .btn-navy:hover {
-  background: var(--navy-light);
+  background: var(--brand-navy);
+  color: var(--white);
   transform: translateY(-2px);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-md);
 }
 
 /* ---- Navigation ---- */
@@ -184,9 +178,9 @@ ul { list-style: none; }
 }
 
 .brand-text-top {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-display);
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   line-height: 1.1;
   letter-spacing: -0.01em;
@@ -213,7 +207,7 @@ ul { list-style: none; }
   padding: 8px 14px;
   border-radius: var(--radius);
   position: relative;
-  transition: all var(--transition);
+  transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
 }
 
 .nav-links a:hover,
@@ -233,16 +227,17 @@ ul { list-style: none; }
 }
 
 .nav-cta {
-  background: var(--gold) !important;
-  color: var(--navy) !important;
+  background: var(--brand-red) !important;
+  color: var(--white) !important;
   padding: 10px 22px !important;
   font-weight: 700 !important;
   border-radius: var(--radius) !important;
 }
 .nav-cta:hover {
-  background: var(--gold-light) !important;
+  background: var(--brand-red-dark) !important;
+  color: var(--white) !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(201,162,39,0.4);
+  box-shadow: var(--shadow-md);
 }
 
 .hamburger {
@@ -257,7 +252,7 @@ ul { list-style: none; }
   width: 26px; height: 2px;
   background: var(--white);
   border-radius: 2px;
-  transition: all var(--transition);
+  transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
 }
 .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
@@ -290,7 +285,7 @@ ul { list-style: none; }
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(10,22,40,0.85) 0%, rgba(10,22,40,0.3) 60%, rgba(201,162,39,0.12) 100%);
+  background: linear-gradient(135deg, rgba(14,27,52,0.85) 0%, rgba(14,27,52,0.32) 60%, rgba(244,180,26,0.10) 100%);
 }
 
 .hero-content {
@@ -333,18 +328,17 @@ ul { list-style: none; }
   color: var(--white);
   line-height: 1.05;
   margin-bottom: 20px;
-  font-weight: 800;
+  font-weight: 500;
 }
 
 .hero h1 span { color: var(--gold); }
 
 .hero-motto {
-  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
-  color: rgba(255,255,255,0.75);
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  color: var(--brand-gold-light);
   margin-bottom: 32px;
   font-style: italic;
-  border-left: 3px solid var(--gold);
-  padding-left: 16px;
 }
 
 .hero-desc {
@@ -367,9 +361,9 @@ ul { list-style: none; }
 }
 
 .hero-stat-num {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-display);
   font-size: 2rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--gold);
   line-height: 1;
   letter-spacing: -0.03em;
@@ -401,13 +395,13 @@ ul { list-style: none; }
   background: var(--navy);
   border-radius: var(--radius);
   padding: 16px 20px;
-  border-left: 4px solid var(--gold);
+  border: 1px solid rgba(244,180,26,0.45);
 }
 
 .welcome-img-badge-num {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-display);
   font-size: 1.8rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--gold);
   line-height: 1;
   letter-spacing: -0.03em;
@@ -430,7 +424,7 @@ ul { list-style: none; }
   padding: 16px;
   background: var(--gray-light);
   border-radius: var(--radius);
-  border-left: 3px solid var(--gold);
+  border: 1px solid var(--border);
 }
 
 .welcome-feature-icon {
@@ -476,9 +470,9 @@ ul { list-style: none; }
 }
 
 .stat-number {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-display);
   font-size: 3rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--gold);
   line-height: 1;
   margin-bottom: 8px;
@@ -502,11 +496,11 @@ ul { list-style: none; }
 
 .program-card {
   background: var(--white);
-  border-radius: var(--radius-lg);
-  padding: 36px 28px;
-  border: 1px solid rgba(10,22,40,0.08);
-  box-shadow: var(--shadow);
-  transition: all var(--transition);
+  border-radius: var(--radius);
+  padding: var(--space-6) var(--space-5);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
   position: relative;
   overflow: hidden;
 }
@@ -515,29 +509,36 @@ ul { list-style: none; }
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 4px;
-  background: var(--gold);
+  height: 3px;
+  background: var(--brand-gold);
   transform: scaleX(0);
-  transition: transform var(--transition);
+  transition: transform var(--dur) var(--ease);
 }
 
-.program-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+.program-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
 .program-card:hover::before { transform: scaleX(1); }
 
 .program-icon {
-  width: 60px; height: 60px;
-  background: rgba(201,162,39,0.1);
-  border-radius: var(--radius);
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
+  width: 48px; height: 48px;
+  background: var(--brand-gold-soft);
+  color: var(--brand-navy);
+  border-radius: var(--radius-full);
+  font-size: 1.5rem;
   margin-bottom: 20px;
-  transition: all var(--transition);
+  transition: transform var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.program-icon svg {
+  width: 24px; height: 24px;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  fill: none;
 }
 
 .program-card:hover .program-icon {
-  background: var(--gold);
+  background: var(--brand-gold);
 }
 
 .program-card h3 {
@@ -603,26 +604,27 @@ ul { list-style: none; }
 }
 
 .testimonial-card {
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  padding: 32px;
-  box-shadow: var(--shadow);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
   position: relative;
-  transition: transform var(--transition);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
   display: flex;
   flex-direction: column;
 }
 
-.testimonial-card:hover { transform: translateY(-4px); }
+.testimonial-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
 
 .quote-mark {
   font-size: 4rem;
   color: var(--gold);
   line-height: 0.8;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-display);
   margin-bottom: 12px;
   opacity: 0.5;
-  font-weight: 800;
+  font-weight: 500;
 }
 
 .testimonial-text {
@@ -705,13 +707,14 @@ ul { list-style: none; }
 }
 
 .news-card {
-  background: var(--white);
-  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: transform var(--transition);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
-.news-card:hover { transform: translateY(-6px); }
+.news-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
 
 .news-img { height: 200px; overflow: hidden; }
 .news-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
@@ -726,7 +729,7 @@ ul { list-style: none; }
 
 /* ---- Footer ---- */
 .footer {
-  background: #060e1d;
+  background: var(--brand-navy-dark);
   color: rgba(255,255,255,0.7);
   padding: 70px 0 0;
 }
@@ -754,9 +757,9 @@ ul { list-style: none; }
 }
 
 .footer-brand-name {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-display);
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   letter-spacing: -0.01em;
 }
@@ -778,13 +781,13 @@ ul { list-style: none; }
   align-items: center;
   justify-content: center;
   font-size: 0.9rem;
-  transition: all var(--transition);
+  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
 }
 .footer-social:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); transform: translateY(-2px); }
 
 .footer-col h4 {
   color: var(--white);
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.01em;
@@ -798,12 +801,12 @@ ul { list-style: none; }
 .footer-links a {
   font-size: 0.88rem;
   color: rgba(255,255,255,0.6);
-  transition: all var(--transition);
+  transition: color var(--dur-fast) var(--ease), padding-left var(--dur-fast) var(--ease);
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.footer-links a::before { content: '→'; color: var(--gold); font-size: 0.7rem; opacity: 0; transition: all var(--transition); }
+.footer-links a::before { content: '→'; color: var(--gold); font-size: 0.7rem; opacity: 0; transition: opacity var(--dur-fast) var(--ease); }
 .footer-links a:hover { color: var(--gold); padding-left: 4px; }
 .footer-links a:hover::before { opacity: 1; }
 
@@ -909,6 +912,7 @@ ul { list-style: none; }
 
 .value-icon {
   font-size: 2.5rem;
+  color: var(--white);
   margin-bottom: 16px;
 }
 
@@ -983,22 +987,27 @@ ul { list-style: none; }
 .form-group select,
 .form-group textarea {
   width: 100%;
-  padding: 12px 16px;
-  border: 2px solid rgba(10,22,40,0.1);
+  padding: 14px 16px;
+  border: 1.5px solid var(--border);
   border-radius: var(--radius);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
-  color: var(--text-dark);
-  background: var(--gray-light);
-  transition: border-color var(--transition);
+  color: var(--ink-900);
+  background: var(--surface);
+  transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
   outline: none;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--ink-500);
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: var(--gold);
-  background: var(--white);
+  border-color: var(--brand-red);
+  box-shadow: 0 0 0 3px rgba(192,39,45,0.12);
+  background: var(--surface);
 }
 
 .form-group textarea { height: 130px; resize: vertical; }
@@ -1034,9 +1043,9 @@ ul { list-style: none; }
   align-items: center;
   justify-content: center;
   margin: 0 auto 20px;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-display);
   font-size: 1.4rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--gold);
   border: 3px solid var(--gold);
   box-shadow: 0 0 0 6px rgba(201,162,39,0.1);
@@ -1129,8 +1138,8 @@ ul { list-style: none; }
   padding: 20px;
   background: var(--gray-light);
   border-radius: var(--radius);
-  border-left: 4px solid var(--gold);
-  transition: all var(--transition);
+  border: 1px solid var(--border);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
 .academics-item:hover { background: var(--white); box-shadow: var(--shadow); transform: translateX(6px); }
@@ -1138,6 +1147,7 @@ ul { list-style: none; }
 .academics-item-icon {
   width: 44px; height: 44px;
   background: var(--navy);
+  color: var(--white);
   border-radius: var(--radius);
   display: flex;
   align-items: center;
@@ -1170,9 +1180,9 @@ ul { list-style: none; }
 }
 
 .academics-card-float-num {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-display);
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--gold);
   line-height: 1;
 }
@@ -1196,7 +1206,7 @@ ul { list-style: none; }
   font-weight: 600;
   font-size: 0.88rem;
   cursor: pointer;
-  transition: all var(--transition);
+  transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
 }
 .tab-btn.active, .tab-btn:hover {
   background: var(--navy);
@@ -1219,7 +1229,7 @@ ul { list-style: none; }
   font-size: 0.88rem;
   font-weight: 500;
   color: var(--navy);
-  transition: all var(--transition);
+  transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
   cursor: default;
 }
 .subject-tag:hover {
@@ -1262,7 +1272,7 @@ ul { list-style: none; }
   gap: 10px;
 }
 .img-placeholder .placeholder-id {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 0.8rem;
   letter-spacing: 1px;
@@ -1286,7 +1296,7 @@ ul { list-style: none; }
 /* ---- Sports page ---- */
 .sports-stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 24px;
   margin: 40px 0;
 }
@@ -1298,7 +1308,7 @@ ul { list-style: none; }
   border-top: 4px solid var(--gold);
 }
 .sports-stat-card .stat-val {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-display);
   font-size: 2.2rem;
   font-weight: 900;
   color: var(--gold);
@@ -1326,10 +1336,10 @@ ul { list-style: none; }
   background: var(--gray-light);
   border-radius: var(--radius);
   padding: 20px;
-  border-left: 4px solid var(--gold);
+  border: 1px solid var(--border);
 }
 .alumni-card .alumni-name {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 0.95rem;
   color: var(--navy);
@@ -1347,7 +1357,7 @@ ul { list-style: none; }
   margin-bottom: 16px;
 }
 .callup-block .callup-title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 700;
   color: var(--gold);
@@ -1374,7 +1384,7 @@ ul { list-style: none; }
   background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
   border-radius: var(--radius-lg);
   padding: 36px;
-  border-left: 5px solid var(--gold);
+  border: 1px solid rgba(244,180,26,0.45);
   margin: 32px 0;
 }
 .achievement-highlight h3 {
@@ -1395,21 +1405,33 @@ ul { list-style: none; }
   .sports-stats-grid { grid-template-columns: 1fr; }
 }
 
-/* ---- Animations ---- */
-.reveal {
+/* ---- Animations ----
+   Content is visible by default. The hidden "pre-reveal" state only
+   applies once JS has stamped html.js (script.js does it immediately),
+   so visitors without JS — and headless/paused renderers — always see
+   the page. Reduced-motion visitors skip the reveal entirely. */
+html.js .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(16px);
+  transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
 }
-.reveal.visible {
+html.js .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
+html.js .reveal-delay-1 { transition-delay: 60ms; }
+html.js .reveal-delay-2 { transition-delay: 120ms; }
+html.js .reveal-delay-3 { transition-delay: 180ms; }
+html.js .reveal-delay-4 { transition-delay: 240ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
 
 /* ---- Lightbox ---- */
 .lightbox-overlay {
