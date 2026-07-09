@@ -2,6 +2,11 @@
 // AMUS COLLEGE SCHOOL - Global JavaScript
 // ============================================
 
+// Stamp the root element so CSS knows JS is running. The scroll-reveal
+// hidden state is scoped to html.js — without JS the page renders fully
+// visible instead of waiting for an observer that will never fire.
+document.documentElement.classList.add('js');
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // ---- Sticky Navbar ----
