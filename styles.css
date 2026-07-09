@@ -32,18 +32,34 @@ ul { list-style: none; }
 .text-navy { color: var(--navy); }
 .text-white { color: var(--white); }
 
+/* Section eyebrow: uppercase red label, short gold underline (see
+   .eyebrow in design-system.css). Gold text on dark sections. */
 .badge {
   display: inline-block;
-  background: rgba(201, 162, 39, 0.15);
-  color: var(--gold);
-  border: 1px solid rgba(201, 162, 39, 0.4);
-  border-radius: 30px;
-  padding: 6px 18px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 1.5px;
+  position: relative;
+  color: var(--brand-red);
+  font-size: var(--text-eyebrow);
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  padding-bottom: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+.badge::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: var(--space-6);
+  height: 2px;
+  background: var(--brand-gold);
+  border-radius: var(--radius-full);
+}
+.page-hero .badge,
+.cta-banner .badge,
+.stats-banner .badge {
+  color: var(--brand-gold);
 }
 
 .section-title {
@@ -379,7 +395,7 @@ ul { list-style: none; }
   background: var(--navy);
   border-radius: var(--radius);
   padding: 16px 20px;
-  border-left: 4px solid var(--gold);
+  border: 1px solid rgba(244,180,26,0.45);
 }
 
 .welcome-img-badge-num {
@@ -408,7 +424,7 @@ ul { list-style: none; }
   padding: 16px;
   background: var(--gray-light);
   border-radius: var(--radius);
-  border-left: 3px solid var(--gold);
+  border: 1px solid var(--border);
 }
 
 .welcome-feature-icon {
@@ -1121,7 +1137,7 @@ ul { list-style: none; }
   padding: 20px;
   background: var(--gray-light);
   border-radius: var(--radius);
-  border-left: 4px solid var(--gold);
+  border: 1px solid var(--border);
   transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 
@@ -1318,7 +1334,7 @@ ul { list-style: none; }
   background: var(--gray-light);
   border-radius: var(--radius);
   padding: 20px;
-  border-left: 4px solid var(--gold);
+  border: 1px solid var(--border);
 }
 .alumni-card .alumni-name {
   font-family: var(--font-body);
@@ -1366,7 +1382,7 @@ ul { list-style: none; }
   background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
   border-radius: var(--radius-lg);
   padding: 36px;
-  border-left: 5px solid var(--gold);
+  border: 1px solid rgba(244,180,26,0.45);
   margin: 32px 0;
 }
 .achievement-highlight h3 {
