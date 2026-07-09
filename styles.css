@@ -912,6 +912,7 @@ ul { list-style: none; }
 
 .value-icon {
   font-size: 2.5rem;
+  color: var(--white);
   margin-bottom: 16px;
 }
 
@@ -1146,6 +1147,7 @@ ul { list-style: none; }
 .academics-item-icon {
   width: 44px; height: 44px;
   background: var(--navy);
+  color: var(--white);
   border-radius: var(--radius);
   display: flex;
   align-items: center;
