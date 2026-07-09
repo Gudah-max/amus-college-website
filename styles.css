@@ -1296,7 +1296,7 @@ ul { list-style: none; }
 /* ---- Sports page ---- */
 .sports-stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 24px;
   margin: 40px 0;
 }
