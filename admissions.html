@@ -10,7 +10,8 @@
   <meta property="og:site_name" content="Amus College School" />
   <meta property="og:title" content="Admissions – Amus College School Uganda" />
   <meta property="og:description" content="Apply to Amus College School Uganda. Learn about our admission process, requirements, and how to enroll your child in our center of excellence." />
-  <meta property="og:url" content="https://amuscollegeschool.com/admissions.html" />
+  <meta property="og:url" content="https://amuscollegeschool.com/admissions" />
+  <link rel="canonical" href="https://amuscollegeschool.com/admissions" />
   <meta property="og:image" content="https://amuscollegeschool.com/images/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -20,10 +21,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="design-system.css" />
   <link rel="stylesheet" href="styles.css" />
-  <script>document.documentElement.classList.add('js');</script>
   <link rel="icon" type="image/png" href="images/favicon.png" />
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
@@ -45,9 +46,11 @@
         <li><a href="contact.html">Contact</a></li>
         <li><a href="admissions.html" class="nav-cta">Apply Now</a></li>
       </ul>
-      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      <button class="hamburger" id="hamburger" type="button" aria-label="Open navigation" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
+
+  <main id="main-content" tabindex="-1">
 
   <!-- PAGE HERO -->
   <section class="page-hero">
@@ -171,26 +174,26 @@
           <h3 style="color:var(--navy);font-size:1.1rem;margin-bottom:20px;">Student Information</h3>
           <div class="form-row">
             <div class="form-group">
-              <label>Full Name of Student <span style="color:var(--red);">*</span></label>
-              <input type="text" name="student-name" placeholder="Student's full name" required />
+              <label for="student-name">Full Name of Student <span style="color:var(--red);">*</span></label>
+              <input id="student-name" type="text" name="student-name" placeholder="Student's full name" required />
             </div>
             <div class="form-group">
-              <label>Date of Birth <span style="color:var(--red);">*</span></label>
-              <input type="date" name="date-of-birth" required />
+              <label for="date-of-birth">Date of Birth <span style="color:var(--red);">*</span></label>
+              <input id="date-of-birth" type="date" name="date-of-birth" required />
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label>Gender <span style="color:var(--red);">*</span></label>
-              <select name="gender" required>
+              <label for="gender">Gender <span style="color:var(--red);">*</span></label>
+              <select id="gender" name="gender" required>
                 <option value="">Select gender</option>
                 <option>Male</option>
                 <option>Female</option>
               </select>
             </div>
             <div class="form-group">
-              <label>Applying for Level <span style="color:var(--red);">*</span></label>
-              <select name="level" required>
+              <label for="level">Applying for Level <span style="color:var(--red);">*</span></label>
+              <select id="level" name="level" required>
                 <option value="">Select level</option>
                 <option>O-Level S1 – S4</option>
                 <option>A-Level S5 – S6</option>
@@ -198,19 +201,19 @@
             </div>
           </div>
           <div class="form-group">
-            <label>Previous School</label>
-            <input type="text" name="previous-school" placeholder="Name of previous school (if any)" />
+            <label for="previous-school">Previous School</label>
+            <input id="previous-school" type="text" name="previous-school" placeholder="Name of previous school (if any)" />
           </div>
 
           <h3 style="color:var(--navy);font-size:1.1rem;margin:24px 0 20px;">Parent/Guardian Information</h3>
           <div class="form-row">
             <div class="form-group">
-              <label>Parent/Guardian Name <span style="color:var(--red);">*</span></label>
-              <input type="text" name="parent-name" placeholder="Full name of parent/guardian" required />
+              <label for="parent-name">Parent/Guardian Name <span style="color:var(--red);">*</span></label>
+              <input id="parent-name" type="text" name="parent-name" placeholder="Full name of parent/guardian" required />
             </div>
             <div class="form-group">
-              <label>Relationship to Student <span style="color:var(--red);">*</span></label>
-              <select name="relationship" required>
+              <label for="relationship">Relationship to Student <span style="color:var(--red);">*</span></label>
+              <select id="relationship" name="relationship" required>
                 <option value="">Select relationship</option>
                 <option>Father</option>
                 <option>Mother</option>
@@ -221,17 +224,17 @@
           </div>
           <div class="form-row">
             <div class="form-group">
-              <label>Phone Number <span style="color:var(--red);">*</span></label>
-              <input type="tel" name="phone" placeholder="+256 7XX XXX XXX" required />
+              <label for="admissions-phone">Phone Number <span style="color:var(--red);">*</span></label>
+              <input id="admissions-phone" type="tel" name="phone" placeholder="+256 7XX XXX XXX" required />
             </div>
             <div class="form-group">
-              <label>Email Address</label>
-              <input type="email" name="email" placeholder="your@email.com" />
+              <label for="admissions-email">Email Address</label>
+              <input id="admissions-email" type="email" name="email" placeholder="your@email.com" />
             </div>
           </div>
           <div class="form-group">
-            <label>Additional Information / Questions</label>
-            <textarea name="additional-info" placeholder="Any questions, special needs, or additional information we should know..."></textarea>
+            <label for="additional-info">Additional Information / Questions</label>
+            <textarea id="additional-info" name="additional-info" placeholder="Any questions, special needs, or additional information we should know..."></textarea>
           </div>
 
           <div style="background:var(--gray-light);border-radius:var(--radius);padding:16px;margin-bottom:24px;font-size:0.85rem;color:var(--text-mid);">
@@ -291,6 +294,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -361,8 +366,9 @@
   </footer>
 
   <script src="script.js"></script>
-  <!-- ACS Chatbot Widget -->
-    <script>window.ACS_CHATBOT_URL = 'https://acs-chatbot-4oym.onrender.com';</script>
-    <script src="https://acs-chatbot-4oym.onrender.com/widget.js"></script>
+  <!-- Temporary Amara fallback: replace after the Render service is restored. -->
+  <aside class="amara-fallback" aria-label="Admissions support">
+    <a href="contact.html">Need help? Contact Admissions</a>
+  </aside>
 </body>
 </html>

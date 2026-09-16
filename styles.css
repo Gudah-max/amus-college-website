@@ -13,6 +13,24 @@ body {
   overflow-x: hidden;
 }
 
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: var(--z-tooltip);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--brand-navy);
+  color: var(--white);
+  transform: translateY(-160%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+:focus-visible {
+  outline: 3px solid var(--brand-gold);
+  outline-offset: 3px;
+}
+
 a { text-decoration: none; color: inherit; transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease); }
 img { max-width: 100%; height: auto; display: block; }
 ul { list-style: none; }
@@ -75,7 +93,7 @@ ul { list-style: none; }
   line-height: 1.7;
 }
 
-.section-title span { color: var(--gold); }
+.section-title span { color: var(--brand-red); }
 
 /* ---- Buttons ---- */
 .btn {
@@ -246,6 +264,8 @@ ul { list-style: none; }
   gap: 5px;
   cursor: pointer;
   padding: 8px;
+  border: 0;
+  background: transparent;
 }
 .hamburger span {
   display: block;
@@ -926,6 +946,7 @@ ul { list-style: none; }
 
 /* ---- Contact Form ---- */
 .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 60px; align-items: start; }
+.contact-grid > * { min-width: 0; }
 
 .contact-info-card {
   background: var(--navy);
@@ -963,7 +984,7 @@ ul { list-style: none; }
 }
 
 .contact-detail-label { font-size: 0.75rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 4px; }
-.contact-detail-value { font-size: 0.9rem; color: rgba(255,255,255,0.8); }
+.contact-detail-value { font-size: 0.9rem; color: rgba(255,255,255,0.8); overflow-wrap: anywhere; }
 
 .contact-form {
   background: var(--white);
@@ -1106,6 +1127,8 @@ ul { list-style: none; }
   transition: opacity 0.3s ease;
 }
 .lightbox.active { opacity: 1; pointer-events: all; }
+.lightbox[hidden], .lightbox-overlay[hidden] { display: none !important; }
+body.is-dialog-open { overflow: hidden; }
 .lightbox img { max-width: 90vw; max-height: 85vh; border-radius: var(--radius); }
 .lightbox-close {
   position: absolute;
@@ -1188,6 +1211,33 @@ ul { list-style: none; }
 }
 
 .academics-card-float-text { font-size: 0.75rem; color: rgba(255,255,255,0.7); margin-top: 4px; }
+
+.gallery-full-item:focus-visible,
+.gallery-item:focus-visible {
+  outline: 3px solid var(--brand-gold);
+  outline-offset: 3px;
+}
+
+.amara-fallback {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: var(--z-toast);
+}
+.amara-fallback a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  color: var(--brand-navy);
+  box-shadow: var(--shadow-md);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.amara-fallback a:hover { background: var(--surface-tint); }
 
 /* ---- Subjects Table ---- */
 .subjects-section { background: var(--gray-light); }
@@ -1502,10 +1552,14 @@ html.js .reveal-delay-4 { transition-delay: 240ms; }
   .section-padding-sm { padding: 48px 0; }
 }
 
+/* The measured header no longer fits comfortably below this width. */
+@media (max-width: 960px) {
+  html.js .nav-links { display: none; flex-direction: column; position: fixed; top: 0; right: -100%; width: min(280px, 88vw); height: 100vh; background: var(--navy); padding: 100px 32px 40px; gap: 8px; transition: right 0.3s ease; box-shadow: -8px 0 32px rgba(0,0,0,0.3); }
+  html.js .nav-links.open { right: 0; display: flex; }
+  html.js .hamburger { display: flex; z-index: calc(var(--z-overlay) + 1); }
+}
+
 @media (max-width: 768px) {
-  .nav-links { display: none; flex-direction: column; position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: var(--navy); padding: 100px 32px 40px; gap: 8px; transition: right 0.3s ease; box-shadow: -8px 0 32px rgba(0,0,0,0.3); }
-  .nav-links.open { right: 0; display: flex; }
-  .hamburger { display: flex; z-index: 10; }
   .programs-grid { grid-template-columns: 1fr; }
   .testimonials-grid { grid-template-columns: 1fr; }
   .gallery-preview { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
@@ -1555,4 +1609,7 @@ html.js .reveal-delay-4 { transition-delay: 240ms; }
   .page-hero::before { width: 180px; height: 180px; }
   .cta-banner::before { width: 200px; height: 200px; }
   .cta-banner::after { width: 130px; height: 130px; }
+  .academics-img-stack { padding-bottom: 20px; }
+  .academics-card-float { right: 0; bottom: 0; }
+  .amara-fallback { right: 12px; bottom: 12px; }
 }

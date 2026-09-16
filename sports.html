@@ -10,7 +10,8 @@
   <meta property="og:site_name" content="Amus College School" />
   <meta property="og:title" content="Sports – Amus College School Uganda" />
   <meta property="og:description" content="Amus College School Sports – East African Champions in Football and Basketball. Our teams compete at national, East African, and international level." />
-  <meta property="og:url" content="https://amuscollegeschool.com/sports.html" />
+  <meta property="og:url" content="https://amuscollegeschool.com/sports" />
+  <link rel="canonical" href="https://amuscollegeschool.com/sports" />
   <meta property="og:image" content="https://amuscollegeschool.com/images/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -20,10 +21,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="design-system.css" />
   <link rel="stylesheet" href="styles.css" />
-  <script>document.documentElement.classList.add('js');</script>
   <link rel="icon" type="image/png" href="images/favicon.png" />
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
@@ -45,9 +46,11 @@
         <li><a href="contact.html">Contact</a></li>
         <li><a href="admissions.html" class="nav-cta">Apply Now</a></li>
       </ul>
-      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      <button class="hamburger" id="hamburger" type="button" aria-label="Open navigation" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
+
+  <main id="main-content" tabindex="-1">
 
   <!-- PAGE HERO -->
   <section class="page-hero">
@@ -352,6 +355,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
@@ -423,43 +428,15 @@
   </footer>
 
   <!-- Lightbox -->
-  <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
-    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+  <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true" hidden>
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close image viewer">&times;</button>
     <img id="lightboxImg" alt="" />
   </div>
 
   <script src="script.js"></script>
-  <script>
-    (function () {
-      var overlay = document.getElementById('lightbox');
-      var img = document.getElementById('lightboxImg');
-      var closeBtn = document.getElementById('lightboxClose');
-
-      document.querySelectorAll('.alumni-portrait-grid img').forEach(function (el) {
-        el.addEventListener('click', function () {
-          img.src = el.src;
-          img.alt = el.alt;
-          overlay.classList.add('active');
-          document.body.style.overflow = 'hidden';
-        });
-      });
-
-      function close() {
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      closeBtn.addEventListener('click', close);
-      overlay.addEventListener('click', function (e) {
-        if (e.target === overlay) close();
-      });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') close();
-      });
-    })();
-  </script>
-  <!-- ACS Chatbot Widget -->
-    <script>window.ACS_CHATBOT_URL = 'https://acs-chatbot-4oym.onrender.com';</script>
-    <script src="https://acs-chatbot-4oym.onrender.com/widget.js"></script>
+  <!-- Temporary Amara fallback: replace after the Render service is restored. -->
+  <aside class="amara-fallback" aria-label="Admissions support">
+    <a href="contact.html">Need help? Contact Admissions</a>
+  </aside>
 </body>
 </html>

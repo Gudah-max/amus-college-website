@@ -10,7 +10,8 @@
   <meta property="og:site_name" content="Amus College School" />
   <meta property="og:title" content="Gallery – Amus College School Uganda" />
   <meta property="og:description" content="Browse the photo gallery of Amus College School Uganda. See campus life, sports, academics, events, and student activities." />
-  <meta property="og:url" content="https://amuscollegeschool.com/gallery.html" />
+  <meta property="og:url" content="https://amuscollegeschool.com/gallery" />
+  <link rel="canonical" href="https://amuscollegeschool.com/gallery" />
   <meta property="og:image" content="https://amuscollegeschool.com/images/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -20,10 +21,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="design-system.css" />
   <link rel="stylesheet" href="styles.css" />
-  <script>document.documentElement.classList.add('js');</script>
   <link rel="icon" type="image/png" href="images/favicon.png" />
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
@@ -45,9 +46,11 @@
         <li><a href="contact.html">Contact</a></li>
         <li><a href="admissions.html" class="nav-cta">Apply Now</a></li>
       </ul>
-      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      <button class="hamburger" id="hamburger" type="button" aria-label="Open navigation" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
+
+  <main id="main-content" tabindex="-1">
 
   <!-- PAGE HERO -->
   <section class="page-hero">
@@ -74,74 +77,74 @@
 
       <!-- Category tabs -->
       <div class="subjects-tabs reveal" style="justify-content:center;margin-bottom:40px;">
-        <button class="tab-btn active" data-tab="gallery-all">All Photos</button>
-        <button class="tab-btn" data-tab="gallery-campus">Campus</button>
-        <button class="tab-btn" data-tab="gallery-academics">Academics</button>
-        <button class="tab-btn" data-tab="gallery-sports">Sports</button>
-        <button class="tab-btn" data-tab="gallery-events">Events</button>
+        <button class="tab-btn active" type="button" data-filter="all" aria-pressed="true">All Photos</button>
+        <button class="tab-btn" type="button" data-filter="campus" aria-pressed="false">Campus</button>
+        <button class="tab-btn" type="button" data-filter="academics" aria-pressed="false">Academics</button>
+        <button class="tab-btn" type="button" data-filter="sports" aria-pressed="false">Sports</button>
+        <button class="tab-btn" type="button" data-filter="events" aria-pressed="false">Events</button>
       </div>
 
       <!-- Gallery Grid -->
       <div id="gallery-all" class="gallery-full-grid reveal">
 
         <!-- Campus photos -->
-        <div class="gallery-full-item" data-lightbox="images/hero_new.webp" data-category="campus">
+        <div class="gallery-full-item" data-lightbox="images/hero_new.webp" data-category="campus" role="button" tabindex="0" aria-label="View Main School Building image">
           <img loading="lazy" decoding="async" width="1280" height="719" src="images/hero_new.webp" alt="Main School Building" />
           <div class="gallery-overlay">
             <div class="gallery-overlay-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-0.125em"><path d="M14 21v-3a2 2 0 0 0-4 0v3" /> <path d="M18 4.933V21" /> <path d="m4 6 7.106-3.79a2 2 0 0 1 1.788 0L20 6" /> <path d="m6 11-3.52 2.147a1 1 0 0 0-.48.854V19a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a1 1 0 0 0-.48-.853L18 11" /> <path d="M6 4.933V21" /> <circle cx="12" cy="9" r="2" /></svg> Main School Building</div>
           </div>
         </div>
 
-        <div class="gallery-full-item" data-lightbox="images/talent_scouting.webp" data-category="academics">
+        <div class="gallery-full-item" data-lightbox="images/talent_scouting.webp" data-category="academics" role="button" tabindex="0" aria-label="View Talent Scouting image">
           <img loading="lazy" decoding="async" width="1384" height="923" src="images/talent_scouting.webp" alt="Talent Scouting" />
           <div class="gallery-overlay">
             <div class="gallery-overlay-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-0.125em"><circle cx="12" cy="12" r="10" /> <circle cx="12" cy="12" r="6" /> <circle cx="12" cy="12" r="2" /></svg> Talent Scouting</div>
           </div>
         </div>
 
-        <div class="gallery-full-item" data-lightbox="images/sports_new.webp" data-category="sports">
+        <div class="gallery-full-item" data-lightbox="images/sports_new.webp" data-category="sports" role="button" tabindex="0" aria-label="View Sports Day Activities image">
           <img loading="lazy" decoding="async" width="1404" height="923" src="images/sports_new.webp" alt="Sports Day Activities" />
           <div class="gallery-overlay">
             <div class="gallery-overlay-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-0.125em"><path d="M11 7a16 16 20 0 1 10.98 4.362" /> <path d="M12 12a13 13 0 0 1-8.66 5" /> <path d="M16.83 13.634a16 16 0 0 1-9.267 7.328" /> <path d="M20.66 17A13 13 0 0 0 12 12a13 13 0 0 1 0-10" /> <path d="M8.17 15.366a16 16 0 0 1-1.713-11.69" /> <circle cx="12" cy="12" r="10" /></svg> Sports Day Activities</div>
           </div>
         </div>
 
-        <div class="gallery-full-item" data-lightbox="images/classroom_new.webp" data-category="academics">
+        <div class="gallery-full-item" data-lightbox="images/classroom_new.webp" data-category="academics" role="button" tabindex="0" aria-label="View Classroom Excellence image">
           <img loading="lazy" decoding="async" width="1384" height="923" src="images/classroom_new.webp" alt="Classroom Learning" />
           <div class="gallery-overlay">
             <div class="gallery-overlay-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-0.125em"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" /> <path d="M22 10v6" /> <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" /></svg> Classroom Excellence</div>
           </div>
         </div>
 
-        <div class="gallery-full-item" data-lightbox="images/sports_grounds.webp" data-category="campus">
+        <div class="gallery-full-item" data-lightbox="images/sports_grounds.webp" data-category="campus" role="button" tabindex="0" aria-label="View Sports Grounds image">
           <img loading="lazy" decoding="async" width="1280" height="719" src="images/sports_grounds.webp" alt="Sports Grounds" />
           <div class="gallery-overlay">
             <div class="gallery-overlay-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-0.125em"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" /> <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" /></svg> Sports Grounds</div>
           </div>
         </div>
 
-        <div class="gallery-full-item" data-lightbox="images/athletics_new.webp" data-category="sports">
+        <div class="gallery-full-item" data-lightbox="images/athletics_new.webp" data-category="sports" role="button" tabindex="0" aria-label="View Athletics Training image">
           <img loading="lazy" decoding="async" width="1191" height="802" src="images/athletics_new.webp" alt="Athletics Training" />
           <div class="gallery-overlay">
             <div class="gallery-overlay-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-0.125em"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z" /> <path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z" /> <path d="M16 17h4" /> <path d="M4 13h4" /></svg> Athletics Training</div>
           </div>
         </div>
 
-        <div class="gallery-full-item" data-lightbox="images/spiritual_guidance.webp" data-category="events">
+        <div class="gallery-full-item" data-lightbox="images/spiritual_guidance.webp" data-category="events" role="button" tabindex="0" aria-label="View Spiritual Guidance image">
           <img loading="lazy" decoding="async" width="1384" height="923" src="images/spiritual_guidance.webp" alt="Spiritual Guidance" />
           <div class="gallery-overlay">
             <div class="gallery-overlay-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-0.125em"><path d="M19.414 14.414C21 12.828 22 11.5 22 9.5a5.5 5.5 0 0 0-9.591-3.676.6.6 0 0 1-.818.001A5.5 5.5 0 0 0 2 9.5c0 2.3 1.5 4 3 5.5l5.535 5.362a2 2 0 0 0 2.879.052 2.12 2.12 0 0 0-.004-3 2.124 2.124 0 1 0 3-3 2.124 2.124 0 0 0 3.004 0 2 2 0 0 0 0-2.828l-1.881-1.882a2.41 2.41 0 0 0-3.409 0l-1.71 1.71a2 2 0 0 1-2.828 0 2 2 0 0 1 0-2.828l2.823-2.762" /></svg> Spiritual Guidance</div>
           </div>
         </div>
 
-        <div class="gallery-full-item" data-lightbox="images/championship_new.webp" data-category="events">
+        <div class="gallery-full-item" data-lightbox="images/championship_new.webp" data-category="events" role="button" tabindex="0" aria-label="View Sports Championship image">
           <img loading="lazy" decoding="async" width="1143" height="923" src="images/championship_new.webp" alt="Sports Championship" />
           <div class="gallery-overlay">
             <div class="gallery-overlay-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-0.125em"><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15" /> <path d="M11 12 5.12 2.2" /> <path d="m13 12 5.88-9.8" /> <path d="M8 7h8" /> <circle cx="12" cy="17" r="5" /> <path d="M12 18v-2h-.5" /></svg> Sports Championship</div>
           </div>
         </div>
 
-        <div class="gallery-full-item" data-lightbox="images/bus_fleet.webp" data-category="campus">
+        <div class="gallery-full-item" data-lightbox="images/bus_fleet.webp" data-category="campus" role="button" tabindex="0" aria-label="View Our Bus Fleet image">
           <img loading="lazy" decoding="async" width="1384" height="923" src="images/bus_fleet.webp" alt="Our Bus Fleet" />
           <div class="gallery-overlay">
             <div class="gallery-overlay-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-0.125em"><path d="M8 6v6" /> <path d="M15 6v6" /> <path d="M2 12h19.6" /> <path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3" /> <circle cx="7" cy="18" r="2" /> <path d="M9 18h5" /> <circle cx="16" cy="18" r="2" /></svg> Our Bus Fleet</div>
@@ -184,6 +187,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -254,14 +259,15 @@
   </footer>
 
   <!-- Lightbox -->
-  <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" id="lightboxClose"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-0.125em"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></svg></button>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true" hidden>
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close image viewer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-0.125em"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></svg></button>
     <img id="lightboxImg" alt="Gallery image" />
   </div>
 
   <script src="script.js"></script>
-  <!-- ACS Chatbot Widget -->
-    <script>window.ACS_CHATBOT_URL = 'https://acs-chatbot-4oym.onrender.com';</script>
-    <script src="https://acs-chatbot-4oym.onrender.com/widget.js"></script>
+  <!-- Temporary Amara fallback: replace after the Render service is restored. -->
+  <aside class="amara-fallback" aria-label="Admissions support">
+    <a href="contact.html">Need help? Contact Admissions</a>
+  </aside>
 </body>
 </html>

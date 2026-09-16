@@ -10,7 +10,8 @@
   <meta property="og:site_name" content="Amus College School" />
   <meta property="og:title" content="Academics – Amus College School Uganda" />
   <meta property="og:description" content="Explore the academic programs at Amus College School Uganda – O-Level, A-Level, ICT, Sports, Music, Dance and Drama." />
-  <meta property="og:url" content="https://amuscollegeschool.com/academics.html" />
+  <meta property="og:url" content="https://amuscollegeschool.com/academics" />
+  <link rel="canonical" href="https://amuscollegeschool.com/academics" />
   <meta property="og:image" content="https://amuscollegeschool.com/images/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -20,10 +21,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="design-system.css" />
   <link rel="stylesheet" href="styles.css" />
-  <script>document.documentElement.classList.add('js');</script>
   <link rel="icon" type="image/png" href="images/favicon.png" />
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
@@ -45,9 +46,11 @@
         <li><a href="contact.html">Contact</a></li>
         <li><a href="admissions.html" class="nav-cta">Apply Now</a></li>
       </ul>
-      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      <button class="hamburger" id="hamburger" type="button" aria-label="Open navigation" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
+
+  <main id="main-content" tabindex="-1">
 
   <!-- PAGE HERO -->
   <section class="page-hero">
@@ -105,9 +108,9 @@
             </div>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:8px;">
-            <img loading="lazy" decoding="async" width="750" height="1080" src="images/2023_results.webp" alt="UACE 2023 Results" data-lightbox="images/2023_results.webp" style="width:100%;border-radius:10px;object-fit:cover;height:180px;display:block;cursor:zoom-in;" />
-            <img loading="lazy" decoding="async" width="750" height="1080" src="images/2024_results.webp" alt="UACE 2024 Results" data-lightbox="images/2024_results.webp" style="width:100%;border-radius:10px;object-fit:cover;height:180px;display:block;cursor:zoom-in;" />
-            <img loading="lazy" decoding="async" width="814" height="1080" src="images/2025_results.webp" alt="UACE 2025 Results" data-lightbox="images/2025_results.webp" style="width:100%;border-radius:10px;object-fit:cover;height:180px;display:block;cursor:zoom-in;" />
+            <img loading="lazy" decoding="async" width="750" height="1080" src="images/2023_results.webp" alt="UACE 2023 Results" data-lightbox="images/2023_results.webp" role="button" tabindex="0" aria-label="View UACE 2023 Results full size" style="width:100%;border-radius:10px;object-fit:cover;height:180px;display:block;cursor:zoom-in;" />
+            <img loading="lazy" decoding="async" width="750" height="1080" src="images/2024_results.webp" alt="UACE 2024 Results" data-lightbox="images/2024_results.webp" role="button" tabindex="0" aria-label="View UACE 2024 Results full size" style="width:100%;border-radius:10px;object-fit:cover;height:180px;display:block;cursor:zoom-in;" />
+            <img loading="lazy" decoding="async" width="814" height="1080" src="images/2025_results.webp" alt="UACE 2025 Results" data-lightbox="images/2025_results.webp" role="button" tabindex="0" aria-label="View UACE 2025 Results full size" style="width:100%;border-radius:10px;object-fit:cover;height:180px;display:block;cursor:zoom-in;" />
           </div>
         </div>
       </div>
@@ -435,6 +438,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
@@ -509,14 +514,15 @@
   </footer>
 
   <!-- Lightbox -->
-  <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" id="lightboxClose"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-0.125em"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></svg></button>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" aria-hidden="true" hidden>
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close image viewer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline-block;vertical-align:-0.125em"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></svg></button>
     <img id="lightboxImg" alt="Results image" />
   </div>
 
   <script src="script.js"></script>
-  <!-- ACS Chatbot Widget -->
-<script>window.ACS_CHATBOT_URL = 'https://acs-chatbot-4oym.onrender.com';</script>
-<script src="https://acs-chatbot-4oym.onrender.com/widget.js"></script>
+  <!-- Temporary Amara fallback: replace after the Render service is restored. -->
+  <aside class="amara-fallback" aria-label="Admissions support">
+    <a href="contact.html">Need help? Contact Admissions</a>
+  </aside>
 </body>
 </html>
