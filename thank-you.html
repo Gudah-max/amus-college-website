@@ -10,7 +10,9 @@
   <meta property="og:site_name" content="Amus College School" />
   <meta property="og:title" content="Thank You – Amus College School" />
   <meta property="og:description" content="Thank you for contacting Amus College School. We have received your message and will reply within 48 hours." />
-  <meta property="og:url" content="https://amuscollegeschool.com/thank-you.html" />
+  <meta property="og:url" content="https://amuscollegeschool.com/thank-you" />
+  <link rel="canonical" href="https://amuscollegeschool.com/thank-you" />
+  <meta name="robots" content="noindex,follow" />
   <meta property="og:image" content="https://amuscollegeschool.com/images/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -20,10 +22,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="design-system.css" />
   <link rel="stylesheet" href="styles.css" />
-  <script>document.documentElement.classList.add('js');</script>
   <link rel="icon" type="image/png" href="images/favicon.png" />
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <!-- NAVBAR -->
   <nav class="navbar" id="navbar" style="position:static;background:var(--brand-navy);">
@@ -45,9 +47,11 @@
         <li><a href="contact.html">Contact</a></li>
         <li><a href="admissions.html" class="nav-cta">Apply Now</a></li>
       </ul>
-      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      <button class="hamburger" id="hamburger" type="button" aria-label="Open navigation" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
   </nav>
+
+  <main id="main-content" tabindex="-1">
 
   <!-- THANK YOU CONTENT -->
   <section class="section-padding" style="min-height:70vh;display:flex;align-items:center;">
@@ -66,6 +70,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -148,8 +154,9 @@
   </footer>
 
   <script src="script.js"></script>
-  <!-- ACS Chatbot Widget -->
-    <script>window.ACS_CHATBOT_URL = 'https://acs-chatbot-4oym.onrender.com';</script>
-    <script src="https://acs-chatbot-4oym.onrender.com/widget.js"></script>
+  <!-- Temporary Amara fallback: replace after the Render service is restored. -->
+  <aside class="amara-fallback" aria-label="Admissions support">
+    <a href="contact.html">Need help? Contact Admissions</a>
+  </aside>
 </body>
 </html>
