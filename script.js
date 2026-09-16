@@ -21,7 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     hamburger.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
   };
   if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => setMenuState(!navLinks.classList.contains('open')));
+    hamburger.addEventListener('click', (event) => {
+      const isOpen = !navLinks.classList.contains('open');
+      setMenuState(isOpen);
+      if (isOpen && event.detail === 0) navLinks.querySelector('a')?.focus();
+    });
     navLinks.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenuState(false)));
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && navLinks.classList.contains('open')) {
