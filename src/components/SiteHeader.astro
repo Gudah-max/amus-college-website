@@ -16,7 +16,7 @@ import { media } from '../data/media';
       <nav class="utility-nav" aria-label="Utility navigation">
         {utilityNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
       </nav>
-      <a class="button button-red header-cta" href="/admissions">Enquire</a>
+      <a class="button button-red header-cta" href="/admissions#enquire">Enquire</a>
       <button class="menu-button" type="button" aria-controls="mobile-menu" aria-expanded="false">
         <span class="sr-only">Open navigation menu</span><i></i><i></i><i></i>
       </button>
@@ -29,7 +29,7 @@ import { media } from '../data/media';
     {primaryNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
     {utilityNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
   </nav>
-  <a class="button button-red" href="/admissions">Enquire about admission</a>
+  <a class="button button-red" href="/admissions#enquire">Enquire about admission</a>
 </dialog>
 <script>
   const dialog = document.querySelector<HTMLDialogElement>('#mobile-menu');

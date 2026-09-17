@@ -22,4 +22,5 @@ export const contentStatus: Record<string, { status: ContentStatus; note?: strin
   scoutingProgramme: { status: 'working-source' },
   sportProgramme: { status: 'working-source' },
   athleteProgression: { status: 'awaiting-confirmation' },
+  oLevelAdmissionsRequirements: { status: 'working-source' }, aLevelEligibility: { status: 'awaiting-confirmation' }, feesRoute: { status: 'working-source' }, scholarshipDetails: { status: 'awaiting-confirmation' }, intakeDates: { status: 'awaiting-confirmation' }, officeHours: { status: 'working-source' }, contactDetails: { status: 'working-source' }, formPrivacyPolicy: { status: 'awaiting-confirmation' },
 };

@@ -3,12 +3,12 @@ export const primaryNavigation = [
   { label: 'Learning', href: '/learning' },
   { label: 'Life at Amus', href: '/life-at-amus' },
   { label: 'Sports', href: '/sports' },
-  { label: 'Admissions', href: '/#admissions' },
+  { label: 'Admissions', href: '/admissions' },
 ];
 
 export const utilityNavigation = [
   { label: 'Gallery', href: '/#gallery' },
-  { label: 'Contact', href: '/#contact' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 export const routesNotMigrated = [
