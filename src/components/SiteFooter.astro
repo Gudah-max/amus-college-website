@@ -21,7 +21,8 @@ import { site } from '../data/site';
     </div>
     <div>
       <h2>Explore</h2>
-      {primaryNavigation.slice(0, 4).map((item) => <a href={item.href}>{item.label}</a>)}
+      {primaryNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a href="/gallery">Gallery</a><a href="/contact">Contact</a><a href="/privacy">Privacy</a><a href="/cookies">Cookies</a>
     </div>
   </div>
   <div class="wrap footer-bottom"><span>© Amus College School</span><a href="#top">Back to top ↑</a></div>

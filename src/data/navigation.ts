@@ -7,7 +7,7 @@ export const primaryNavigation = [
 ];
 
 export const utilityNavigation = [
-  { label: 'Gallery', href: '/#gallery' },
+  { label: 'Gallery', href: '/gallery' },
   { label: 'Contact', href: '/contact' },
 ];
 
