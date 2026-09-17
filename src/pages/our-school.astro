@@ -1,0 +1,23 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import PageIntro from '../components/PageIntro.astro';
+import ContextualCTA from '../components/ContextualCTA.astro';
+import { media } from '../data/media';
+import { schoolIdentity } from '../data/internal-pages';
+---
+<BaseLayout title="Our School | Amus College School" description="Discover Amus College School, its boarding-school community, mission, values and campus in Bukedea District, Uganda." canonical="/our-school">
+  <SiteHeader />
+  <main id="main-content">
+    <PageIntro label="Our School" title="A school community with purpose." intro="Amus College School is a boarding school in Bukedea District, Uganda, where learning, character and community shape the everyday experience of school." />
+    <section class="internal-lead section"><div class="wrap internal-lead-grid"><figure><Image src={media.schoolLead.src} widths={[640, 960, 1400]} sizes="(max-width: 820px) 100vw, 62vw" alt={media.schoolLead.alt} loading="eager" fetchpriority="high" /></figure><div><h2>Learning and life, held together.</h2><p>{schoolIdentity.overview}</p><p>School life is designed around disciplined study, shared routines and opportunities to grow as part of a community.</p></div></div></section>
+    <section class="identity-section section"><div class="wrap identity-grid"><div><p class="section-kicker">Purpose and direction</p><h2>Rooted in whole-person development.</h2></div><div class="identity-statements"><article><h3>Vision</h3><p>{schoolIdentity.vision}</p></article><article><h3>Mission</h3><p>{schoolIdentity.mission}</p></article></div></div></section>
+    <section class="values-section section"><div class="wrap"><div class="values-heading"><h2>What we stand for.</h2><p>These values provide a shared direction for life and learning at Amus.</p></div><ol class="values-list">{schoolIdentity.values.map(([name, copy]) => <li><h3>{name}</h3><p>{copy}</p></li>)}</ol></div></section>
+    <section class="leader-feature section"><div class="wrap leader-feature-grid"><figure><Image src={media.headteacher.src} widths={[480, 720, 900]} sizes="(max-width: 820px) 100vw, 42vw" alt={media.headteacher.alt} loading="lazy" /><figcaption>Richard Olupot <span>Headteacher</span></figcaption></figure><div><h2>A welcome from our Headteacher</h2><p>A warm welcome to Amus College School. At Amus, we are committed to nurturing students who are academically strong, morally grounded and prepared to make a meaningful contribution to society. We believe education should develop the whole person through disciplined learning, dedicated teaching and a vibrant school community.</p></div></div></section>
+    <section class="campus-editorial section"><div class="wrap campus-editorial-grid"><div><h2>A setting for learning and belonging.</h2><p>Campus life brings together teaching spaces, study, sport and the shared rhythm of a boarding school.</p></div><figure><Image src={media.campusAerial.src} widths={[640, 960, 1400]} sizes="(max-width: 820px) 100vw, 66vw" alt={media.campusAerial.alt} loading="lazy" /></figure><figure class="campus-editorial-small"><Image src={media.studentsCommunity.src} widths={[400, 720, 1000]} sizes="(max-width: 820px) 100vw, 30vw" alt={media.studentsCommunity.alt} loading="lazy" /></figure></div></section>
+    <ContextualCTA title="Plan a conversation with Amus." copy="Find out more about school life, learning and the experience of boarding at Amus College School." primaryLabel="Contact Amus" primaryHref="/#contact" secondaryLabel="Explore learning" secondaryHref="/learning" />
+  </main>
+  <SiteFooter />
+</BaseLayout>

@@ -10,4 +10,7 @@ export const contentStatus: Record<string, { status: ContentStatus; note?: strin
   aLevelCombinations: { status: 'awaiting-confirmation' },
   officeHours: { status: 'awaiting-confirmation' },
   sportsHonours: { status: 'awaiting-confirmation' },
+  missionValues: { status: 'working-source' },
+  leadershipDirectory: { status: 'awaiting-confirmation' },
+  aLevelSubjects: { status: 'working-source' },
 };

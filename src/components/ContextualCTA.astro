@@ -1,0 +1,5 @@
+---
+interface Props { title: string; copy: string; primaryLabel: string; primaryHref: string; secondaryLabel?: string; secondaryHref?: string; }
+const { title, copy, primaryLabel, primaryHref, secondaryLabel, secondaryHref } = Astro.props;
+---
+<section class="contextual-cta"><div class="wrap contextual-cta-inner"><div><h2>{title}</h2><p>{copy}</p></div><div class="cta-actions"><a class="button button-red" href={primaryHref}>{primaryLabel}</a>{secondaryLabel && secondaryHref && <a class="text-link light-link" href={secondaryHref}>{secondaryLabel} <span>→</span></a>}</div></div></section>

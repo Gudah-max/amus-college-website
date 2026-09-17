@@ -1,0 +1,15 @@
+---
+interface Props {
+  title: string;
+  intro: string;
+  label?: string;
+}
+const { title, intro, label } = Astro.props;
+---
+<section class="page-intro">
+  <div class="wrap page-intro-inner">
+    {label && <p class="section-kicker">{label}</p>}
+    <h1>{title}</h1>
+    <p>{intro}</p>
+  </div>
+</section>

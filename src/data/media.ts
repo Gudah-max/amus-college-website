@@ -13,6 +13,11 @@ import campusOne from '../assets/campus-one.webp';
 import campusTwo from '../assets/campus-two.webp';
 import facility from '../assets/facility.webp';
 import headteacher from '../assets/headteacher.webp';
+import schoolLead from '../assets/our-school-lead-7309.webp';
+import campusAerial from '../assets/campus-aerial-view.webp';
+import aLevelBlock from '../assets/a-level-block.webp';
+import studentsCommunity from '../assets/students-community.webp';
+import learningStudy from '../assets/learning-study.webp';
 
 export const media = {
   crest: { src: crest, source: 'images/logo.png', purpose: 'brand crest', alt: 'Amus College School crest', status: 'approved' },
@@ -30,4 +35,9 @@ export const media = {
   campusTwo: { src: campusTwo, source: 'IMG_7318.JPG.jpeg', purpose: 'campus detail', alt: 'A view across the Amus College campus', status: 'working-source' },
   facility: { src: facility, source: 'library_students_new.webp', purpose: 'learning facility', alt: 'Students using a school learning space', status: 'working-source' },
   headteacher: { src: headteacher, source: 'richard_olupot_amus_head_teacher.webp', purpose: 'leadership portrait', alt: 'Richard Olupot, Amus College School Headteacher', status: 'working-source' },
+  schoolLead: { src: schoolLead, source: 'IMG_7309.JPG.jpeg', purpose: 'Our School lead image', alt: 'Amus College campus and sports grounds in the Bukedea landscape', focalPoint: '50% 50%', caption: null, captionStatus: 'awaiting-confirmation', status: 'working-source' },
+  campusAerial: { src: campusAerial, source: 'campus_aerial_view.webp', purpose: 'Our School campus image', alt: 'Aerial view of Amus College School campus', focalPoint: 'center', caption: null, captionStatus: 'awaiting-confirmation', status: 'working-source' },
+  aLevelBlock: { src: aLevelBlock, source: 'a_level_block.webp', purpose: 'Learning pathway image', alt: 'Amus College A-Level learning block', focalPoint: 'center', caption: null, captionStatus: 'awaiting-confirmation', status: 'working-source' },
+  studentsCommunity: { src: studentsCommunity, source: 'welcome_students_new.webp', purpose: 'Our School community image', alt: 'Amus students together at school', focalPoint: 'center', caption: null, captionStatus: 'awaiting-confirmation', status: 'working-source' },
+  learningStudy: { src: learningStudy, source: 'students_studying.webp', purpose: 'Learning study image', alt: 'Students studying together at Amus', focalPoint: 'center', caption: null, captionStatus: 'awaiting-confirmation', status: 'working-source' },
 } as const;
