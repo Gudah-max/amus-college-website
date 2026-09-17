@@ -1456,27 +1456,18 @@ body.is-dialog-open { overflow: hidden; }
 }
 
 /* ---- Animations ----
-   Content is visible by default. The hidden "pre-reveal" state only
-   applies once JS has stamped html.js (script.js does it immediately),
+   Reveal elements must remain visible when JavaScript is interrupted.
+   It is retained for no-JS and reduced-motion safety,
    so visitors without JS — and headless/paused renderers — always see
    the page. Reduced-motion visitors skip the reveal entirely. */
-html.js .reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease);
-}
-html.js .reveal.visible {
+/* Emergency fallback: never let the absent reveal observer hide content. */
+.reveal {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
-
-html.js .reveal-delay-1 { transition-delay: 60ms; }
-html.js .reveal-delay-2 { transition-delay: 120ms; }
-html.js .reveal-delay-3 { transition-delay: 180ms; }
-html.js .reveal-delay-4 { transition-delay: 240ms; }
 
 @media (prefers-reduced-motion: reduce) {
-  html.js .reveal {
+  .reveal {
     opacity: 1;
     transform: none;
     transition: none;
