@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+import { primaryNavigation, utilityNavigation } from '../data/navigation';
+import { media } from '../data/media';
+---
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="Amus College School home">
+      <Image src={media.crest.src} width={56} height={56} alt={media.crest.alt} />
+      <span>AMUS <small>COLLEGE SCHOOL</small><b>LET THERE BE LIGHT</b></span>
+    </a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      {primaryNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+    <div class="header-tools">
+      <nav class="utility-nav" aria-label="Utility navigation">
+        {utilityNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+      <a class="button button-red header-cta" href="/admissions">Enquire</a>
+      <button class="menu-button" type="button" aria-controls="mobile-menu" aria-expanded="false">
+        <span class="sr-only">Open navigation menu</span><i></i><i></i><i></i>
+      </button>
+    </div>
+  </div>
+</header>
+<dialog id="mobile-menu" aria-label="Mobile navigation">
+  <div class="drawer-head"><span>Navigate</span><button class="drawer-close" type="button" aria-label="Close navigation">×</button></div>
+  <nav aria-label="Mobile primary navigation">
+    {primaryNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    {utilityNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
+  </nav>
+  <a class="button button-red" href="/admissions">Enquire about admission</a>
+</dialog>
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('#mobile-menu');
+  const trigger = document.querySelector<HTMLButtonElement>('.menu-button');
+  const close = document.querySelector<HTMLButtonElement>('.drawer-close');
+  let opener: HTMLElement | null = null;
+  trigger?.addEventListener('click', () => {
+    opener = document.activeElement as HTMLElement;
+    dialog?.showModal();
+    trigger.setAttribute('aria-expanded', 'true');
+    dialog?.querySelector<HTMLAnchorElement>('a')?.focus();
+  });
+  close?.addEventListener('click', () => dialog?.close());
+  dialog?.addEventListener('close', () => {
+    trigger?.setAttribute('aria-expanded', 'false');
+    opener?.focus();
+  });
+</script>

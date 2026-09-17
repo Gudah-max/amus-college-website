@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+import { primaryNavigation } from '../data/navigation';
+import { media } from '../data/media';
+import { site } from '../data/site';
+---
+<footer id="contact">
+  <div class="wrap footer-grid">
+    <div>
+      <a class="brand footer-brand" href="/">
+        <Image src={media.crest.src} width={56} height={56} alt="" />
+        <span>AMUS <small>COLLEGE SCHOOL</small></span>
+      </a>
+      <p>Learning with purpose. Growing with character.</p>
+    </div>
+    <div>
+      <h2>Visit or enquire</h2>
+      <p>{site.address[0]}<br />{site.address[1]}</p>
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+      {site.phones.map((phone) => <a href={`tel:${phone.replaceAll(' ', '')}`}>{phone}</a>)}
+    </div>
+    <div>
+      <h2>Explore</h2>
+      {primaryNavigation.slice(0, 4).map((item) => <a href={item.href}>{item.label}</a>)}
+    </div>
+  </div>
+  <div class="wrap footer-bottom"><span>© Amus College School</span><a href="#top">Back to top ↑</a></div>
+</footer>

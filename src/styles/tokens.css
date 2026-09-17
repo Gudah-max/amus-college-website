@@ -1,0 +1,37 @@
+:root {
+  /* Primitive brand tokens */
+  --brand-navy-900: #0e1b34;
+  --brand-navy-700: #14264a;
+  --brand-red-700: #9e1f24;
+  --brand-red-600: #c0272d;
+  --brand-gold-500: #f4b41a;
+  --brand-gold-100: #fbe7b4;
+  --neutral-0: #ffffff;
+  --neutral-50: #f8f7f4;
+  --neutral-100: #f1eee8;
+  --neutral-200: #e7e2d9;
+  --ink-700: #2a3a57;
+  --ink-500: #5b6b85;
+
+  /* Semantic tokens */
+  --color-page: var(--neutral-50);
+  --color-surface: var(--neutral-0);
+  --color-structure: var(--brand-navy-700);
+  --color-structure-deep: var(--brand-navy-900);
+  --color-action: var(--brand-red-600);
+  --color-action-hover: var(--brand-red-700);
+  --color-accent: var(--brand-gold-500);
+  --color-text: var(--ink-700);
+  --color-text-muted: var(--ink-500);
+  --color-border: var(--neutral-200);
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', Arial, sans-serif;
+  --content-max: 1200px;
+
+  /* Component tokens */
+  --header-height: 84px;
+  --focus-ring: 3px solid var(--color-accent);
+  --button-radius: 3px;
+  --image-placeholder: var(--neutral-200);
+  --shadow-raised: 0 14px 38px rgb(14 27 52 / 10%);
+}
