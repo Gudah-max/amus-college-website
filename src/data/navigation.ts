@@ -1,8 +1,8 @@
 export const primaryNavigation = [
   { label: 'Our School', href: '/our-school' },
   { label: 'Learning', href: '/learning' },
-  { label: 'Life at Amus', href: '/#life' },
-  { label: 'Sports', href: '/#sports' },
+  { label: 'Life at Amus', href: '/life-at-amus' },
+  { label: 'Sports', href: '/sports' },
   { label: 'Admissions', href: '/#admissions' },
 ];
 

@@ -1,3 +1,5 @@
+import type { ContentStatus } from './content-status';
+
 export const schoolIdentity = {
   overview: 'Amus College School is a boarding school in Bukedea District, Uganda, bringing disciplined learning, character and community into the everyday life of school.',
   vision: 'To produce Academically, Morally, Physically, Spiritually, Socially and Economically sound Citizens ready to meet the challenges of the modern World.',
@@ -15,3 +17,14 @@ export const learningContent = {
   oLevelSubjects: ['English Language', 'Mathematics', 'Biology', 'Chemistry', 'Physics', 'History', 'Geography', 'Computer Studies', 'Religious Education', 'Commerce', 'Fine Art', 'Literature', 'Agriculture', 'Home Economics', 'French', 'Luganda'],
   aLevelSubjects: ['Mathematics', 'Physics', 'Chemistry', 'Biology', 'History', 'Economics', 'Geography', 'Literature', 'Computer Studies', 'Divinity', 'General Paper', 'Entrepreneurship'],
 } as const;
+
+export type SportingHonour = {
+  year: string;
+  competition: string;
+  discipline: string;
+  team: string;
+  result: string;
+  sourceStatus: ContentStatus;
+};
+
+export const sportingHonours: SportingHonour[] = [];

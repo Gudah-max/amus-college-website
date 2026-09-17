@@ -18,6 +18,12 @@ import campusAerial from '../assets/campus-aerial-view.webp';
 import aLevelBlock from '../assets/a-level-block.webp';
 import studentsCommunity from '../assets/students-community.webp';
 import learningStudy from '../assets/learning-study.webp';
+import lifePrayer from '../assets/life-prayer.webp';
+import lifeCommunity from '../assets/life-community.webp';
+import sportsFootballTurf from '../assets/sports-football-turf.webp';
+import sportsVolleyball from '../assets/sports-volleyball.webp';
+import sportsGrounds from '../assets/sports-grounds.webp';
+import sportsAthletics from '../assets/sports-athletics.webp';
 
 export const media = {
   crest: { src: crest, source: 'images/logo.png', purpose: 'brand crest', alt: 'Amus College School crest', status: 'approved' },
@@ -40,4 +46,10 @@ export const media = {
   aLevelBlock: { src: aLevelBlock, source: 'a_level_block.webp', purpose: 'Learning pathway image', alt: 'Amus College A-Level learning block', focalPoint: 'center', caption: null, captionStatus: 'awaiting-confirmation', status: 'working-source' },
   studentsCommunity: { src: studentsCommunity, source: 'welcome_students_new.webp', purpose: 'Our School community image', alt: 'Amus students together at school', focalPoint: 'center', caption: null, captionStatus: 'awaiting-confirmation', status: 'working-source' },
   learningStudy: { src: learningStudy, source: 'students_studying.webp', purpose: 'Learning study image', alt: 'Students studying together at Amus', focalPoint: 'center', caption: null, captionStatus: 'awaiting-confirmation', status: 'working-source' },
+  lifePrayer: { src: lifePrayer, source: 'prayer_time.webp', purpose: 'Life at Amus faith and community image', alt: 'Students gathered for a moment of prayer at Amus', focalPoint: 'center', caption: null, captionStatus: 'awaiting-confirmation', status: 'working-source' },
+  lifeCommunity: { src: lifeCommunity, source: 'welcome_group.webp', purpose: 'Life at Amus community image', alt: 'Amus students together on campus', focalPoint: 'center', caption: null, captionStatus: 'awaiting-confirmation', status: 'working-source' },
+  sportsFootballTurf: { src: sportsFootballTurf, source: 'football_turf.webp', purpose: 'Sports football feature image', alt: 'Students playing football on the Amus pitch', focalPoint: 'center', caption: null, captionStatus: 'awaiting-confirmation', status: 'working-source' },
+  sportsVolleyball: { src: sportsVolleyball, source: 'volleyball.webp', purpose: 'Sports participation image', alt: 'Amus students taking part in volleyball', focalPoint: 'center', caption: null, captionStatus: 'awaiting-confirmation', status: 'working-source' },
+  sportsGrounds: { src: sportsGrounds, source: 'sports_grounds.webp', purpose: 'Sports facilities image', alt: 'Amus sports grounds and spectator stand', focalPoint: 'center', caption: null, captionStatus: 'awaiting-confirmation', status: 'working-source' },
+  sportsAthletics: { src: sportsAthletics, source: 'athletics_new.webp', purpose: 'Sports participation image', alt: 'Amus students participating in athletics', focalPoint: 'center', caption: null, captionStatus: 'awaiting-confirmation', status: 'working-source' },
 } as const;

@@ -13,4 +13,13 @@ export const contentStatus: Record<string, { status: ContentStatus; note?: strin
   missionValues: { status: 'working-source' },
   leadershipDirectory: { status: 'awaiting-confirmation' },
   aLevelSubjects: { status: 'working-source' },
+  boardingCapacity: { status: 'awaiting-confirmation' },
+  boysDormitoryStatus: { status: 'awaiting-confirmation' },
+  mealDetails: { status: 'awaiting-confirmation' },
+  faithCommunity: { status: 'working-source' },
+  mddProgramme: { status: 'working-source' },
+  debateProgramme: { status: 'working-source' },
+  scoutingProgramme: { status: 'working-source' },
+  sportProgramme: { status: 'working-source' },
+  athleteProgression: { status: 'awaiting-confirmation' },
 };
