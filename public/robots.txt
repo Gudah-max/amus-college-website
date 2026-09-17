@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://amuscollegeschool.com/sitemap.xml

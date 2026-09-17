@@ -1,0 +1,26 @@
+export type ContentStatus = 'approved' | 'working-source' | 'provisional' | 'awaiting-confirmation';
+
+export const contentStatus: Record<string, { status: ContentStatus; note?: string }> = {
+  schoolName: { status: 'approved' },
+  boardingOnly: { status: 'working-source' },
+  location: { status: 'working-source' },
+  academicStages: { status: 'working-source' },
+  headteacherWelcome: { status: 'provisional', note: 'Editorial working copy; not a direct quotation.' },
+  currentResults: { status: 'awaiting-confirmation' },
+  aLevelCombinations: { status: 'awaiting-confirmation' },
+  officeHours: { status: 'awaiting-confirmation' },
+  sportsHonours: { status: 'awaiting-confirmation' },
+  missionValues: { status: 'working-source' },
+  leadershipDirectory: { status: 'awaiting-confirmation' },
+  aLevelSubjects: { status: 'working-source' },
+  boardingCapacity: { status: 'awaiting-confirmation' },
+  boysDormitoryStatus: { status: 'awaiting-confirmation' },
+  mealDetails: { status: 'awaiting-confirmation' },
+  faithCommunity: { status: 'working-source' },
+  mddProgramme: { status: 'working-source' },
+  debateProgramme: { status: 'working-source' },
+  scoutingProgramme: { status: 'working-source' },
+  sportProgramme: { status: 'working-source' },
+  athleteProgression: { status: 'awaiting-confirmation' },
+  oLevelAdmissionsRequirements: { status: 'working-source' }, aLevelEligibility: { status: 'awaiting-confirmation' }, feesRoute: { status: 'working-source' }, scholarshipDetails: { status: 'awaiting-confirmation' }, intakeDates: { status: 'awaiting-confirmation' }, officeHours: { status: 'working-source' }, contactDetails: { status: 'working-source' }, formPrivacyPolicy: { status: 'awaiting-confirmation' }, policyReview: { status: 'awaiting-confirmation', note: 'Privacy and cookie policy wording requires school confirmation.' },
+};

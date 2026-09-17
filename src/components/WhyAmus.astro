@@ -1,0 +1,8 @@
+---
+import { Image } from 'astro:assets';
+import { media } from '../data/media';
+---
+<section class="why section" id="our-school"><div class="wrap why-grid">
+  <div class="why-copy"><h2>Learning, character and community.</h2><p>At Amus, disciplined learning sits alongside the habits that help young people flourish: responsibility, curiosity and care for one another.</p><div class="principles"><div><strong>Academic seriousness</strong><span>Thoughtful teaching and purposeful study.</span></div><div><strong>Whole-person formation</strong><span>Character is shaped alongside knowledge.</span></div><div><strong>Boarding community</strong><span>A shared daily life with room to belong.</span></div></div></div>
+  <figure class="portrait-image"><Image src={media.whyAmus.src} widths={[480, 720, 1000]} sizes="(max-width: 820px) 100vw, 50vw" alt={media.whyAmus.alt} loading="lazy" /><figcaption>Learning is strengthened by community.</figcaption></figure>
+</div></section>

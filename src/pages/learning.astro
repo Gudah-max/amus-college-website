@@ -1,0 +1,23 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import PageIntro from '../components/PageIntro.astro';
+import EvidenceRecord from '../components/EvidenceRecord.astro';
+import ContextualCTA from '../components/ContextualCTA.astro';
+import { media } from '../data/media';
+import { learningContent } from '../data/internal-pages';
+---
+<BaseLayout title="Learning | Amus College School" description="Explore O-Level/UCE and A-Level/UACE learning at Amus College School in Bukedea District, Uganda." canonical="/learning">
+  <SiteHeader />
+  <main id="main-content">
+    <PageIntro label="Learning at Amus" title="A clear path through secondary education." intro="Amus College School offers O-Level/UCE and A-Level/UACE education, with purposeful study and a school community that values disciplined learning." />
+    <section class="learning-lead section"><div class="wrap learning-lead-grid"><div><h2>Learning that prepares students to progress.</h2><p>At each stage, students build subject knowledge, confidence and habits for thoughtful, independent work.</p></div><figure><Image src={media.learningStudy.src} widths={[640, 960, 1384]} sizes="(max-width: 820px) 100vw, 58vw" alt={media.learningStudy.alt} loading="eager" fetchpriority="high" /></figure></div></section>
+    <section class="pathways-detail section"><div class="wrap"><div class="pathways-detail-heading"><p class="section-kicker">Academic pathways</p><h2>Two stages, with room to grow.</h2></div><div class="pathways-detail-grid"><article><p class="pathway-mark">Senior 1–4</p><h3>O-Level <em>UCE</em></h3><p>Students develop foundations in literacy, numeracy, critical thinking and strong character through a broad secondary curriculum.</p><ul><li>Core and elective subject study</li><li>Uganda Certificate of Education preparation</li><li>Revision, mock examinations and past-paper practice</li></ul></article><article><p class="pathway-mark">Senior 5–6</p><h3>A-Level <em>UACE</em></h3><p>Students deepen their academic work as they prepare for further study and meaningful contribution.</p><ul><li>Focused subject progression</li><li>Uganda Advanced Certificate preparation</li><li>Current subject combinations are confirmed through the school</li></ul></article><figure><Image src={media.aLevelBlock.src} widths={[480, 760, 1286]} sizes="(max-width: 820px) 100vw, 35vw" alt={media.aLevelBlock.alt} loading="lazy" /></figure></div></div></section>
+    <section id="subjects" class="subjects-section-v2 section"><div class="wrap"><div class="subjects-heading"><h2>Subjects offered.</h2><p>Current subject information is presented by stage. Subject combinations are confirmed directly through the school.</p></div><div class="subject-columns"><section aria-labelledby="olevel-subjects"><h3 id="olevel-subjects">O-Level / UCE</h3><ul>{learningContent.oLevelSubjects.map((subject) => <li>{subject}</li>)}</ul></section><section aria-labelledby="alevel-subjects"><h3 id="alevel-subjects">A-Level / UACE</h3><ul>{learningContent.aLevelSubjects.map((subject) => <li>{subject}</li>)}</ul><p class="a-level-note"><strong>A-Level combinations</strong><br />Available subject combinations are confirmed directly with the school according to the current academic programme.</p></section></div></div></section>
+    <EvidenceRecord heading="Achievement, clearly presented." copy="Academic results and achievements at Amus are presented as dated records, helping families understand progress over time." />
+    <ContextualCTA title="Explore learning with Amus." copy="Speak with the school about learning pathways and the next stage of your child's education." primaryLabel="Contact Amus" primaryHref="/contact" secondaryLabel="Our School" secondaryHref="/our-school" />
+  </main>
+  <SiteFooter />
+</BaseLayout>

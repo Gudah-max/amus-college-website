@@ -1,0 +1,12 @@
+---
+import { Image } from 'astro:assets';
+import { media } from '../data/media';
+---
+<section class="pathways section" id="learning"><div class="wrap">
+  <div class="pathway-intro"><h2>Two stages. One purposeful education.</h2><p>Each stage offers space to build knowledge, confidence and readiness for what comes next.</p></div>
+  <div class="pathway-grid">
+    <article><span>Senior 1–4</span><h3>O-Level <em>UCE</em></h3><p>Students develop strong foundations through a broad secondary curriculum and consistent study.</p><ul><li>Languages and humanities</li><li>Mathematics and sciences</li><li>Practical and creative learning</li></ul></article>
+    <article><span>Senior 5–6</span><h3>A-Level <em>UACE</em></h3><p>Students deepen their learning as they prepare for further study and meaningful contribution.</p><ul><li>Focused academic progression</li><li>Independent study habits</li><li>Guidance for the next step</li></ul></article>
+    <figure><Image src={media.learning.src} widths={[480, 720, 1000]} sizes="(max-width: 560px) 100vw, 34vw" alt={media.learning.alt} loading="lazy" /></figure>
+  </div>
+</div></section>

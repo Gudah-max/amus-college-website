@@ -1,0 +1,9 @@
+---
+import { Image } from 'astro:assets';
+import { media } from '../data/media';
+---
+<section class="sports section" id="sports"><div class="wrap sports-grid">
+  <div class="sports-copy"><p class="section-kicker gold-label">Sport &amp; energy</p><h2>Discipline takes many forms.</h2><p>Sport is part of a fuller school experience: teamwork, practice, resilience and the joy of showing up for one another.</p><div class="honours"><span>A record of sporting achievement</span><p>Explore the discipline, teamwork and competitive experiences that shape sport at Amus.</p></div></div>
+  <figure class="sports-photo"><Image src={media.sportAerial.src} widths={[640, 900, 1200]} sizes="(max-width: 820px) 100vw, 58vw" alt={media.sportAerial.alt} loading="lazy" /><figcaption>Space to practise, play and grow.</figcaption></figure>
+  <Image class="sports-action" src={media.sportsAction.src} widths={[360, 620, 900]} sizes="34vw" alt={media.sportsAction.alt} loading="lazy" />
+</div></section>
