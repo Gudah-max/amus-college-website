@@ -24,13 +24,16 @@
   --color-text: var(--ink-700);
   --color-text-muted: var(--ink-500);
   --color-border: var(--neutral-200);
+  --color-border-strong: #d7d2c8;
+  --color-border-hover: var(--ink-500);
   --font-display: 'Fraunces', Georgia, serif;
   --font-body: 'Plus Jakarta Sans', Arial, sans-serif;
-  --content-max: 1200px;
+  --content-max: 1240px;
 
   /* Component tokens */
-  --header-height: 84px;
+  --header-height: 76px;
   --focus-ring: 3px solid var(--color-accent);
+  --control-focus-ring: 0 0 0 3px rgb(192 39 45 / 18%);
   --button-radius: 3px;
   --image-placeholder: var(--neutral-200);
   --shadow-raised: 0 14px 38px rgb(14 27 52 / 10%);
