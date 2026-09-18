@@ -1,5 +1,5 @@
 import hero from '../assets/campus-hero-7310.webp';
-import crest from '../assets/crest.webp';
+import crest from '../assets/amus-crest.png';
 import whyAmus from '../assets/why-amus.webp';
 import learning from '../assets/learning.webp';
 import boarding from '../assets/boarding.webp';
@@ -26,7 +26,7 @@ import sportsGrounds from '../assets/sports-grounds.webp';
 import sportsAthletics from '../assets/sports-athletics.webp';
 
 export const media = {
-  crest: { src: crest, source: 'images/logo.png', purpose: 'brand crest', alt: 'Amus College School crest', status: 'approved' },
+  crest: { src: crest, source: 'amus-crest.png', purpose: 'brand crest', alt: 'Amus College School crest', status: 'approved' },
   hero: { src: hero, source: 'IMG_7310.JPG.jpeg', purpose: 'homepage hero', alt: 'Amus College campus rising across the Bukedea landscape in daylight', focalPoint: '52% 50%', status: 'approved' },
   whyAmus: { src: whyAmus, source: 'welcome_students_new.webp', purpose: 'student community', alt: 'Amus students gathered together at school', status: 'working-source' },
   learning: { src: learning, source: 'students_studying.webp', purpose: 'academic pathways', alt: 'Students studying together in a classroom', status: 'working-source' },
