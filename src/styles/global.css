@@ -113,6 +113,7 @@ figcaption { margin-top: 10px; color: var(--color-text-muted); font-size: 12px; 
 .fragments { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .fragments article { padding-top: 13px; border-top: 1px solid var(--color-border); }
 .fragments img { width: 100%; aspect-ratio: 1.35; margin-bottom: 13px; object-fit: cover; }
+.fragments article:first-child img { object-position: center top; }
 .fragments h3 { font-size: 16px; }
 .fragments p { margin: 6px 0; font-size: 13px; line-height: 1.55; }
 .simple-list { margin-top: 27px; padding-top: 18px; border-top: 1px solid var(--color-border); color: var(--color-text-muted); font-size: 13px; }
