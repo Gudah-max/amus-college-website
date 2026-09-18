@@ -144,6 +144,10 @@ footer h2 { margin-bottom: 12px; color: var(--color-accent); font: 700 13px/1.3 
 .footer-bottom a { margin: 0; font-size: 12px; }
 
 .footer-brand img { flex: 0 0 auto; width: 52px; height: auto; object-fit: contain; object-position: center; }
+.footer-social { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.footer-social a { display: grid; width: 44px; height: 44px; margin: 0; place-items: center; color: #d9e1ee; }
+.footer-social a:hover { color: var(--color-action); }
+.footer-social svg { width: 21px; height: 21px; }
 
 @media (max-width: 1050px) {
   .desktop-nav { gap: 14px; }
@@ -367,8 +371,10 @@ main section, main [id] { scroll-margin-top: calc(var(--header-height) + 24px); 
 .life-participation-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: clamp(40px, 8vw, 118px); align-items: center; }
 .life-participation-images { display: grid; grid-template-columns: 1fr .74fr; gap: 18px; align-items: end; }
 .life-participation-images figure:first-child img { aspect-ratio: .88; }
+.life-participation-images figure:first-child img { object-position: 50% 38%; }
 .life-participation-images figure:last-child { margin-bottom: -54px; }
 .life-participation-images figure:last-child img { aspect-ratio: 1.05; }
+.life-participation-images figure:last-child img { object-position: 54% 60%; }
 .sports-lead-v2 { background: var(--neutral-50); }
 .sports-lead-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: clamp(42px, 8vw, 120px); align-items: center; }
 .sports-lead-grid figure { min-height: 500px; }

@@ -3,6 +3,15 @@ import { Image } from 'astro:assets';
 import { primaryNavigation } from '../data/navigation';
 import { media } from '../data/media';
 import { site } from '../data/site';
+import SocialIcon from './icons/SocialIcon.astro';
+
+const socialLinks = [
+  { platform: 'facebook', label: 'Facebook', href: site.social.facebook },
+  { platform: 'x', label: 'X', href: site.social.x },
+  { platform: 'youtube', label: 'YouTube', href: site.social.youtube },
+  { platform: 'tiktok', label: 'TikTok', href: site.social.tiktok },
+  { platform: 'instagram', label: 'Instagram', href: site.social.instagram },
+] as const;
 ---
 <footer id="contact">
   <div class="wrap footer-grid">
@@ -12,6 +21,13 @@ import { site } from '../data/site';
         <span>AMUS <small>COLLEGE SCHOOL</small></span>
       </a>
       <p>Learning with purpose. Growing with character.</p>
+      <nav class="footer-social" aria-label="Follow Amus College School">
+        {socialLinks.map(({ platform, label, href }) => (
+          <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`Amus College School on ${label}`}>
+            <SocialIcon platform={platform} />
+          </a>
+        ))}
+      </nav>
     </div>
     <div>
       <h2>Visit or enquire</h2>

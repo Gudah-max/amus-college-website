@@ -3,7 +3,7 @@ import type { ContentStatus } from './content-status';
 export const schoolIdentity = {
   overview: 'Amus College School is a boarding school in Bukedea District, Uganda, bringing disciplined learning, character and community into the everyday life of school.',
   vision: 'To produce Academically, Morally, Physically, Spiritually, Socially and Economically sound Citizens ready to meet the challenges of the modern World.',
-  mission: 'To be a center of excellence — fostering academic achievement, moral uprightness, and all-round development in every student who walks through our doors.',
+  mission: 'To be a centre of excellence — fostering academic achievement, moral uprightness, and all-round development in every student who walks through our doors.',
   values: [
     ['Academic excellence', 'Knowledge and skills for learning, examinations and life beyond school.'],
     ['Moral integrity', 'Honesty, respect and ethical responsibility at the centre of character.'],
