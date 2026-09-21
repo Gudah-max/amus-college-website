@@ -383,7 +383,9 @@ main section, main [id] { scroll-margin-top: calc(var(--header-height) + 24px); 
 .life-participation { background: var(--neutral-50); }
 .life-participation-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: clamp(40px, 8vw, 118px); align-items: center; }
 .life-participation-images { display: grid; grid-template-columns: 1fr .74fr; gap: 18px; align-items: end; }
+.life-participation-images--single { grid-template-columns: minmax(0, .82fr); justify-content: end; }
 .life-participation-images figure:first-child img { aspect-ratio: .88; }
+.life-participation-images--single figure:first-child img { aspect-ratio: 1.2; object-position: center; }
 .life-participation-images figure:first-child img { object-position: 50% 38%; }
 .life-participation-images figure:last-child { margin-bottom: -54px; }
 .life-participation-images figure:last-child img { aspect-ratio: 1.05; }
@@ -489,6 +491,7 @@ main section, main [id] { scroll-margin-top: calc(var(--header-height) + 24px); 
   .life-creative-image { margin-right: 0 !important; }
   .life-creative-image img { aspect-ratio: 1.25; }
   .life-participation-images { gap: 12px; }
+  .life-participation-images--single { grid-template-columns: 1fr; }
   .life-participation-images figure:last-child, .sports-participation-images figure:last-child { margin-bottom: 0; }
   .sports-participation-heading { grid-template-columns: 1fr; gap: 5px; margin-bottom: 31px; }
   .sports-honours-heading, .sports-honours-layout, .athlete-progression-list { grid-template-columns: 1fr; gap: 30px; }
