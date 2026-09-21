@@ -395,6 +395,27 @@ main section, main [id] { scroll-margin-top: calc(var(--header-height) + 24px); 
 .sports-facilities p { color: #dce3f0; }
 .sports-facilities figure img { aspect-ratio: 1.48; }
 .sports-facilities .sports-caption { border-color: rgb(255 255 255 / 26%); }
+.sports-honours { background: var(--color-surface); }
+.sports-honours-heading { display: grid; grid-template-columns: .82fr .7fr; gap: 8%; align-items: end; margin-bottom: 46px; }
+.sports-honours-heading p { max-width: 490px; margin: 0 0 5px; color: var(--color-text-muted); }
+.sports-honours-layout { display: grid; grid-template-columns: .72fr 1.28fr; gap: clamp(36px, 7vw, 96px); align-items: start; }
+.sports-honours-layout figure { position: sticky; top: calc(var(--header-height) + 28px); background: var(--image-placeholder); }
+.sports-honours-layout figure img { width: 100%; aspect-ratio: .86; object-fit: cover; object-position: center; }
+.sports-records { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--color-border); }
+.sports-records li { display: grid; grid-template-columns: 74px 1fr; gap: 22px; padding: 25px 0 27px; border-bottom: 1px solid var(--color-border); }
+.sports-record-year { margin: 3px 0 0; color: var(--color-action); font-size: 13px; font-weight: 800; letter-spacing: .08em; }
+.sports-record-competition { margin: 0 0 8px; color: var(--color-text-muted); font-size: 13px; font-weight: 700; }
+.sports-records h3 { margin-bottom: 10px; font: 500 clamp(22px, 2.3vw, 30px)/1.1 var(--font-display); color: var(--color-structure); }
+.sports-records li div > p:last-child { max-width: 64ch; margin: 0; color: var(--color-text-muted); font-size: 15px; line-height: 1.7; }
+.athlete-progression { background: var(--neutral-50); }
+.athlete-progression-heading { max-width: 650px; margin-bottom: 44px; }
+.athlete-progression-heading > p:last-child { max-width: 53ch; margin: 18px 0 0; color: var(--color-text-muted); }
+.athlete-progression-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(26px, 5vw, 64px); }
+.athlete-progression-list article { display: grid; grid-template-columns: minmax(145px, .58fr) 1fr; gap: 23px; align-items: start; padding-top: 18px; border-top: 1px solid var(--color-border); }
+.athlete-progression-list figure { background: var(--image-placeholder); }
+.athlete-progression-list img { width: 100%; aspect-ratio: .82; object-fit: cover; object-position: center top; }
+.athlete-progression-list h3 { margin: 4px 0 11px; font: 500 clamp(23px, 2.2vw, 29px)/1.1 var(--font-display); color: var(--color-structure); }
+.athlete-progression-list p { margin: 0; color: var(--color-text-muted); font-size: 15px; line-height: 1.7; }
 .admissions-v2 { background: var(--neutral-50); }.admissions-intro { max-width: 620px; margin-bottom: 42px; }.admissions-intro h2,.admissions-notes h2,.form-layout h2,.contact-grid h2,.thank-you h1 { font-size:clamp(32px,3.7vw,52px); margin:0 0 16px; }.admissions-rules { display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--color-border); }.admissions-rules article { padding:28px 34px 28px 0; border-bottom:1px solid var(--color-border); }.admissions-rules article+article { padding-left:34px; border-left:1px solid var(--color-border); }.admissions-rules h3,.contact-grid h3 { margin:0 0 15px; color:var(--color-structure); }.admissions-rules li { margin:9px 0; color:var(--color-text-muted); }.admissions-notes { background:var(--color-structure); color:var(--neutral-0); }.admissions-notes h2 { color:var(--neutral-0); }.admissions-notes-grid,.contact-grid,.form-layout { display:grid; grid-template-columns:.8fr 1.2fr; gap:clamp(36px,8vw,112px); }.admissions-notes p { color:#dce3f0; }.admissions-notes ol { margin:0; padding:0; list-style:none; border-top:1px solid rgb(255 255 255 / 25%); }.admissions-notes li { padding:17px 0; border-bottom:1px solid rgb(255 255 255 / 25%); }.form-section { background:var(--color-surface); }.form-layout>div>p { color:var(--color-text-muted); }.v2-form { padding:0; }.v2-form fieldset { display:grid; grid-template-columns:1fr 1fr; gap:17px 20px; margin:0 0 26px; padding:22px 0 0; border:0; border-top:2px solid var(--color-structure); }.v2-form legend { padding:0 0 17px; color:var(--color-structure); font:600 21px/1.2 var(--font-display); }.v2-form label { display:grid; gap:7px; color:var(--color-structure); font-size:14px; font-weight:700; }.v2-form b { color:var(--color-action); }.v2-form input,.v2-form select,.v2-form textarea { width:100%; min-height:46px; padding:10px 12px; border:1px solid var(--color-border); border-radius:0; background:var(--neutral-0); color:var(--color-text); font:400 16px/1.4 var(--font-body); }.v2-form textarea { min-height:130px; resize:vertical; }.v2-form .wide { grid-column:1 / -1; }.contact-v2 { background:var(--neutral-50); }.contact-grid a { color:var(--color-structure); font-weight:700; }.contact-grid h3 { margin-top:34px; }.map-wrap { background:var(--image-placeholder); }.map-wrap iframe { width:100%; min-height:390px; border:0; }.map-wrap p { margin:12px 0 0; font-size:14px; color:var(--color-text-muted); }.social-links { display:flex; gap:13px; flex-wrap:wrap; margin-top:24px; }.social-links a { text-transform:capitalize; font-weight:700; }.thank-you { min-height:62vh; display:flex; align-items:center; background:var(--neutral-50); }.thank-you .wrap { max-width:760px; }.thank-you h1 { max-width:15ch; }.thank-you p { max-width:55ch; color:var(--color-text-muted); }.thank-you .button { margin:18px 18px 0 0; }
 
 @media (max-width: 820px) {
@@ -418,6 +439,9 @@ main section, main [id] { scroll-margin-top: calc(var(--header-height) + 24px); 
   .pathways-detail-grid figure img { aspect-ratio: 2.2; }
   .subject-columns { gap: 36px; }
   .life-boarding-grid, .life-faith-grid, .sports-lead-grid, .sports-football-grid, .sports-facilities-grid { grid-template-columns: 1fr; }
+  .sports-honours-layout { grid-template-columns: .7fr 1.3fr; gap: 38px; }
+  .sports-honours-layout figure { position: static; }
+  .athlete-progression-list { gap: 32px; }
   .life-boarding figure, .sports-lead-grid figure { min-height: 0; }
   .life-boarding figure img, .sports-lead-grid figure img { aspect-ratio: 1.45; }
   .life-rhythm-grid { grid-template-columns: .7fr 1fr; gap: 58px; }
@@ -451,6 +475,12 @@ main section, main [id] { scroll-margin-top: calc(var(--header-height) + 24px); 
   .life-participation-images { gap: 12px; }
   .life-participation-images figure:last-child, .sports-participation-images figure:last-child { margin-bottom: 0; }
   .sports-participation-heading { grid-template-columns: 1fr; gap: 5px; margin-bottom: 31px; }
+  .sports-honours-heading, .sports-honours-layout, .athlete-progression-list { grid-template-columns: 1fr; gap: 30px; }
+  .sports-honours-heading { margin-bottom: 31px; }
+  .sports-honours-layout figure { width: min(100%, 480px); }
+  .sports-honours-layout figure img { aspect-ratio: 1.25; }
+  .sports-records li { grid-template-columns: 1fr; gap: 7px; padding: 22px 0; }
+  .athlete-progression-list article { grid-template-columns: minmax(112px, .44fr) 1fr; gap: 18px; }
   .sports-participation-images { grid-template-columns: 1fr; gap: 16px; }
   .sports-participation-images figure:last-child { width: 72%; margin-left: auto; }
   .sports-football figure img, .sports-facilities figure img { aspect-ratio: 1.25; }
