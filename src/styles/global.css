@@ -131,6 +131,7 @@ figcaption { margin-top: 10px; color: var(--color-text-muted); font-size: 12px; 
 .leader-grid figure img { width: 100%; aspect-ratio: .98; object-fit: cover; object-position: center top; }
 .leader-grid figcaption { color: var(--color-structure); font-size: 14px; font-weight: 700; }
 .leader-grid figcaption span { margin-left: 8px; color: var(--color-text-muted); font-weight: 400; }
+.headteacher .text-link { display: inline-block; margin-top: 26px; }
 
 .admissions { padding: clamp(72px, 10vw, 132px) 0; background: var(--color-structure); color: var(--neutral-0); }
 .admissions h2 { max-width: 14ch; color: var(--neutral-0); }
