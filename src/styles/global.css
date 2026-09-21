@@ -317,6 +317,17 @@ main section, main [id] { scroll-margin-top: calc(var(--header-height) + 24px); 
 .light-link { color: var(--neutral-0); }
 .learning-lead-grid { grid-template-columns: .75fr 1.25fr; }
 .learning-lead-grid figure { min-height: 430px; }
+.learning-study { background: var(--color-surface); }
+.learning-study-grid { display: grid; grid-template-columns: .72fr 1.28fr; gap: clamp(40px, 8vw, 120px); align-items: center; }
+.learning-study-copy { max-width: 510px; }
+.learning-study-copy h2 { margin-bottom: 18px; font-size: clamp(32px, 3.7vw, 52px); line-height: 1.05; letter-spacing: -.04em; }
+.learning-study-copy p { color: var(--color-text-muted); line-height: 1.75; }
+.learning-study-images { display: grid; grid-template-columns: 1.2fr .8fr; gap: 20px; align-items: end; }
+.learning-study-images figure { margin: 0; background: var(--image-placeholder); }
+.learning-study-images img { width: 100%; object-fit: cover; }
+.learning-study-images figure:first-child img { aspect-ratio: 1.28; object-position: center; }
+.learning-study-images figure:last-child { margin-bottom: -48px; }
+.learning-study-images figure:last-child img { aspect-ratio: .92; object-position: center; }
 .pathways-detail { background: var(--color-surface); }
 .pathways-detail-heading { max-width: 650px; margin-bottom: 42px; }
 .pathways-detail-grid { display: grid; grid-template-columns: 1fr 1fr .75fr; border-top: 1px solid var(--color-border); }
@@ -438,6 +449,7 @@ main section, main [id] { scroll-margin-top: calc(var(--header-height) + 24px); 
   .pathways-detail-grid figure { grid-column: 1 / 3; margin: 32px 0 0; }
   .pathways-detail-grid figure img { aspect-ratio: 2.2; }
   .subject-columns { gap: 36px; }
+  .learning-study-grid { grid-template-columns: .78fr 1.22fr; gap: 48px; }
   .life-boarding-grid, .life-faith-grid, .sports-lead-grid, .sports-football-grid, .sports-facilities-grid { grid-template-columns: 1fr; }
   .sports-honours-layout { grid-template-columns: .7fr 1.3fr; gap: 38px; }
   .sports-honours-layout figure { position: static; }
@@ -463,6 +475,9 @@ main section, main [id] { scroll-margin-top: calc(var(--header-height) + 24px); 
   .pathways-detail-grid figure { margin: 26px 0 0; }
   .pathways-detail-grid figure img { aspect-ratio: 1.35; }
   .subject-columns { grid-template-columns: 1fr; gap: 33px; }
+  .learning-study-grid { grid-template-columns: 1fr; gap: 32px; }
+  .learning-study-images { gap: 12px; }
+  .learning-study-images figure:last-child { width: 72%; margin-bottom: 0; margin-left: auto; }
   .subject-columns ul { grid-template-columns: 1fr 1fr; }
   .evidence-record-inner { grid-template-columns: 1fr; gap: 16px; }
   .life-rhythm-grid, .life-participation-grid { grid-template-columns: 1fr; gap: 32px; }

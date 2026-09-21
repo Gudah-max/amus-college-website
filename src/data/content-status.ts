@@ -8,7 +8,6 @@ export const contentStatus: Record<string, { status: ContentStatus; note?: strin
   headteacherWelcome: { status: 'provisional', note: 'Editorial working copy; not a direct quotation.' },
   currentResults: { status: 'awaiting-confirmation' },
   aLevelCombinations: { status: 'awaiting-confirmation' },
-  officeHours: { status: 'awaiting-confirmation' },
   sportsHonours: { status: 'awaiting-confirmation' },
   missionValues: { status: 'working-source' },
   leadershipDirectory: { status: 'awaiting-confirmation' },
@@ -22,5 +21,5 @@ export const contentStatus: Record<string, { status: ContentStatus; note?: strin
   scoutingProgramme: { status: 'working-source' },
   sportProgramme: { status: 'working-source' },
   athleteProgression: { status: 'awaiting-confirmation' },
-  oLevelAdmissionsRequirements: { status: 'working-source' }, aLevelEligibility: { status: 'awaiting-confirmation' }, feesRoute: { status: 'working-source' }, scholarshipDetails: { status: 'awaiting-confirmation' }, intakeDates: { status: 'awaiting-confirmation' }, officeHours: { status: 'working-source' }, contactDetails: { status: 'working-source' }, formPrivacyPolicy: { status: 'awaiting-confirmation' }, policyReview: { status: 'awaiting-confirmation', note: 'Privacy and cookie policy wording requires school confirmation.' },
+  oLevelAdmissionsRequirements: { status: 'working-source' }, aLevelEligibility: { status: 'awaiting-confirmation' }, feesRoute: { status: 'working-source' }, scholarshipDetails: { status: 'awaiting-confirmation' }, intakeDates: { status: 'awaiting-confirmation' }, officeHours: { status: 'awaiting-confirmation' }, contactDetails: { status: 'working-source' }, formPrivacyPolicy: { status: 'awaiting-confirmation' }, policyReview: { status: 'awaiting-confirmation', note: 'Privacy and cookie policy wording requires school confirmation.' },
 };
