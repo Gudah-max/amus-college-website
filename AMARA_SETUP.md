@@ -10,8 +10,11 @@ Anthropic, and returns a small JSON response. No Render, Railway, external
 widget script, database, vector store, lead capture or raw-message analytics
 are part of this design.
 
-The component is deliberately **not imported by the global layout or any page**.
-It will remain invisible to the public until UAT authorises an import.
+`BaseLayout.astro` is the only integration point. It renders Amara for normal
+public pages only when `PUBLIC_AMARA_ENABLED=true` at build time. No-index
+pages (including the 404 and thank-you routes) do not render it. When the flag
+is unset or any value other than the lowercase string `true`, Astro emits no
+Amara markup or client script, so production remains off by default.
 
 ## Environment
 
@@ -22,6 +25,20 @@ Set these server-side Netlify environment variables; never commit their values:
   cost/latency and Sonnet 5 as the quality benchmark before selecting production.
 - `AMARA_MAX_TOKENS` — optional, 64–512; defaults to 360.
 - `AMARA_TIMEOUT_MS` — optional, 1000–20000; defaults to 8000.
+
+For a **Deploy Preview**, set the following variables in Netlify's
+`deploy-preview` context (not in this repository):
+
+- `ANTHROPIC_API_KEY` — required for live provider answers.
+- `AMARA_MODEL=claude-haiku-4-5`
+- `AMARA_MAX_TOKENS` — use the approved value, normally `360`.
+- `AMARA_TIMEOUT_MS` — use the approved value, normally `8000`.
+- `PUBLIC_AMARA_ENABLED=true`
+
+For production, leave `PUBLIC_AMARA_ENABLED` unset (or set it to `false`) until
+written approval to enable Amara is received. Never define the API key or any
+other secret in `netlify.toml`: Netlify configuration-file variables are not
+available to serverless functions.
 
 No provider request is made by the build or automated tests. Without an API key,
 the endpoint returns a limited deterministic school-information fallback.
@@ -82,13 +99,41 @@ sanitized JSON. Provider failure produces a topic-aware contact/admissions
 fallback; keys, traces, prompt text and provider internals never leave the
 endpoint.
 
-## Enabling for UAT
+## Preview integration, rollback and QA
 
-After approval, import `AmaraChat` into the chosen page or `BaseLayout.astro`.
-Deploy only after a preview confirms desktop, tablet and mobile layout; keyboard
-focus, Escape, focus return, error state and long text; the live Netlify rate
-limit; and a controlled provider evaluation. Remove that import to disable the
-UI again. Do not enable before UAT.
+The browser calls only the same-origin `POST /api/amara` route. The function's
+exported Netlify configuration maps that path directly to
+`netlify/functions/amara.mts`; no Render, Railway, external widget host or
+chatbot domain is used. The configuration also applies Netlify's code-based
+rate rule of **10 requests per IP per 60 seconds**. Netlify validates this rule
+during the deploy post-processing stage; confirm it appears in the Deploy
+Preview log before relying on it. The same code-based rule applies to preview
+and production deployments, subject to the site's Netlify plan rule allowance.
+
+Before creating a Deploy Preview:
+
+1. Confirm all five preview variables above are present in the `deploy-preview`
+   context without printing their values. If `ANTHROPIC_API_KEY` is missing,
+   stop before live preview UAT.
+2. Run `PUBLIC_AMARA_ENABLED=true npm run build` locally. Confirm the launcher
+   appears on an ordinary public page and does not appear on `/404.html` or
+   `/thank-you`.
+3. On the preview, check desktop (1440px), tablet (768px) and mobile (390px):
+   launcher and teaser placement; dialog open/close; input, send and typing
+   state; all five quick replies; response and contact/admissions links; error
+   fallback; Escape; focus entry/return; no overlap or horizontal overflow.
+   Mobile must use the full screen without covering safe-area controls.
+4. Run a small Haiku-only browser set: office hours; phone/email; fees; 2027
+   fee boundary; admissions open; unsupported admissions threshold; scholarship
+   guarantee; Gulu/Kigali sports; Morocco; future Nakuru choir; boarding;
+   privacy/report-card refusal; prompt injection; Kiswahili; and one Luganda
+   sanity check. Mark the Luganda result **NATIVE-SPEAKER REVIEW REQUIRED**.
+
+To roll back a preview, set `PUBLIC_AMARA_ENABLED=false` (or remove it) in the
+Deploy Preview context and redeploy, or remove the preview branch/PR. To roll
+back production after an explicitly approved future enablement, use the same
+flag change and redeploy the production branch. Do not alter the provider key,
+knowledge files or rate rule as part of a flag-only rollback.
 
 ## Model UAT (internal only)
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { createAmaraHandler, sanitizeHistory } from '../netlify/functions/amara.mts';
+import { config, createAmaraHandler, sanitizeHistory } from '../netlify/functions/amara.mts';
 
 const request = (body?: unknown, init: RequestInit = {}) => new Request('https://example.test/api/amara', {
   method: 'POST', headers: { 'content-type': 'application/json', ...(init.headers || {}) }, body: body === undefined ? undefined : JSON.stringify(body), ...init,
@@ -7,6 +7,12 @@ const request = (body?: unknown, init: RequestInit = {}) => new Request('https:/
 const bodyOf = async (response: Response) => response.json() as Promise<Record<string, unknown>>;
 
 describe('Amara Netlify function', () => {
+  it('maps the same-origin endpoint and protects it at 10 requests per IP per minute', () => {
+    expect(config).toMatchObject({
+      path: '/api/amara',
+      rateLimit: { windowLimit: 10, windowSize: 60, aggregateBy: ['ip'] },
+    });
+  });
   it('responds to a valid request without a real provider call', async () => {
     const handler = createAmaraHandler(() => async () => 'A safe answer.');
     const response = await handler(request({ message: 'How do I apply?' }));
