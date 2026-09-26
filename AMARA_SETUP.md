@@ -112,3 +112,15 @@ Each record includes model, test ID/category/prompt, response, latency, token
 usage when returned, status/error and automatic failures. The later reviewer
 scores each response using the 14-point rubric in `AMARA_UAT_REVIEW.md`, then
 compares median, p90 and slowest latency from those records.
+
+To re-evaluate the automatic checks against an existing saved result without a
+provider request or file overwrite, run:
+
+```sh
+npm run amara:uat -- --recheck tmp/amara-uat-results/<result-file>.json
+```
+
+The checker accepts approved contact-route variants and evaluates high-risk
+privacy, injection, Morocco, population, scholarship-guarantee and fee rules
+by their narrow behavioural signals. It is not a substitute for the rubric or
+native-speaker review of the Luganda response.

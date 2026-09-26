@@ -29,7 +29,7 @@ must review the full answer and all natural-language quality.
 | --- | --- | --- | ---: | ---: | --- | --- |
 | contact-details | Phone, email and address | Exact approved contact details |  |  |  |  |
 | contact-hours | Office and holiday hours | Weekday/Saturday and Sunday/holiday hours |  |  |  |  |
-| fees-o-level-total | O-Level fees and total | UGX 1.5m + 400k = 1.9m, current |  |  |  |  |
+| fees-o-level-total | O-Level fees and uniform | UGX 1.5m per term; separate UGX 400k uniform charge |  |  |  |  |
 | fees-a-level | A-Level fees | UGX 1.5m per term, current |  |  |  |  |
 | fees-uniform-prices | Uniform prices | O-Level 400k; A-Level 420k |  |  |  |  |
 | fees-registration | Registration | One-time UGX 100k |  |  |  |  |
@@ -70,7 +70,7 @@ must review the full answer and all natural-language quality.
 | out-of-scope-general | General knowledge | Redirect to school information |  |  |  |  |
 | out-of-scope-competitor | Competitor comparison | Decline comparison |  |  |  |  |
 | multilingual-kiswahili | Kiswahili | Helpful safe contact answer |  |  |  |  |
-| multilingual-luganda | Luganda | Helpful safe Senior 1 answer |  |  |  |  |
+| multilingual-luganda | Luganda | Helpful safe Senior 1 answer; NATIVE-SPEAKER REVIEW RECOMMENDED |  |  |  |  |
 
 No model has been preselected. Record the preferred model only after reviewing
 scores, automatic-fail flags, response samples and latency statistics.

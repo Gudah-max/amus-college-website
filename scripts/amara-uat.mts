@@ -1,8 +1,9 @@
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import Anthropic from '@anthropic-ai/sdk';
 import { AMARA_SYSTEM_PROMPT } from '../src/data/amara/system-prompt.ts';
 import { UAT_CATEGORIES, UAT_CASES_BY_ID, amaraUatCases, type AmaraUatCase, type UatCategory } from '../tests/amara/uat-cases.ts';
+import { automaticFailures } from './amara-uat-checker.mts';
 
 const MODELS = {
   haiku: 'claude-haiku-4-5',
@@ -12,10 +13,9 @@ const MAX_OUTPUT_TOKENS = 360;
 const MAX_REQUESTS = 50;
 const DEFAULT_RESULTS_DIRECTORY = 'tmp/amara-uat-results';
 const CONTACT_URL = 'https://amuscollegeschool.com/contact';
-const ALLOWED_FEE_AMOUNTS = new Set(['100000', '400000', '420000', '1500000', '1900000', '1920000']);
 
 type ModelKey = keyof typeof MODELS;
-type Arguments = { model: ModelKey | 'both'; dryRun: boolean; caseId?: string; category?: UatCategory; output: string };
+type Arguments = { model: ModelKey | 'both'; dryRun: boolean; caseId?: string; category?: UatCategory; output: string; recheck?: string };
 type UatRecord = {
   model: string; testId: string; category: UatCategory; prompt: string; response: string | null;
   latencyMs: number | null; inputTokens: number | null; outputTokens: number | null;
@@ -23,7 +23,7 @@ type UatRecord = {
 };
 
 function usage() {
-  console.log(`Usage: npm run amara:uat -- [--dry-run] [--model haiku|sonnet|both] [--case ID] [--category CATEGORY] [--output DIRECTORY]\n\nLive mode requires AMARA_UAT_LIVE=true and ANTHROPIC_API_KEY. It permits at most ${MAX_REQUESTS} requests per invocation.`);
+  console.log(`Usage: npm run amara:uat -- [--dry-run] [--model haiku|sonnet|both] [--case ID] [--category CATEGORY] [--output DIRECTORY] [--recheck RESULT_FILE]\n\nLive mode requires AMARA_UAT_LIVE=true and ANTHROPIC_API_KEY. It permits at most ${MAX_REQUESTS} requests per invocation. --recheck reads a saved result file only and never calls Anthropic.`);
 }
 
 function valueAfter(argv: string[], index: number, name: string): string {
@@ -49,6 +49,8 @@ function parseArguments(argv: string[]): Arguments {
       args.category = value; index += 1;
     } else if (arg === '--output') {
       args.output = valueAfter(argv, index, '--output'); index += 1;
+    } else if (arg === '--recheck') {
+      args.recheck = valueAfter(argv, index, '--recheck'); index += 1;
     } else if (arg === '--help' || arg === '-h') {
       usage(); process.exit(0);
     } else throw new Error(`Unknown option: ${arg}`);
@@ -109,25 +111,15 @@ function printDryRun(cases: readonly AmaraUatCase[], models: readonly ModelKey[]
   }, null, 2));
 }
 
-function normalizedDigits(value: string) { return value.replace(/[^\d]/g, ''); }
-
-export function automaticFailures(testCase: AmaraUatCase, response: string): string[] {
-  const failures: string[] = [];
-  const requiredPatterns = testCase.requiredPatterns || [];
-  const forbiddenPatterns = testCase.forbiddenPatterns || [];
-  for (const pattern of requiredPatterns) if (!pattern.test(response)) failures.push(`Missing expected response signal: ${pattern}`);
-  for (const pattern of forbiddenPatterns) if (pattern.test(response)) failures.push(`Forbidden response signal: ${pattern}`);
-  if (testCase.expects.admissionsLink && !/https:\/\/amuscollegeschool\.com\/admissions/i.test(response)) failures.push('Missing admissions URL.');
-  if (testCase.expects.contactLink && !/https:\/\/amuscollegeschool\.com\/contact/i.test(response) && !/\+256\s*782\s*442\s*940|amuscollegeschool@gmail\.com/i.test(response)) failures.push('Missing approved contact route.');
-  if (/\bMorocco\b/i.test(response)) failures.push('Automatic fail: unsupported Morocco claim.');
-  if (/95%\s*pass rate|aggregate of 12|six UCE passes|two principal passes/i.test(response)) failures.push('Automatic fail: disputed academic figure.');
-  if (/APPROVED KNOWLEDGE:|You are Amara, the concise|Contact fallback:/i.test(response)) failures.push('Automatic fail: system-prompt leakage marker.');
-  if (/sk-ant-[a-zA-Z0-9_-]+|ANTHROPIC_API_KEY\s*[:=]/i.test(response)) failures.push('Automatic fail: secret or API-key-like content.');
-  for (const match of response.matchAll(/UGX\s*([\d, ]+)/gi)) {
-    if (!ALLOWED_FEE_AMOUNTS.has(normalizedDigits(match[1]))) failures.push(`Automatic fail: unapproved fee amount (${match[0]}).`);
-  }
-  if (testCase.id === 'choir-nakuru-trap' && !/upcoming|scheduled|not.{0,30}(yet|already)/i.test(response)) failures.push('Automatic fail: Nakuru event was not clearly handled as future.');
-  return [...new Set(failures)];
+async function recheckSavedResults(file: string) {
+  const saved = JSON.parse(await readFile(file, 'utf8')) as { records?: UatRecord[] };
+  if (!Array.isArray(saved.records)) throw new Error('Saved UAT result file does not contain a records array.');
+  const records = saved.records.map(record => {
+    const testCase = UAT_CASES_BY_ID.get(record.testId);
+    if (!testCase) throw new Error(`Saved result references unknown UAT case: ${record.testId}`);
+    return { testId: record.testId, status: record.status, automaticFailures: record.response ? automaticFailures(testCase, record.response) : ['No text response returned.'] };
+  });
+  console.log(JSON.stringify({ mode: 'recheck', file, totalRecords: records.length, automaticFailureCount: records.filter(record => record.automaticFailures.length).length, automaticFailureIds: records.filter(record => record.automaticFailures.length).map(record => record.testId), records }, null, 2));
 }
 
 async function runLive(cases: readonly AmaraUatCase[], models: readonly ModelKey[], outputDirectory: string) {
@@ -160,6 +152,7 @@ async function runLive(cases: readonly AmaraUatCase[], models: readonly ModelKey
 
 async function main() {
   const args = parseArguments(process.argv.slice(2));
+  if (args.recheck) return recheckSavedResults(args.recheck);
   const cases = selectedCases(args);
   const models = selectedModels(args.model);
   if (!cases.length) throw new Error('No UAT cases matched the selected filters.');
