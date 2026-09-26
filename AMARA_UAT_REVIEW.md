@@ -29,7 +29,7 @@ must review the full answer and all natural-language quality.
 | --- | --- | --- | ---: | ---: | --- | --- |
 | contact-details | Phone, email and address | Exact approved contact details |  |  |  |  |
 | contact-hours | Office and holiday hours | Weekday/Saturday and Sunday/holiday hours |  |  |  |  |
-| fees-o-level-total | O-Level fees and uniform | UGX 1.5m per term; separate UGX 400k uniform charge |  |  |  |  |
+| fees-o-level-total | O-Level fees and uniform | Approved components only; no synthesized total or payment timing |  |  |  |  |
 | fees-a-level | A-Level fees | UGX 1.5m per term, current |  |  |  |  |
 | fees-uniform-prices | Uniform prices | O-Level 400k; A-Level 420k |  |  |  |  |
 | fees-registration | Registration | One-time UGX 100k |  |  |  |  |

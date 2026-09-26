@@ -39,4 +39,22 @@ describe('Amara UAT automatic checker', () => {
     expect(check('fees-2027', 'Please contact the school at +256 782 442 940 to confirm future fees. Current school fees are UGX 1,500,000 per term and uniform is a separate UGX 400,000 charge.')).toEqual([]);
     expect(check('fees-2027', 'Please contact the school to confirm future fees. The current total is UGX 1,900,000 per term including uniform.')).toContain('Automatic fail: uniform-inclusive total was presented as a recurring per-term fee.');
   });
+
+  it('allows approved fee components but rejects synthesized totals, recurring uniform and invented payment timing', () => {
+    expect(check('fees-o-level-total', 'O-Level school fees are UGX 1,500,000 per term. Uniform is a separate UGX 400,000 charge. New-student registration is UGX 100,000 one time.')).toEqual([]);
+    expect(check('fees-o-level-total', 'The approved total is UGX 2,000,000.')).toContain('Automatic fail: unapproved fee amount (UGX 2,000,000).');
+    expect(check('fees-o-level-total', 'School fees are UGX 1,500,000 per term and uniform is UGX 400,000 every term.')).toContain('Automatic fail: uniform was presented as a recurring charge.');
+    expect(check('fees-o-level-total', 'School fees of UGX 1,500,000 are due by 5 January, and uniform is UGX 400,000.')).toContain('Automatic fail: unsupported fee payment timing or instalment schedule.');
+  });
+
+  it('accepts equivalent boarding terminology and rejects invented capacity', () => {
+    expect(check('admissions-boarding', 'Amus is a residential school. Please contact Admissions at +256 782 442 940 to confirm availability.')).toEqual([]);
+    expect(check('admissions-boarding', 'Amus is a boarding school. Please contact Admissions at +256 782 442 940 to confirm availability.')).toEqual([]);
+    expect(check('admissions-boarding', 'Amus is a residential school with 120 boarding spaces. Contact Admissions at +256 782 442 940.')).not.toEqual([]);
+  });
+
+  it('accepts school-scope redirection with or without a contact route', () => {
+    expect(check('out-of-scope-general', 'I focus on information about Amus College School. I can help with admissions, fees, academics, sports or student life.')).toEqual([]);
+    expect(check('out-of-scope-general', 'I focus on information about Amus College School. For help, contact the school at +256 782 442 940.')).toEqual([]);
+  });
 });

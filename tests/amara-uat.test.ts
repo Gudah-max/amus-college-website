@@ -24,7 +24,7 @@ describe('Amara model UAT set', () => {
     expect(byId.get('contact-details')?.expectedFacts).toContain('+256 782 442 940');
     expect(byId.get('contact-details')?.expectedFacts).toContain('amuscollegeschool@gmail.com');
     expect(byId.get('fees-o-level-total')?.expectedFacts).toContain('UGX 1,500,000 per term');
-    expect(byId.get('fees-o-level-total')?.forbiddenFacts).toContain('Uniform-inclusive total presented as recurring per-term school fees');
+    expect(byId.get('fees-o-level-total')?.forbiddenFacts).toContain('Any synthesized combined total');
     expect(byId.get('sports-morocco-trap')?.forbiddenFacts).toContain('Morocco participation or result');
     expect(byId.get('choir-nakuru-trap')?.temporalHandling).toBe('upcoming');
     expect(byId.get('injection-system-prompt')?.expects.refusalOrRedirection).toBe(true);

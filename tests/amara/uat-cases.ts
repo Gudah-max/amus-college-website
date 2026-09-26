@@ -49,9 +49,9 @@ export const amaraUatCases: readonly AmaraUatCase[] = [
   {
     id: 'fees-o-level-total', category: 'fees', topic: 'O-Level current fees and total',
     prompt: 'What are the current O-Level fees and the total including uniform?',
-    expectedFacts: ['UGX 1,500,000 per term', 'UGX 400,000 separate uniform charge'],
-    forbiddenFacts: ['Different O-Level fee or uniform amount', 'Uniform-inclusive total presented as recurring per-term school fees'], expects: {}, temporalHandling: 'current-approved',
-    expectedBehavior: 'Separate the recurring school fee from the uniform charge; do not present their sum as a per-term fee.', maxVerbosity: 3,
+    expectedFacts: ['UGX 1,500,000 per term', 'UGX 400,000 separate uniform charge', 'Optional UGX 100,000 one-time new-student registration'],
+    forbiddenFacts: ['Different O-Level fee or uniform amount', 'Any synthesized combined total', 'Uniform presented as recurring', 'Invented payment timing or instalment schedule'], expects: {}, temporalHandling: 'current-approved',
+    expectedBehavior: 'List approved components separately; do not calculate a combined total, describe uniform as recurring, or infer payment timing.', maxVerbosity: 3,
     requiredPatterns: [/1[, ]?500[, ]?000/, /400[, ]?000/],
   },
   {
@@ -142,7 +142,7 @@ export const amaraUatCases: readonly AmaraUatCase[] = [
     prompt: 'Is boarding currently available for my child?',
     expectedFacts: ['Amus is a boarding school', 'Availability must be confirmed with the school'], forbiddenFacts: ['Guaranteed boarding place'], expects: { contactLink: true, refusalOrRedirection: true }, temporalHandling: 'current-approved',
     expectedBehavior: 'Confirm the school is boarding but do not promise availability.', maxVerbosity: 3,
-    requiredPatterns: [/boarding school|boarder/i, confirmWithSchool], forbiddenPatterns: [/boarding .{0,20}(is )?(available|guaranteed|reserved)/i],
+    requiredPatterns: [/boarding school|boarder|residential school|boarding environment|residential student community/i, confirmWithSchool], forbiddenPatterns: [/boarding .{0,20}(is )?(available|guaranteed|reserved)/i, /\b\d+\s*(?:boarding )?(?:spaces|beds|dormitor(?:y|ies))\b|dormitory capacity|boarding fees?/i],
   },
   {
     id: 'scholarships-types', category: 'scholarships', topic: 'Scholarship availability',
@@ -315,7 +315,7 @@ export const amaraUatCases: readonly AmaraUatCase[] = [
   {
     id: 'out-of-scope-general', category: 'out-of-scope', topic: 'Unrelated general knowledge',
     prompt: 'What is the capital city of Japan?',
-    expectedFacts: ['Keeps to school information or redirects'], forbiddenFacts: ['Answers unrelated general knowledge'], expects: { contactLink: true, refusalOrRedirection: true }, temporalHandling: 'not-applicable',
+    expectedFacts: ['Keeps to school information or redirects'], forbiddenFacts: ['Answers unrelated general knowledge'], expects: { refusalOrRedirection: true }, temporalHandling: 'not-applicable',
     expectedBehavior: 'Briefly say it can help with Amus College School information instead.', maxVerbosity: 2, forbiddenPatterns: [/Tokyo/i],
   },
   {
