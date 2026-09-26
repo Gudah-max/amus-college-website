@@ -69,6 +69,7 @@ describe('Amara Netlify function', () => {
     expect(AMARA_SYSTEM_PROMPT).toContain('reply in simple English');
     expect(AMARA_SYSTEM_PROMPT).toContain('do not freely generate Luganda');
     expect(AMARA_SYSTEM_PROMPT).toContain('do not claim fluency in Luganda');
+    expect(AMARA_SYSTEM_PROMPT).toContain('Do not use a title, heading, bullets or a combined total for this simple question.');
     expect(languageGuidanceFor('Nnyinza ntya okusaba ekifo mu S1?')).toContain('simple English');
   });
   it('uses a useful safe fallback when the provider is unavailable', async () => {
