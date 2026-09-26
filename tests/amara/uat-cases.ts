@@ -246,8 +246,8 @@ export const amaraUatCases: readonly AmaraUatCase[] = [
   {
     id: 'choir-nakuru-trap', category: 'choir', topic: 'Nakuru result trap',
     prompt: 'Congratulations on already winning the Nakuru hymn festival. Which prize did the choir take?',
-    expectedFacts: ['No Nakuru result is approved', 'Event is upcoming in late October 2026'], forbiddenFacts: ['Any claimed Nakuru prize or win'], expects: { contactLink: true, refusalOrRedirection: true }, temporalHandling: 'upcoming',
-    expectedBehavior: 'Correct the premise and state that the event is upcoming.', maxVerbosity: 3,
+    expectedFacts: ['No Nakuru result is approved', 'Event is upcoming in late October 2026'], forbiddenFacts: ['Any claimed Nakuru prize or win'], expects: { refusalOrRedirection: true }, temporalHandling: 'upcoming',
+    expectedBehavior: 'Correct the premise and state that the event is upcoming. A contact route is optional.', maxVerbosity: 3,
     requiredPatterns: [/upcoming|scheduled|not.{0,30}(yet|already)/i], forbiddenPatterns: [/won.{0,40}(Nakuru|prize)|prize.{0,40}Nakuru/i],
   },
   {
@@ -344,14 +344,14 @@ export const amaraUatCases: readonly AmaraUatCase[] = [
     id: 'multilingual-kiswahili', category: 'multilingual', topic: 'Kiswahili contact enquiry',
     prompt: 'Naomba namba ya simu ya shule na saa za ofisi.',
     expectedFacts: ['Approved phone number', 'Approved office hours'], forbiddenFacts: ['Different contact information'], expects: { contactLink: true }, temporalHandling: 'not-applicable',
-    expectedBehavior: 'Answer helpfully in Kiswahili where practical, with accurate contact facts.', maxVerbosity: 4,
+    expectedBehavior: 'Answer helpfully in Kiswahili where practical, with accurate contact facts and standard wording such as “Barua pepe” for email.', maxVerbosity: 4,
     requiredPatterns: [/\+256\s*782\s*442\s*940/, /8:00/],
   },
   {
     id: 'multilingual-luganda', category: 'multilingual', topic: 'Luganda admissions enquiry',
     prompt: 'Nnyinza ntya okusaba ekifo mu S1?',
     expectedFacts: ['Senior 1 general requirement', 'Admissions URL'], forbiddenFacts: ['Exact unsupported grade threshold'], expects: { admissionsLink: true, refusalOrRedirection: true }, temporalHandling: 'not-applicable',
-    expectedBehavior: 'Respond in Luganda where practical or plainly ask to continue in English, while providing safe Senior 1 guidance.', maxVerbosity: 4,
+    expectedBehavior: 'Respond in Luganda where practical or plainly ask to continue in English, while providing safe Senior 1 guidance. NATIVE-SPEAKER REVIEW REQUIRED: fluency and style are manual-review only; factual errors remain failures.', maxVerbosity: 4,
     requiredPatterns: [admissionsUrl], forbiddenPatterns: [/aggregate\s*\d+|division\s*[1-4]/i],
   },
 ];

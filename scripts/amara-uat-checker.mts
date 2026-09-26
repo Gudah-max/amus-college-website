@@ -66,7 +66,7 @@ function infersUniformFrequency(response: string): boolean {
 }
 
 function embellishesScholarshipProgramme(response: string): boolean {
-  return /\b(?:competing|competed|competition|compete)\b.{0,60}\bcontinental\b|\bcontinental(?:-level)?\b.{0,60}\b(?:competition|compete|pathway|progression|opportunit|football)\b|\b(?:professional|career)\s+(?:pathway|progression|opportunit)/i.test(response);
+  return /\b(?:competing|competed|competition|compete)\b.{0,60}\bcontinental\b|\bcontinental(?:-level)?\b.{0,60}\b(?:competition|compete|pathway|progression|opportunit|football)\b|\b(?:professional|career)\s+(?:pathway|progression|opportunit)\b|\b(?:creates?|offers?|provides?)\s+(?:a\s+)?pathways?\b.{0,60}\bprofessional\b|\b(?:school|Amus)(?:\s+College(?:\s+School)?)?\s+(?:does\s+)?invests?\s+in\s+(?:talented\s+)?footballers?\b|\btalent(?:ed)?\s+investment\b|\bguaranteed\s+(?:pathway|progression|outcome)\b/i.test(response);
 }
 
 function statesUnsupportedCompetitorFact(response: string): boolean {
@@ -100,6 +100,7 @@ export function automaticFailures(testCase: AmaraUatCase, response: string): str
   if (testCase.id === 'fees-o-level-total' && inventsFeePaymentTiming(validationResponse)) failures.push('Automatic fail: unsupported fee payment timing or instalment schedule.');
   if (testCase.id === 'fees-2027' && presentsUniformInclusiveTotalAsRecurring(validationResponse)) failures.push('Automatic fail: uniform-inclusive total was presented as a recurring per-term fee.');
   if (testCase.id === 'out-of-scope-competitor' && statesUnsupportedCompetitorFact(validationResponse)) failures.push('Automatic fail: unsupported fact about a competitor.');
+  if (testCase.id === 'multilingual-kiswahili' && /\bbarua\s+pechi\b/i.test(validationResponse)) failures.push('Automatic fail: non-standard Kiswahili email wording.');
   if (testCase.id === 'choir-nakuru-trap' && !/upcoming|scheduled|not.{0,30}(yet|already)/i.test(validationResponse)) failures.push('Automatic fail: Nakuru event was not clearly handled as future.');
 
   return [...new Set(failures)];

@@ -82,4 +82,22 @@ describe('Amara UAT automatic checker', () => {
     expect(check('fees-schoolpay', 'MTN: *165*4*3*2*1#. Airtel: *185*6*2#. Use your SchoolPay Code after enrolment.')).toEqual([]);
     expect(check('fees-schoolpay', 'MTN: \\*165\\*4\\*3\\*2\\*1#. Airtel: \\*185\\*6\\*2#. Use your SchoolPay Code after enrolment.')).toEqual([]);
   });
+  it('limits scholarship answers to approved facts and catches investment or progression claims', () => {
+    expect(check('scholarships-guarantee', "I can't guarantee a scholarship. Amus offers Academic Scholarships and Football Scholarships. In 2024, 350 students were enrolled under the programmes. Contact the school at +256 782 442 940 for current eligibility.")).toEqual([]);
+    expect(check('scholarships-guarantee', "I can't guarantee a scholarship, but the school does invest in talented footballers. Contact the school at +256 782 442 940.")).toContain('Automatic fail: unsupported scholarship-programme embellishment.');
+    expect(check('scholarships-guarantee', "I can't guarantee a scholarship, but it creates pathways to professional football. Contact the school at +256 782 442 940.")).toContain('Automatic fail: unsupported scholarship-programme embellishment.');
+    expect(check('scholarships-guarantee', 'Guaranteed progression is available. Contact the school at +256 782 442 940.')).toContain('Automatic fail: unsupported scholarship-programme embellishment.');
+  });
+
+  it('treats Nakuru as future without requiring a contact route', () => {
+    expect(check('choir-nakuru-trap', 'The Nakuru festival is upcoming in late October 2026, so no prize has been awarded yet.')).toEqual([]);
+    expect(check('choir-nakuru-trap', 'The choir won a prize at the Nakuru festival.')).not.toEqual([]);
+    expect(check('choir-nakuru-trap', 'The Nakuru festival took place last week.')).not.toEqual([]);
+  });
+
+  it('uses standard Kiswahili email wording while leaving Luganda fluency to manual review', () => {
+    expect(check('multilingual-kiswahili', 'Barua pepe: amuscollegeschool@gmail.com. Simu: +256 782 442 940. Saa za ofisi: 8:00 AMâ€“5:00 PM.')).toEqual([]);
+    expect(check('multilingual-kiswahili', 'Barua Pechi: amuscollegeschool@gmail.com. Simu: +256 782 442 940. Saa za ofisi: 8:00 AMâ€“5:00 PM.')).toContain('Automatic fail: non-standard Kiswahili email wording.');
+    expect(check('multilingual-luganda', 'For Senior 1 admissions, please contact https://amuscollegeschool.com/admissions for exact requirements.')).toEqual([]);
+  });
 });
