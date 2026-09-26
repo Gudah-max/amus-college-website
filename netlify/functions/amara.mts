@@ -10,7 +10,14 @@ const DEFAULT_MAX_TOKENS = 360;
 const DEFAULT_TIMEOUT_MS = 8_000;
 
 type ChatTurn = { role: 'user' | 'assistant'; content: string };
-type Provider = (messages: ChatTurn[]) => Promise<string>;
+type Provider = (messages: ChatTurn[], languageGuidance?: string) => Promise<string>;
+
+const LUGANDA_MARKERS = /\b(?:nsobola|nnyinza|ntya|okukwasaganya|essomero|okusaba|ekifo|mwana|nnyamba|webale)\b/i;
+const LUGANDA_ENGLISH_GUIDANCE = 'The visitor wrote in Luganda. Reply in concise, simple English with only approved school information. Do not generate Luganda or claim Luganda fluency; Luganda is pending native-speaker review.';
+
+export function languageGuidanceFor(message: string): string | undefined {
+  return LUGANDA_MARKERS.test(message) ? LUGANDA_ENGLISH_GUIDANCE : undefined;
+}
 
 const json = (body: Record<string, unknown>, status = 200) => new Response(JSON.stringify(body), {
   status,
@@ -36,11 +43,11 @@ function anthropicProvider(): Provider {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) throw new Error('provider unavailable');
   const client = new Anthropic({ apiKey, timeout: numberFromEnv('AMARA_TIMEOUT_MS', DEFAULT_TIMEOUT_MS, 1_000, 20_000), maxRetries: 0 });
-  return async (messages) => {
+  return async (messages, languageGuidance) => {
     const response = await client.messages.create({
       model: process.env.AMARA_MODEL || 'claude-haiku-4-5',
       max_tokens: numberFromEnv('AMARA_MAX_TOKENS', DEFAULT_MAX_TOKENS, 64, 512),
-      system: AMARA_SYSTEM_PROMPT,
+      system: languageGuidance ? `${AMARA_SYSTEM_PROMPT}\n\n${languageGuidance}` : AMARA_SYSTEM_PROMPT,
       messages,
     });
     const text = response.content.find(block => block.type === 'text')?.text?.trim();
@@ -64,8 +71,9 @@ export function createAmaraHandler(providerFactory: () => Provider = anthropicPr
     if (message.length > MAX_MESSAGE_LENGTH) return json({ error: `Messages must be ${MAX_MESSAGE_LENGTH} characters or fewer.` }, 400);
 
     const messages = [...sanitizeHistory(payload.history), { role: 'user' as const, content: message }];
+    const languageGuidance = languageGuidanceFor(message);
     try {
-      const reply = await providerFactory()(messages);
+      const reply = await providerFactory()(messages, languageGuidance);
       return json({ reply });
     } catch {
       return json({ reply: deterministicFallback(message), fallback: true });

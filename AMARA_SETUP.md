@@ -60,8 +60,10 @@ Sonnet's factual, safety and temporal quality at lower cost and latency:
 | Haiku 4.5 | 44/44 | 0 | $0.125477 | 2,164.5 ms | 3,038.3 ms | 5,217 ms |
 | Sonnet 5 | 44/44 | 1 checker false positive | $0.493749 | 2,807.5 ms | 3,733.3 ms | 11,186 ms |
 
-Luganda remains subject to native-speaker review. The model decision should not
-be reopened unless future evidence identifies a material quality issue.
+English and Kiswahili are the supported v1 languages. Luganda remains subject
+to native-speaker review: Luganda enquiries are answered in simple English
+until that review is complete. The model decision should not be reopened unless
+future evidence identifies a material quality issue.
 
 ## Knowledge ownership and review
 

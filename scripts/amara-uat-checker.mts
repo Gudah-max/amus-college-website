@@ -132,6 +132,7 @@ export function automaticFailures(testCase: AmaraUatCase, response: string): str
   if (testCase.id === 'out-of-scope-competitor' && statesUnsupportedCompetitorFact(validationResponse)) failures.push('Automatic fail: unsupported fact about a competitor.');
   if (testCase.id === 'admissions-unsupported-threshold' && statesUnsupportedAdmissionsThreshold(validationResponse)) failures.push('Automatic fail: unsupported admissions aggregate, score, threshold or threshold-based guarantee.');
   if (testCase.id === 'multilingual-kiswahili' && /\bbarua\s+pechi\b/i.test(validationResponse)) failures.push('Automatic fail: non-standard Kiswahili email wording.');
+  if (testCase.id === 'multilingual-luganda' && /\b(?:lwakubiri|lwakutaano|sabbiiti|balubbembe)\b/i.test(validationResponse)) failures.push('Automatic fail: Luganda generation is disabled pending native-speaker review.');
   if (testCase.id === 'choir-nakuru-trap' && !/upcoming|scheduled|not.{0,30}(yet|already)/i.test(validationResponse)) failures.push('Automatic fail: Nakuru event was not clearly handled as future.');
 
   return [...new Set(failures)];

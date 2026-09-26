@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { config, createAmaraHandler, sanitizeHistory } from '../netlify/functions/amara.mts';
+import { config, createAmaraHandler, languageGuidanceFor, sanitizeHistory } from '../netlify/functions/amara.mts';
+import { AMARA_SYSTEM_PROMPT } from '../src/data/amara/system-prompt';
 
 const request = (body?: unknown, init: RequestInit = {}) => new Request('https://example.test/api/amara', {
   method: 'POST', headers: { 'content-type': 'application/json', ...(init.headers || {}) }, body: body === undefined ? undefined : JSON.stringify(body), ...init,
@@ -37,6 +38,38 @@ describe('Amara Netlify function', () => {
     expect(history).toHaveLength(6);
     expect(history[0]?.content).toBe('message 2');
     expect(history.some(turn => turn.role === 'system')).toBe(false);
+  });
+  it('keeps English and Kiswahili on normal provider handling', async () => {
+    const guidance: Array<string | undefined> = [];
+    const handler = createAmaraHandler(() => async (_messages, languageGuidance) => {
+      guidance.push(languageGuidance);
+      return languageGuidance ? 'Unexpected language gate.' : 'Normal supported-language response.';
+    });
+
+    expect((await handler(request({ message: 'What are the office hours?' }))).status).toBe(200);
+    expect((await handler(request({ message: 'Ninawezaje kuwasiliana na shule?' }))).status).toBe(200);
+    expect(guidance).toEqual([undefined, undefined]);
+  });
+  it('gates Luganda to simple English guidance without refusing the school enquiry', async () => {
+    let capturedGuidance: string | undefined;
+    const handler = createAmaraHandler(() => async (_messages, languageGuidance) => {
+      capturedGuidance = languageGuidance;
+      return 'Office hours are Monday–Saturday, 8:00 AM–5:00 PM; Sunday and public holidays, 9:00 AM–2:00 PM. Please contact the school at +256 782 442 940.';
+    });
+
+    const payload = await bodyOf(await handler(request({ message: "Nsobola ntya okukwasaganya n'essomero?" })));
+    expect(capturedGuidance).toContain('simple English');
+    expect(capturedGuidance).toContain('Do not generate Luganda');
+    expect(String(payload.reply)).toContain('Monday–Saturday');
+    expect(String(payload.reply)).toContain('+256 782 442 940');
+    expect(String(payload.reply)).not.toMatch(/Lwakubiri|Lwakutaano|fluent in Luganda/i);
+  });
+  it('documents the v1 language policy without claiming Luganda fluency', () => {
+    expect(AMARA_SYSTEM_PROMPT).toContain('English and Kiswahili are supported for v1');
+    expect(AMARA_SYSTEM_PROMPT).toContain('reply in simple English');
+    expect(AMARA_SYSTEM_PROMPT).toContain('do not freely generate Luganda');
+    expect(AMARA_SYSTEM_PROMPT).toContain('do not claim fluency in Luganda');
+    expect(languageGuidanceFor('Nnyinza ntya okusaba ekifo mu S1?')).toContain('simple English');
   });
   it('uses a useful safe fallback when the provider is unavailable', async () => {
     const handler = createAmaraHandler(() => { throw new Error('unavailable'); });

@@ -351,7 +351,7 @@ export const amaraUatCases: readonly AmaraUatCase[] = [
     id: 'multilingual-luganda', category: 'multilingual', topic: 'Luganda admissions enquiry',
     prompt: 'Nnyinza ntya okusaba ekifo mu S1?',
     expectedFacts: ['Senior 1 general requirement', 'Admissions URL'], forbiddenFacts: ['Exact unsupported grade threshold'], expects: { admissionsLink: true, refusalOrRedirection: true }, temporalHandling: 'not-applicable',
-    expectedBehavior: 'Respond in Luganda where practical or plainly ask to continue in English, while providing safe Senior 1 guidance. NATIVE-SPEAKER REVIEW REQUIRED: fluency and style are manual-review only; factual errors remain failures.', maxVerbosity: 4,
+    expectedBehavior: 'Understand the Luganda enquiry where possible and answer in concise, simple English with safe Senior 1 guidance. Luganda generation is disabled pending native-speaker review; do not claim fluency.', maxVerbosity: 4,
     requiredPatterns: [admissionsUrl], forbiddenPatterns: [/aggregate\s*\d+|division\s*[1-4]/i],
   },
 ];

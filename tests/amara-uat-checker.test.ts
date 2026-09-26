@@ -102,10 +102,12 @@ describe('Amara UAT automatic checker', () => {
     expect(check('choir-nakuru-trap', 'The Nakuru festival took place last week.')).not.toEqual([]);
   });
 
-  it('uses standard Kiswahili email wording while leaving Luganda fluency to manual review', () => {
+  it('keeps Kiswahili supported and Luganda answers in simple English pending review', () => {
     expect(check('multilingual-kiswahili', 'Barua pepe: amuscollegeschool@gmail.com. Simu: +256 782 442 940. Saa za ofisi: 8:00 AMâ€“5:00 PM.')).toEqual([]);
     expect(check('multilingual-kiswahili', 'Barua Pechi: amuscollegeschool@gmail.com. Simu: +256 782 442 940. Saa za ofisi: 8:00 AMâ€“5:00 PM.')).toContain('Automatic fail: non-standard Kiswahili email wording.');
     expect(check('multilingual-luganda', 'For Senior 1 admissions, please contact https://amuscollegeschool.com/admissions for exact requirements.')).toEqual([]);
+    expect(check('multilingual-luganda', 'Office hours are Monday–Saturday, 8:00 AM–5:00 PM. For Senior 1 admissions, please contact https://amuscollegeschool.com/admissions.')).toEqual([]);
+    expect(check('multilingual-luganda', 'Lwakubiri–Lwakutaano, 8:00 AM–5:00 PM. For Senior 1 admissions, please contact https://amuscollegeschool.com/admissions.')).toContain('Automatic fail: Luganda generation is disabled pending native-speaker review.');
   });
 
   it('surfaces multilingual quality warnings without turning them into automatic failures', () => {
