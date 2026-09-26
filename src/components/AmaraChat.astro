@@ -1,0 +1,34 @@
+---
+import '../styles/amara.css';
+---
+
+<aside class="amara" aria-label="Amara school information assistant">
+  <button class="amara__teaser" type="button" data-amara-teaser aria-label="Open Amara chat">
+    <span><strong>Amara</strong><small>Ask about admissions, fees or school life.</small></span>
+    <span aria-hidden="true">×</span>
+  </button>
+  <button class="amara__launcher" type="button" data-amara-launcher aria-haspopup="dialog" aria-controls="amara-dialog" aria-label="Chat with Amara">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2Z" /></svg>
+    <span>Ask Amara</span>
+  </button>
+  <dialog class="amara__dialog" id="amara-dialog" aria-labelledby="amara-title" data-amara-dialog>
+    <header class="amara__header">
+      <img src="/images/logo.png" width="40" height="40" alt="Amus College School" />
+      <div><h2 id="amara-title">Amara</h2><p>Amus College School assistant</p></div>
+      <button type="button" data-amara-close aria-label="Close Amara chat">×</button>
+    </header>
+    <div class="amara__messages" data-amara-messages aria-live="polite" aria-relevant="additions"></div>
+    <div class="amara__typing" data-amara-typing aria-label="Amara is typing" hidden><i></i><i></i><i></i></div>
+    <div class="amara__quick-replies" data-amara-quick-replies aria-label="Suggested questions">
+      {['How do I apply?', 'What are the fees?', 'Tell me about sports', 'Do you offer scholarships?', 'Contact the school'].map(question => <button type="button" data-amara-question={question}>{question}</button>)}
+    </div>
+    <p class="amara__privacy">Amara provides general school information. Please don’t share sensitive student information.</p>
+    <form class="amara__form" data-amara-form>
+      <label class="sr-only" for="amara-message">Your message</label>
+      <textarea id="amara-message" name="message" rows="1" maxlength="700" placeholder="Write a question…" data-amara-input></textarea>
+      <button type="submit" data-amara-send>Send</button>
+    </form>
+    <p class="amara__status sr-only" data-amara-status role="status"></p>
+  </dialog>
+</aside>
+<script src="../scripts/amara.ts"></script>

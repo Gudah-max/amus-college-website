@@ -1,0 +1,10 @@
+import type { AmaraFact } from './types';
+
+export const sportsFacts: AmaraFact[] = [
+  { id: 'feassa-2024', topic: 'sports', content: 'In 2024 FEASSA, Amus College School were Boys’ Football Champions.', source: 'src/data/sports-records.ts', effectivePeriod: '2024 historic record', lastReviewed: '2026-09-26', status: 'approved-stable' },
+  { id: 'usssa-2026', topic: 'sports', content: 'In 2026, Amus College School were National Boys’ Football Champions in USSSA.', source: 'src/data/sports-records.ts', effectivePeriod: '2026 historic record', lastReviewed: '2026-09-26', status: 'approved-stable' },
+  { id: 'caf-gulu-2026', topic: 'sports', content: 'At the CAF Uganda national qualifiers in Gulu in 2026, Amus College School won a national double: the boys beat St Mary’s Kitende 5–4 on penalties after 0–0, and the girls beat St Noa Girls 1–0.', source: 'src/data/sports-records.ts', effectivePeriod: '2026 historic record', lastReviewed: '2026-09-26', status: 'approved-stable' },
+  { id: 'cecafa-kigali-2026', topic: 'sports', content: 'At CECAFA qualifying in Kigali in 2026, Amus represented Uganda. The boys became regional champions after beating Rwanda 1–0 in the final; the girls won bronze after beating Rwanda 2–0 in the third-place playoff. The boys qualified to represent the CECAFA zone at the continental stage.', source: 'src/data/sports-records.ts', effectivePeriod: '2026 historic record', lastReviewed: '2026-09-26', status: 'approved-stable' },
+  { id: 'amus-fc-2026-2027', topic: 'sports', content: 'Amus FC, distinct from the school’s inter-school teams, was promoted to the 2026/27 FUFA Big League after a 2–1 aggregate result over MYDA FC.', source: 'Current sports page', effectivePeriod: '2026/27 season', lastReviewed: '2026-09-26', status: 'approved-stable' },
+  { id: 'athlete-progression', topic: 'sports', content: 'Former Amus College students Allan Oyirwoth and Hakim Musabbah are included in the school’s athlete-progression records.', source: 'src/data/sports-records.ts', lastReviewed: '2026-09-26', status: 'approved-stable' },
+];

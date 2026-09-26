@@ -6,9 +6,15 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "test": "vitest run"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.128.0",
+    "@netlify/functions": "^6.0.0",
     "astro": "7.3.3"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.2"
   }
 }
