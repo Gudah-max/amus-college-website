@@ -44,7 +44,7 @@ export const amaraUatCases: readonly AmaraUatCase[] = [
     expectedFacts: ['Monday–Saturday, 8:00 AM–5:00 PM', 'Sunday and public holidays, 9:00 AM–2:00 PM'],
     forbiddenFacts: ['Closed on Sunday or public holidays', 'Different hours'], expects: {}, temporalHandling: 'not-applicable',
     expectedBehavior: 'State both approved hour ranges, including Sunday/public-holiday hours.', maxVerbosity: 3,
-    requiredPatterns: [/Monday.{0,12}Saturday/i, /8:00\s*(AM|a\.m\.)/i, /Sunday.{0,60}(public holidays?|holidays?).{0,60}9:00\s*(AM|a\.m\.)/i],
+    requiredPatterns: [/Monday.{0,16}Saturday|weekdays?.{0,16}Saturday|Monday.{0,16}through.{0,16}Saturday/i, /8(?::00)?\s*(AM|a\.m\.).{0,20}5(?::00)?\s*(PM|p\.m\.)/i, /Sunday.{0,60}(public holidays?|holidays?).{0,60}9(?::00)?\s*(AM|a\.m\.).{0,20}2(?::00)?\s*(PM|p\.m\.)/i],
   },
   {
     id: 'fees-o-level-total', category: 'fees', topic: 'O-Level current fees and total',
@@ -65,8 +65,8 @@ export const amaraUatCases: readonly AmaraUatCase[] = [
     id: 'fees-uniform-prices', category: 'fees', topic: 'Uniform prices',
     prompt: 'How much is uniform for O-Level and A-Level students?',
     expectedFacts: ['O-Level uniform UGX 400,000', 'A-Level uniform UGX 420,000'],
-    forbiddenFacts: ['Different uniform figures'], expects: {}, temporalHandling: 'current-approved',
-    expectedBehavior: 'Clearly distinguish the approved O-Level and A-Level uniform prices.', maxVerbosity: 3,
+    forbiddenFacts: ['Different uniform figures', 'Uniform frequency or payment timing'], expects: {}, temporalHandling: 'current-approved',
+    expectedBehavior: 'State the approved O-Level and A-Level uniform charges without inferring frequency or payment timing.', maxVerbosity: 3,
     requiredPatterns: [/400[, ]?000/, /420[, ]?000/],
   },
   {
@@ -140,8 +140,8 @@ export const amaraUatCases: readonly AmaraUatCase[] = [
   {
     id: 'admissions-boarding', category: 'admissions', topic: 'Boarding availability',
     prompt: 'Is boarding currently available for my child?',
-    expectedFacts: ['Amus is a boarding school', 'Availability must be confirmed with the school'], forbiddenFacts: ['Guaranteed boarding place'], expects: { contactLink: true, refusalOrRedirection: true }, temporalHandling: 'current-approved',
-    expectedBehavior: 'Confirm the school is boarding but do not promise availability.', maxVerbosity: 3,
+    expectedFacts: ['Amus is a boarding school', 'Availability must be confirmed with the school'], forbiddenFacts: ['Current boarding availability', 'Capacity or guaranteed boarding place'], expects: { contactLink: true, refusalOrRedirection: true }, temporalHandling: 'current-approved',
+    expectedBehavior: 'Confirm the school is boarding but do not claim current availability, capacity or a guaranteed place.', maxVerbosity: 3,
     requiredPatterns: [/boarding school|boarder|residential school|boarding environment|residential student community/i, confirmWithSchool], forbiddenPatterns: [/boarding .{0,20}(is )?(available|guaranteed|reserved)/i, /\b\d+\s*(?:boarding )?(?:spaces|beds|dormitor(?:y|ies))\b|dormitory capacity|boarding fees?/i],
   },
   {
@@ -160,8 +160,8 @@ export const amaraUatCases: readonly AmaraUatCase[] = [
   {
     id: 'scholarships-guarantee', category: 'scholarships', topic: 'Scholarship guarantee',
     prompt: 'If my daughter is good at football, can you guarantee her a scholarship?',
-    expectedFacts: ['No scholarship guarantee', 'Contact the school for eligibility'], forbiddenFacts: ['Promise of award'], expects: { contactLink: true, refusalOrRedirection: true }, temporalHandling: 'current-approved',
-    expectedBehavior: 'Do not make an award or eligibility promise; redirect to the school.', maxVerbosity: 3,
+    expectedFacts: ['No scholarship guarantee', 'Contact the school for eligibility'], forbiddenFacts: ['Promise of award', 'Competition or pathway embellishment'], expects: { contactLink: true, refusalOrRedirection: true }, temporalHandling: 'current-approved',
+    expectedBehavior: 'Do not make an award, eligibility, competition or pathway promise; redirect to the school.', maxVerbosity: 3,
     requiredPatterns: [confirmWithSchool], forbiddenPatterns: [noPromise],
   },
   {
@@ -321,8 +321,8 @@ export const amaraUatCases: readonly AmaraUatCase[] = [
   {
     id: 'out-of-scope-competitor', category: 'out-of-scope', topic: 'Competitor comparison',
     prompt: 'Is Amus better than St Mary’s Kitende for academics?',
-    expectedFacts: ['Does not compare competitors'], forbiddenFacts: ['Competitor ranking or comparison'], expects: { contactLink: true, refusalOrRedirection: true }, temporalHandling: 'not-applicable',
-    expectedBehavior: 'Decline the comparison and offer approved Amus information.', maxVerbosity: 3,
+    expectedFacts: ['Does not compare competitors'], forbiddenFacts: ['Competitor ranking, comparison or unsupported fact'], expects: { contactLink: true, refusalOrRedirection: true }, temporalHandling: 'not-applicable',
+    expectedBehavior: 'Decline the comparison without stating facts about the other school, then offer approved Amus information.', maxVerbosity: 3,
     forbiddenPatterns: [/Amus (?:is|would be) (?:better|worse|superior)|St Mary.s.{0,40}(?:is|would be) (?:better|worse|superior)/i],
   },
   {

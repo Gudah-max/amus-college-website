@@ -57,4 +57,29 @@ describe('Amara UAT automatic checker', () => {
     expect(check('out-of-scope-general', 'I focus on information about Amus College School. I can help with admissions, fees, academics, sports or student life.')).toEqual([]);
     expect(check('out-of-scope-general', 'I focus on information about Amus College School. For help, contact the school at +256 782 442 940.')).toEqual([]);
   });
+
+  it('enforces approved boarding identity without claiming current availability', () => {
+    expect(check('admissions-boarding', 'Amus is a boarding school. Contact the school at +256 782 442 940 for current availability.')).toEqual([]);
+    expect(check('admissions-boarding', 'Amus is a residential school. Contact the school at +256 782 442 940 for current availability.')).toEqual([]);
+    expect(check('admissions-boarding', 'Boarding is available. Contact the school at +256 782 442 940.')).not.toEqual([]);
+  });
+
+  it('allows neutral uniform charges and rejects any inferred uniform frequency', () => {
+    expect(check('fees-uniform-prices', 'The approved O-Level uniform charge is UGX 400,000 and the A-Level uniform charge is UGX 420,000.')).toEqual([]);
+    expect(check('fees-uniform-prices', 'The one-time uniform purchase is UGX 400,000 for O-Level and UGX 420,000 for A-Level.')).toContain('Automatic fail: unsupported uniform frequency.');
+    expect(check('fees-uniform-prices', 'Uniform is UGX 400,000 for O-Level and UGX 420,000 every term for A-Level.')).toContain('Automatic fail: unsupported uniform frequency.');
+  });
+
+  it('limits scholarship and competitor answers to approved facts', () => {
+    expect(check('scholarships-types', 'Amus offers Academic Scholarships and Football Scholarships. In 2024, 350 students were enrolled under the programmes. Contact the school at +256 782 442 940 for eligibility.')).toEqual([]);
+    expect(check('scholarships-guarantee', 'Football Scholarships provide a continental-level competition pathway. Contact the school at +256 782 442 940.')).toContain('Automatic fail: unsupported scholarship-programme embellishment.');
+    expect(check('out-of-scope-competitor', 'I do not have verified information to compare Amus College School with other schools. I can share Amus information; contact the school at +256 782 442 940.')).toEqual([]);
+    expect(check('out-of-scope-competitor', 'Both are schools in Uganda. Contact the school at +256 782 442 940.')).toContain('Automatic fail: unsupported fact about a competitor.');
+  });
+
+  it('accepts equivalent office-hour wording and escaped SchoolPay codes', () => {
+    expect(check('contact-hours', 'Weekdays and Saturday: 8 AM–5 PM. Sunday and public holidays: 9 AM–2 PM.')).toEqual([]);
+    expect(check('fees-schoolpay', 'MTN: *165*4*3*2*1#. Airtel: *185*6*2#. Use your SchoolPay Code after enrolment.')).toEqual([]);
+    expect(check('fees-schoolpay', 'MTN: \\*165\\*4\\*3\\*2\\*1#. Airtel: \\*185\\*6\\*2#. Use your SchoolPay Code after enrolment.')).toEqual([]);
+  });
 });
