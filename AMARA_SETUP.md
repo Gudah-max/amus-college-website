@@ -69,3 +69,46 @@ Deploy only after a preview confirms desktop, tablet and mobile layout; keyboard
 focus, Escape, focus return, error state and long text; the live Netlify rate
 limit; and a controlled provider evaluation. Remove that import to disable the
 UI again. Do not enable before UAT.
+
+## Model UAT (internal only)
+
+The model evaluation is deliberately separate from the site and the Netlify
+function. It uses the same `AMARA_SYSTEM_PROMPT`, approved knowledge, empty
+history, `max_tokens: 360`, no temperature override, and disabled thinking for
+both candidates. This makes the comparison a like-for-like text response test;
+it does not add a public route, component import or test endpoint.
+
+Verified 26 September 2026 from Anthropic's official documentation:
+
+- Model A (Haiku 4.5): `claude-haiku-4-5`
+- Model B (Sonnet 5): `claude-sonnet-5`
+- The installed `@anthropic-ai/sdk` 0.128.0 supports both identifiers in its
+  Messages `Model` type. Both use the standard Messages API shape used here
+  (`model`, `system`, `messages`, `max_tokens`).
+- Sonnet 5 has a larger context window and adaptive-thinking capability than
+  Haiku 4.5. The UAT does not request those capabilities, so it supplies the
+  shared `thinking: { type: 'disabled' }` setting. No tools, caching, history,
+  temperature or partner-cloud endpoint is used.
+
+Sources: [model IDs and lifecycle](https://platform.claude.com/docs/en/about-claude/model-deprecations),
+[model migration guidance](https://platform.claude.com/docs/en/about-claude/models/migration-guide),
+and [Claude API pricing](https://platform.claude.com/docs/en/about-claude/pricing).
+The standard first-party API prices used for planning are Haiku 4.5: $1/MTok
+input and $5/MTok output; Sonnet 5: $2/MTok input and $10/MTok output.
+
+Run a safe, no-network summary without a key:
+
+```sh
+npm run amara:uat -- --dry-run
+```
+
+The harness accepts `--model haiku|sonnet|both`, `--case ID`, `--category
+CATEGORY` and `--output DIRECTORY`. Live mode is impossible unless both
+`AMARA_UAT_LIVE=true` and `ANTHROPIC_API_KEY` are present. A hard cap of 50
+requests applies per invocation, so the complete 44-case comparison must be
+run intentionally as two model-specific commands. Live machine-readable JSON
+result files are written to `tmp/amara-uat-results/`, which is gitignored.
+Each record includes model, test ID/category/prompt, response, latency, token
+usage when returned, status/error and automatic failures. The later reviewer
+scores each response using the 14-point rubric in `AMARA_UAT_REVIEW.md`, then
+compares median, p90 and slowest latency from those records.

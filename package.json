@@ -7,7 +7,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "amara:uat": "tsx scripts/amara-uat.mts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.128.0",
@@ -15,6 +16,7 @@
     "astro": "7.3.3"
   },
   "devDependencies": {
+    "tsx": "4.21.0",
     "vitest": "^5.0.2"
   }
 }
