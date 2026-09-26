@@ -4,6 +4,28 @@ This is an internal review sheet. Do not use it to enable Amara, deploy the
 site, or send a provider request without explicit approval. Run the same case
 set against each candidate with empty history and the shared prompt/config.
 
+## Recorded model decision — 26 September 2026
+
+**Production model:** `claude-haiku-4-5`
+**Benchmark/debug model:** `claude-sonnet-5`
+
+| Model | Success | Automatic failures | Cost | Median | p90 | Max |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| Haiku 4.5 | 44/44 | 0 | $0.125477 | 2,164.5 ms | 3,038.3 ms | 5,217 ms |
+| Sonnet 5 | 44/44 | 1 checker false positive | $0.493749 | 2,807.5 ms | 3,733.3 ms | 11,186 ms |
+
+The full-answer review found equivalent factual, safety/guardrail and temporal
+quality. Haiku completed the multilingual response more reliably and was
+approximately four times cheaper with lower latency. Use Sonnet only as a
+future benchmark/debug option if Haiku materially regresses, complex reasoning
+becomes necessary, or the knowledge architecture becomes substantially more
+complex. Luganda remains **NATIVE-SPEAKER REVIEW REQUIRED**.
+
+The former Sonnet automatic failure on `admissions-unsupported-threshold` was a
+checker false positive: a safe refusal repeated terms from the question. The
+checker now fails only a positive assertion of an unsupported aggregate, score,
+numeric threshold or threshold-based guarantee.
+
 ## Scoring rubric
 
 | Dimension | Points | Review question |

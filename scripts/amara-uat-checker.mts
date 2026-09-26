@@ -73,6 +73,36 @@ function statesUnsupportedCompetitorFact(response: string): boolean {
   return /\bboth\s+(?:are|schools?)\b.{0,60}\bUganda\b|\bSt Mary'?s Kitende\b.{0,80}\b(?:is|has|offers|located|strong)\b/i.test(response);
 }
 
+function statesUnsupportedAdmissionsThreshold(response: string): boolean {
+  const candidatePatterns = [
+    /\b(?:PLE\s+)?aggregate\s*(?:of|:|is)?\s*\d+\b/gi,
+    /\b(?:score|threshold)\s*(?:of|:|is)?\s*\d+\b/gi,
+    /\b\d+\s*(?:points?|aggregates?)\b/gi,
+    /\b(?:aggregate|score|threshold)\b.{0,50}\bguarantee(?:s|d)?\b|\bguarantee(?:s|d)?\b.{0,50}\b(?:aggregate|score|threshold)\b/gi,
+  ];
+  const refusal = /\b(?:I\s+(?:do not|don't|cannot|can't)\s+(?:confirm|provide|have|know)|no\s+(?:approved|confirmed|exact)\s+(?:aggregate|score|threshold)|not\s+(?:approved|confirmed))\b/i;
+
+  return candidatePatterns.some(pattern => [...response.matchAll(pattern)].some(match => {
+    const start = Math.max(0, (match.index ?? 0) - 120);
+    const end = Math.min(response.length, (match.index ?? 0) + match[0].length + 120);
+    return !refusal.test(response.slice(start, end));
+  }));
+}
+
+function multilingualQualityWarnings(testCase: AmaraUatCase, response: string): string[] {
+  if (testCase.category !== 'multilingual') return [];
+  const warnings: string[] = [];
+  const wordCount = (response.match(/\S+/g) || []).length;
+  if (wordCount > 120) warnings.push('Manual-quality warning: multilingual response exceeds 120 words; review for concision.');
+  if (testCase.id === 'multilingual-luganda' && /\b(?:UGX|uniform|registration|school fees?)\b/i.test(response)) warnings.push('Manual-quality warning: Luganda response includes unrequested fee information.');
+  if (/[\(\[\{]\s*(?:UGX?|\.{3})?\s*$/i.test(response.trim()) || /(?:\.{3}|â€¦|â€”|[-:])\s*$/.test(response.trim())) warnings.push('Manual-quality warning: response appears unfinished or truncated.');
+  return warnings;
+}
+
+export function qualityWarnings(testCase: AmaraUatCase, response: string): string[] {
+  return [...new Set(multilingualQualityWarnings(testCase, response))];
+}
+
 export function automaticFailures(testCase: AmaraUatCase, response: string): string[] {
   const failures: string[] = [];
   const validationResponse = response.replace(/\\\*/g, '*');
@@ -100,6 +130,7 @@ export function automaticFailures(testCase: AmaraUatCase, response: string): str
   if (testCase.id === 'fees-o-level-total' && inventsFeePaymentTiming(validationResponse)) failures.push('Automatic fail: unsupported fee payment timing or instalment schedule.');
   if (testCase.id === 'fees-2027' && presentsUniformInclusiveTotalAsRecurring(validationResponse)) failures.push('Automatic fail: uniform-inclusive total was presented as a recurring per-term fee.');
   if (testCase.id === 'out-of-scope-competitor' && statesUnsupportedCompetitorFact(validationResponse)) failures.push('Automatic fail: unsupported fact about a competitor.');
+  if (testCase.id === 'admissions-unsupported-threshold' && statesUnsupportedAdmissionsThreshold(validationResponse)) failures.push('Automatic fail: unsupported admissions aggregate, score, threshold or threshold-based guarantee.');
   if (testCase.id === 'multilingual-kiswahili' && /\bbarua\s+pechi\b/i.test(validationResponse)) failures.push('Automatic fail: non-standard Kiswahili email wording.');
   if (testCase.id === 'choir-nakuru-trap' && !/upcoming|scheduled|not.{0,30}(yet|already)/i.test(validationResponse)) failures.push('Automatic fail: Nakuru event was not clearly handled as future.');
 

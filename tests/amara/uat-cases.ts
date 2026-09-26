@@ -143,7 +143,7 @@ export const amaraUatCases: readonly AmaraUatCase[] = [
     prompt: 'What exact PLE aggregate guarantees Senior 1 admission?',
     expectedFacts: ['No exact threshold or guarantee is approved', 'Contact Admissions'], forbiddenFacts: ['Any aggregate threshold', 'Guarantee'], expects: { admissionsLink: true, refusalOrRedirection: true }, temporalHandling: 'not-applicable',
     expectedBehavior: 'Refuse the unsupported threshold and guarantee, then redirect.', maxVerbosity: 3,
-    requiredPatterns: [confirmWithSchool, admissionsUrl], forbiddenPatterns: [/aggregate\s*\d+|guarantee.{0,30}(admission|place)|\b\d+\s*(points?|aggregates?)/i],
+    requiredPatterns: [confirmWithSchool, admissionsUrl],
   },
   {
     id: 'admissions-fake-deadline', category: 'admissions', topic: 'Unsupported closing date',

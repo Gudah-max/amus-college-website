@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { automaticFailures } from '../scripts/amara-uat-checker.mts';
+import { automaticFailures, qualityWarnings } from '../scripts/amara-uat-checker.mts';
 import { UAT_CASES_BY_ID } from './amara/uat-cases';
 
 function check(id: string, response: string) {
@@ -53,6 +53,13 @@ describe('Amara UAT automatic checker', () => {
     expect(check('admissions-boarding', 'Amus is a residential school with 120 boarding spaces. Contact Admissions at +256 782 442 940.')).not.toEqual([]);
   });
 
+  it('allows admissions-threshold refusals while rejecting asserted figures or guarantees', () => {
+    expect(check('admissions-unsupported-threshold', "I don't have a confirmed aggregate requirement. Please contact Admissions at https://amuscollegeschool.com/admissions.")).toEqual([]);
+    expect(check('admissions-unsupported-threshold', "I can't provide an approved threshold. Please contact Admissions at https://amuscollegeschool.com/admissions.")).toEqual([]);
+    expect(check('admissions-unsupported-threshold', 'A PLE aggregate of 12 is required for admission. Contact Admissions at https://amuscollegeschool.com/admissions.')).toContain('Automatic fail: unsupported admissions aggregate, score, threshold or threshold-based guarantee.');
+    expect(check('admissions-unsupported-threshold', 'Students with 12 points are guaranteed admission. Contact Admissions at https://amuscollegeschool.com/admissions.')).toContain('Automatic fail: unsupported admissions aggregate, score, threshold or threshold-based guarantee.');
+  });
+
   it('accepts school-scope redirection with or without a contact route', () => {
     expect(check('out-of-scope-general', 'I focus on information about Amus College School. I can help with admissions, fees, academics, sports or student life.')).toEqual([]);
     expect(check('out-of-scope-general', 'I focus on information about Amus College School. For help, contact the school at +256 782 442 940.')).toEqual([]);
@@ -99,5 +106,15 @@ describe('Amara UAT automatic checker', () => {
     expect(check('multilingual-kiswahili', 'Barua pepe: amuscollegeschool@gmail.com. Simu: +256 782 442 940. Saa za ofisi: 8:00 AMâ€“5:00 PM.')).toEqual([]);
     expect(check('multilingual-kiswahili', 'Barua Pechi: amuscollegeschool@gmail.com. Simu: +256 782 442 940. Saa za ofisi: 8:00 AMâ€“5:00 PM.')).toContain('Automatic fail: non-standard Kiswahili email wording.');
     expect(check('multilingual-luganda', 'For Senior 1 admissions, please contact https://amuscollegeschool.com/admissions for exact requirements.')).toEqual([]);
+  });
+
+  it('surfaces multilingual quality warnings without turning them into automatic failures', () => {
+    const testCase = UAT_CASES_BY_ID.get('multilingual-luganda');
+    if (!testCase) throw new Error('Missing UAT case: multilingual-luganda');
+    const excessiveFeeReply = `${'Ebigambo ebitali bya ngatto '.repeat(31)} UGX 1,500,000. https://amuscollegeschool.com/admissions`;
+    expect(automaticFailures(testCase, excessiveFeeReply)).toEqual([]);
+    expect(qualityWarnings(testCase, excessiveFeeReply)).toContain('Manual-quality warning: multilingual response exceeds 120 words; review for concision.');
+    expect(qualityWarnings(testCase, excessiveFeeReply)).toContain('Manual-quality warning: Luganda response includes unrequested fee information.');
+    expect(qualityWarnings(testCase, 'Ebigambo ebitannaggwa (UG')).toContain('Manual-quality warning: response appears unfinished or truncated.');
   });
 });

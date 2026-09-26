@@ -3,7 +3,7 @@ import path from 'node:path';
 import Anthropic from '@anthropic-ai/sdk';
 import { AMARA_SYSTEM_PROMPT } from '../src/data/amara/system-prompt.ts';
 import { APPROVED_UAT_CASE_COUNT, UAT_CATEGORIES, UAT_CASES_BY_ID, amaraUatCases, assertApprovedUatSuite, type AmaraUatCase, type UatCategory } from '../tests/amara/uat-cases.ts';
-import { automaticFailures } from './amara-uat-checker.mts';
+import { automaticFailures, qualityWarnings } from './amara-uat-checker.mts';
 
 const MODELS = {
   haiku: 'claude-haiku-4-5',
@@ -19,7 +19,7 @@ type Arguments = { model: ModelKey | 'both'; dryRun: boolean; caseId?: string; c
 type UatRecord = {
   model: string; testId: string; category: UatCategory; prompt: string; response: string | null;
   latencyMs: number | null; inputTokens: number | null; outputTokens: number | null;
-  status: 'ok' | 'error'; error?: string; automaticFailures: string[];
+  status: 'ok' | 'error'; error?: string; automaticFailures: string[]; qualityWarnings?: string[];
 };
 
 function usage() {
@@ -81,7 +81,7 @@ function printDryRun(cases: readonly AmaraUatCase[], models: readonly ModelKey[]
   const modelNames = models.map(model => MODELS[model]);
   const estimateFor40Cases = {
     haiku: { low: costs(40, averagePromptTokens, 75, 1, 5), typical: costs(40, averagePromptTokens, 150, 1, 5), worstCaseCap: costs(40, averagePromptTokens, MAX_OUTPUT_TOKENS, 1, 5) },
-    sonnet: { low: costs(40, averagePromptTokens, 75, 2, 10), typical: costs(40, averagePromptTokens, 150, 2, 10), worstCaseCap: costs(40, averagePromptTokens, MAX_OUTPUT_TOKENS, 2, 10) },
+    sonnet: { low: costs(40, averagePromptTokens, 75, 3, 15), typical: costs(40, averagePromptTokens, 150, 3, 15), worstCaseCap: costs(40, averagePromptTokens, MAX_OUTPUT_TOKENS, 3, 15) },
   };
   console.log(JSON.stringify({
     mode: 'dry-run', models: modelNames, cases: cases.length, estimatedRequests: requestCount,
@@ -95,9 +95,9 @@ function printDryRun(cases: readonly AmaraUatCase[], models: readonly ModelKey[]
         worstCaseCap: costs(cases.length, averagePromptTokens, MAX_OUTPUT_TOKENS, 1, 5),
       } : undefined,
       sonnet: models.includes('sonnet') ? {
-        low: costs(cases.length, averagePromptTokens, 75, 2, 10),
-        typical: costs(cases.length, averagePromptTokens, 150, 2, 10),
-        worstCaseCap: costs(cases.length, averagePromptTokens, MAX_OUTPUT_TOKENS, 2, 10),
+        low: costs(cases.length, averagePromptTokens, 75, 3, 15),
+        typical: costs(cases.length, averagePromptTokens, 150, 3, 15),
+        worstCaseCap: costs(cases.length, averagePromptTokens, MAX_OUTPUT_TOKENS, 3, 15),
       } : undefined,
     },
     estimatedStandardApiCostUsdFor40Cases: {
@@ -117,7 +117,12 @@ async function recheckSavedResults(file: string) {
   const records = saved.records.map(record => {
     const testCase = UAT_CASES_BY_ID.get(record.testId);
     if (!testCase) throw new Error(`Saved result references unknown UAT case: ${record.testId}`);
-    return { testId: record.testId, status: record.status, automaticFailures: record.response ? automaticFailures(testCase, record.response) : ['No text response returned.'] };
+    return {
+      testId: record.testId,
+      status: record.status,
+      automaticFailures: record.response ? automaticFailures(testCase, record.response) : ['No text response returned.'],
+      qualityWarnings: record.response ? qualityWarnings(testCase, record.response) : [],
+    };
   });
   console.log(JSON.stringify({ mode: 'recheck', file, totalRecords: records.length, automaticFailureCount: records.filter(record => record.automaticFailures.length).length, automaticFailureIds: records.filter(record => record.automaticFailures.length).map(record => record.testId), records }, null, 2));
 }
@@ -140,7 +145,7 @@ async function runLive(cases: readonly AmaraUatCase[], models: readonly ModelKey
           system: AMARA_SYSTEM_PROMPT, messages: [{ role: 'user', content: testCase.prompt }],
         });
         const response = message.content.filter(block => block.type === 'text').map(block => block.text).join('\n').trim();
-        records.push({ model: MODELS[modelKey], testId: testCase.id, category: testCase.category, prompt: testCase.prompt, response: response || null, latencyMs: Math.round(performance.now() - started), inputTokens: message.usage.input_tokens, outputTokens: message.usage.output_tokens, status: 'ok', automaticFailures: response ? automaticFailures(testCase, response) : ['No text response returned.'] });
+        records.push({ model: MODELS[modelKey], testId: testCase.id, category: testCase.category, prompt: testCase.prompt, response: response || null, latencyMs: Math.round(performance.now() - started), inputTokens: message.usage.input_tokens, outputTokens: message.usage.output_tokens, status: 'ok', automaticFailures: response ? automaticFailures(testCase, response) : ['No text response returned.'], qualityWarnings: response ? qualityWarnings(testCase, response) : [] });
       } catch (error) {
         records.push({ model: MODELS[modelKey], testId: testCase.id, category: testCase.category, prompt: testCase.prompt, response: null, latencyMs: Math.round(performance.now() - started), inputTokens: null, outputTokens: null, status: 'error', error: error instanceof Error ? error.message : 'Unknown provider error', automaticFailures: [] });
       }

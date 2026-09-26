@@ -26,6 +26,26 @@ Set these server-side Netlify environment variables; never commit their values:
 No provider request is made by the build or automated tests. Without an API key,
 the endpoint returns a limited deterministic school-information fallback.
 
+## Production model decision
+
+The approved production default is `claude-haiku-4-5`. `AMARA_MODEL` remains
+an environment override and must not be hard-coded with a credential. Sonnet 5
+(`claude-sonnet-5`) is retained only as a future benchmark/debug option, to be
+used when a later regression shows a material Haiku quality problem, complex
+reasoning becomes necessary, or the knowledge architecture becomes materially
+more complex.
+
+The controlled 26 September 2026 UAT selected Haiku because it matched
+Sonnet's factual, safety and temporal quality at lower cost and latency:
+
+| Model | Success | Automatic failures | Cost | Median | p90 | Max |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| Haiku 4.5 | 44/44 | 0 | $0.125477 | 2,164.5 ms | 3,038.3 ms | 5,217 ms |
+| Sonnet 5 | 44/44 | 1 checker false positive | $0.493749 | 2,807.5 ms | 3,733.3 ms | 11,186 ms |
+
+Luganda remains subject to native-speaker review. The model decision should not
+be reopened unless future evidence identifies a material quality issue.
+
 ## Knowledge ownership and review
 
 `src/data/amara/` is the human-reviewable knowledge layer. The current website
@@ -94,7 +114,7 @@ Sources: [model IDs and lifecycle](https://platform.claude.com/docs/en/about-cla
 [model migration guidance](https://platform.claude.com/docs/en/about-claude/models/migration-guide),
 and [Claude API pricing](https://platform.claude.com/docs/en/about-claude/pricing).
 The standard first-party API prices used for planning are Haiku 4.5: $1/MTok
-input and $5/MTok output; Sonnet 5: $2/MTok input and $10/MTok output.
+input and $5/MTok output; Sonnet 5: $3/MTok input and $15/MTok output.
 
 Run a safe, no-network summary without a key:
 
@@ -109,7 +129,8 @@ requests applies per invocation, so the complete 44-case comparison must be
 run intentionally as two model-specific commands. Live machine-readable JSON
 result files are written to `tmp/amara-uat-results/`, which is gitignored.
 Each record includes model, test ID/category/prompt, response, latency, token
-usage when returned, status/error and automatic failures. The later reviewer
+usage when returned, status/error, automatic failures and manual-quality
+warnings. The later reviewer
 scores each response using the 14-point rubric in `AMARA_UAT_REVIEW.md`, then
 compares median, p90 and slowest latency from those records.
 
@@ -122,5 +143,9 @@ npm run amara:uat -- --recheck tmp/amara-uat-results/<result-file>.json
 
 The checker accepts approved contact-route variants and evaluates high-risk
 privacy, injection, Morocco, population, scholarship-guarantee and fee rules
-by their narrow behavioural signals. It is not a substitute for the rubric or
-native-speaker review of the Luganda response.
+by their narrow behavioural signals. Admissions-threshold checks fail only for
+an asserted aggregate, score, numeric threshold or threshold-based guarantee;
+safe refusals may mention those terms. Multilingual warnings surface excessive
+length, unrequested Luganda fee detail and obvious unfinished endings without
+turning language style into an automatic failure. The checker is not a
+substitute for the rubric or native-speaker review of the Luganda response.
