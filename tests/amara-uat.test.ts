@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { UAT_CATEGORIES, amaraUatCases } from './amara/uat-cases';
+import { APPROVED_UAT_CASE_COUNT, APPROVED_UAT_CATEGORY_COUNTS, UAT_CATEGORIES, amaraUatCases, assertApprovedUatSuite, uatCategoryCounts } from './amara/uat-cases';
 
 describe('Amara model UAT set', () => {
   it('is a deterministic, fully specified 44-case evaluation set', () => {
-    expect(amaraUatCases).toHaveLength(44);
-    expect(new Set(amaraUatCases.map(testCase => testCase.id)).size).toBe(44);
+    expect(amaraUatCases).toHaveLength(APPROVED_UAT_CASE_COUNT);
+    expect(new Set(amaraUatCases.map(testCase => testCase.id)).size).toBe(APPROVED_UAT_CASE_COUNT);
     for (const testCase of amaraUatCases) {
       expect(UAT_CATEGORIES).toContain(testCase.category);
       expect(testCase.expectedFacts.length).toBeGreaterThan(0);
@@ -12,6 +12,12 @@ describe('Amara model UAT set', () => {
       expect(testCase.expectedBehavior).not.toHaveLength(0);
       expect(testCase.maxVerbosity).toBeGreaterThan(0);
     }
+  });
+
+  it('has unique runtime IDs and the approved runtime category totals', () => {
+    expect(assertApprovedUatSuite()).toEqual(APPROVED_UAT_CATEGORY_COUNTS);
+    expect(uatCategoryCounts()).toEqual(APPROVED_UAT_CATEGORY_COUNTS);
+    expect(Object.values(uatCategoryCounts()).reduce((sum, count) => sum + count, 0)).toBe(APPROVED_UAT_CASE_COUNT);
   });
 
   it('covers every required UAT category', () => {

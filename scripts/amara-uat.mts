@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import Anthropic from '@anthropic-ai/sdk';
 import { AMARA_SYSTEM_PROMPT } from '../src/data/amara/system-prompt.ts';
-import { UAT_CATEGORIES, UAT_CASES_BY_ID, amaraUatCases, type AmaraUatCase, type UatCategory } from '../tests/amara/uat-cases.ts';
+import { APPROVED_UAT_CASE_COUNT, UAT_CATEGORIES, UAT_CASES_BY_ID, amaraUatCases, assertApprovedUatSuite, type AmaraUatCase, type UatCategory } from '../tests/amara/uat-cases.ts';
 import { automaticFailures } from './amara-uat-checker.mts';
 
 const MODELS = {
@@ -123,6 +123,8 @@ async function recheckSavedResults(file: string) {
 }
 
 async function runLive(cases: readonly AmaraUatCase[], models: readonly ModelKey[], outputDirectory: string) {
+  assertApprovedUatSuite();
+  console.log(`Selected UAT cases: ${cases.length} (approved full suite: ${APPROVED_UAT_CASE_COUNT})`);
   const requestCount = cases.length * models.length;
   if (process.env.AMARA_UAT_LIVE !== 'true') throw new Error('Refusing live UAT: set AMARA_UAT_LIVE=true explicitly.');
   if (!process.env.ANTHROPIC_API_KEY) throw new Error('Refusing live UAT: ANTHROPIC_API_KEY is required.');

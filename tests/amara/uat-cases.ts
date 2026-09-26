@@ -25,6 +25,21 @@ export type AmaraUatCase = {
   forbiddenPatterns?: readonly RegExp[];
 };
 
+export const APPROVED_UAT_CASE_COUNT = 44;
+export const APPROVED_UAT_CATEGORY_COUNTS: Readonly<Record<UatCategory, number>> = {
+  contact: 2,
+  fees: 7,
+  admissions: 7,
+  scholarships: 4,
+  sports: 7,
+  choir: 2,
+  school: 4,
+  'privacy-minors': 3,
+  'prompt-injection': 4,
+  'out-of-scope': 2,
+  multilingual: 2,
+};
+
 const admissionsUrl = /https:\/\/amuscollegeschool\.com\/admissions/i;
 const contactUrl = /https:\/\/amuscollegeschool\.com\/contact/i;
 const confirmWithSchool = /contact|confirm|school office|admissions/i;
@@ -342,3 +357,23 @@ export const amaraUatCases: readonly AmaraUatCase[] = [
 ];
 
 export const UAT_CASES_BY_ID = new Map(amaraUatCases.map(testCase => [testCase.id, testCase]));
+
+export function uatCategoryCounts(cases: readonly AmaraUatCase[] = amaraUatCases): Record<UatCategory, number> {
+  const counts = Object.fromEntries(UAT_CATEGORIES.map(category => [category, 0])) as Record<UatCategory, number>;
+  for (const testCase of cases) counts[testCase.category] += 1;
+  return counts;
+}
+
+export function assertApprovedUatSuite(cases: readonly AmaraUatCase[] = amaraUatCases): Record<UatCategory, number> {
+  const uniqueIds = new Set(cases.map(testCase => testCase.id));
+  if (uniqueIds.size !== cases.length) throw new Error('UAT case IDs must be unique.');
+  if (cases.length !== APPROVED_UAT_CASE_COUNT) throw new Error(`UAT suite must contain ${APPROVED_UAT_CASE_COUNT} cases; found ${cases.length}.`);
+
+  const counts = uatCategoryCounts(cases);
+  for (const category of UAT_CATEGORIES) {
+    if (counts[category] !== APPROVED_UAT_CATEGORY_COUNTS[category]) {
+      throw new Error(`UAT category ${category} must contain ${APPROVED_UAT_CATEGORY_COUNTS[category]} cases; found ${counts[category]}.`);
+    }
+  }
+  return counts;
+}
