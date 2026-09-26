@@ -15,13 +15,13 @@ export const recentSportsHonours = [
     year: '2026',
     competition: 'CAF Africa Schools Uganda National Qualifiers',
     achievement: 'Boys\' and girls\' champions',
-    context: 'Amus College School won both national titles in July, becoming the first school to win the boys\' and girls\' categories in the same edition.',
+    context: 'In July in Gulu, Amus College School won both national titles, becoming the first school to take the boys\' and girls\' categories in the same edition. The boys beat St Mary\'s Kitende 5–4 on penalties after a goalless final, while the girls beat St Noa Girls 1–0. The wins earned Amus College School the chance to represent Uganda at the CECAFA qualifiers in Rwanda.',
   },
   {
     year: '2026',
     competition: 'CAF Africa Schools Football Championship — CECAFA Qualifiers',
     achievement: 'Boys\' champions; girls\' bronze',
-    context: 'Representing Uganda in Kigali, the boys defeated Rwanda 1–0 in the final; the girls defeated Rwanda 2–0 in the third-place playoff.',
+    context: 'Representing Uganda in Kigali, Rwanda, the boys won the CECAFA regional title with a 1–0 final victory over Rwanda. The girls took bronze after defeating Rwanda 2–0 in the third-place playoff. The boys qualified to represent the CECAFA zone at the continental stage of the CAF African Schools Football Championship.',
   },
 ] as const;
 
