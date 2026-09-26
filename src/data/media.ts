@@ -26,6 +26,8 @@ import sportsVolleyball from '../assets/high_flying_community_volleyball_match.w
 import sportsGrounds from '../assets/amus-sports-grandstand.webp';
 import sportsAthletics from '../assets/ugandan_football_team_training_run.webp';
 import feassaChampions from '../../images/amus_college_2024_feasa_chanpions.webp';
+import kigaliCombinedCelebration from '../assets/kigali_combined_celebration_2026.webp';
+import kigaliGirlsBronze from '../assets/kigali_girls_bronze_2026.webp';
 import allanOyirwoth from '../../images/oyirwoth_allan.webp';
 import hakimMusabbah from '../../images/musabbah_hakim_VCU.webp';
 import competitiveFootball from '../../images/inter_school_sports.webp';
@@ -61,6 +63,8 @@ export const media = {
   sportsGrounds: { src: sportsGrounds, source: 'amus-sports-grandstand.png', purpose: 'Sports facilities image', alt: 'Covered spectator grandstand at the Amus College School sports field', focalPoint: 'center', caption: null, captionStatus: 'awaiting-confirmation', status: 'approved' },
   sportsAthletics: { src: sportsAthletics, source: 'ugandan_football_team_training_run.png', purpose: 'Sports participation image', alt: 'Amus College School football team training together in Uganda jerseys', focalPoint: 'center', caption: null, captionStatus: 'awaiting-confirmation', status: 'approved' },
   feassaChampions: { src: feassaChampions, source: 'amus_college_2024_feasa_chanpions.webp', purpose: '2024 FEASSA boys\' football record', alt: 'Amus College School football team pictured after the 2024 FEASSA Games', focalPoint: 'center', status: 'approved' },
+  kigaliCombinedCelebration: { src: kigaliCombinedCelebration, source: 'kigali_combined_celebration_2026.webp', purpose: '2026 CECAFA qualifiers boys\' and girls\' achievement', alt: 'Amus College School boys\' and girls\' teams celebrating after the CECAFA CAF African Schools Football Championship qualifiers in Kigali, Rwanda, in 2026.', focalPoint: 'center', status: 'approved' },
+  kigaliGirlsBronze: { src: kigaliGirlsBronze, source: 'kigali_girls_bronze_2026.webp', purpose: '2026 CECAFA qualifiers girls\' bronze record', alt: 'Amus College School girls\' team with medals and trophy after winning bronze at the CECAFA CAF African Schools Football Championship qualifiers in Kigali, Rwanda, in 2026.', focalPoint: 'center', status: 'approved' },
   allanOyirwoth: { src: allanOyirwoth, source: 'oyirwoth_allan.webp', purpose: 'former student progression profile', alt: 'Allan Oyirwoth, former Amus College student and footballer', focalPoint: 'center top', status: 'approved' },
   hakimMusabbah: { src: hakimMusabbah, source: 'musabbah_hakim_VCU.webp', purpose: 'former student progression profile', alt: 'Hakim Musabbah, former Amus College student and footballer', focalPoint: 'center top', status: 'approved' },
   competitiveFootball: { src: competitiveFootball, source: 'inter_school_sports.webp', purpose: 'Gallery competitive football', alt: 'Amus students representing the school in competitive football', focalPoint: 'center', status: 'working-source' },

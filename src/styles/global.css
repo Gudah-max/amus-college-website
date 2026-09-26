@@ -415,6 +415,8 @@ main section, main [id] { scroll-margin-top: calc(var(--header-height) + 24px); 
 .sports-honours-layout { display: grid; grid-template-columns: .72fr 1.28fr; gap: clamp(36px, 7vw, 96px); align-items: start; }
 .sports-honours-layout figure { position: sticky; top: calc(var(--header-height) + 28px); background: var(--image-placeholder); }
 .sports-honours-layout figure img { width: 100%; aspect-ratio: .86; object-fit: cover; object-position: center; }
+.sports-honours-support { position: static !important; margin: 32px 0 0; background: var(--image-placeholder); }
+.sports-honours-support img { aspect-ratio: 1.5 !important; object-position: center !important; }
 .sports-records { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--color-border); }
 .sports-records li { display: grid; grid-template-columns: 74px 1fr; gap: 22px; padding: 25px 0 27px; border-bottom: 1px solid var(--color-border); }
 .sports-record-year { margin: 3px 0 0; color: var(--color-action); font-size: 13px; font-weight: 800; letter-spacing: .08em; }
@@ -502,6 +504,8 @@ main section, main [id] { scroll-margin-top: calc(var(--header-height) + 24px); 
   .sports-honours-heading { margin-bottom: 31px; }
   .sports-honours-layout figure { width: min(100%, 480px); }
   .sports-honours-layout figure img { aspect-ratio: 1.25; }
+  .sports-honours-support { width: 100% !important; }
+  .sports-honours-support img { aspect-ratio: 1.25 !important; }
   .sports-records li { grid-template-columns: 1fr; gap: 7px; padding: 22px 0; }
   .athlete-progression-list article { grid-template-columns: minmax(112px, .44fr) 1fr; gap: 18px; }
   .sports-participation-images { grid-template-columns: 1fr; gap: 16px; }
