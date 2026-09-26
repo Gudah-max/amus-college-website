@@ -1,6 +1,7 @@
 _local/
 temporary screenshots/
 node_modules/
+.netlify/
 .astro/
 dist/
 playwright-report/
