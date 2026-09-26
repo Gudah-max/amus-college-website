@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import crest from '../assets/amus-crest.png';
 import '../styles/amara.css';
 ---
 
@@ -13,8 +15,8 @@ import '../styles/amara.css';
   </button>
   <dialog class="amara__dialog" id="amara-dialog" aria-labelledby="amara-title" data-amara-dialog>
     <header class="amara__header">
-      <img src="/images/logo.png" width="40" height="40" alt="Amus College School" />
-      <div><h2 id="amara-title">Amara</h2><p>Amus College School assistant</p></div>
+      <Image class="amara__crest" src={crest} width={40} height={40} alt="Amus College School crest" loading="eager" />
+      <div><h2 id="amara-title">Amara</h2><p>Amus College School Assistant</p></div>
       <button type="button" data-amara-close aria-label="Close Amara chat">×</button>
     </header>
     <div class="amara__messages" data-amara-messages aria-live="polite" aria-relevant="additions"></div>

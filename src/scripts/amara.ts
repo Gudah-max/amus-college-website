@@ -1,3 +1,5 @@
+import { formatAmaraResponse } from './amara-format';
+
 const root = document.querySelector<HTMLElement>('.amara');
 
 if (root) {
@@ -15,20 +17,23 @@ if (root) {
   const history: Array<{ role: 'user' | 'assistant'; content: string }> = [];
   let started = false;
 
-  const approvedLinkPattern = /https:\/\/amuscollegeschool\.com(?:\/[^\s.,!?)]*)?|amuscollegeschool@gmail\.com|\+256\s?(?:782\s?442\s?940|772\s?303\s?282|779\s?964\s?478)/gi;
   const appendAssistantContent = (message: HTMLElement, content: string) => {
-    let lastIndex = 0;
-    for (const match of content.matchAll(approvedLinkPattern)) {
-      const index = match.index ?? 0;
-      message.append(document.createTextNode(content.slice(lastIndex, index)));
-      const text = match[0];
-      const link = document.createElement('a');
-      link.textContent = text;
-      link.href = text.startsWith('https://') ? text : text.includes('@') ? `mailto:${text}` : `tel:${text.replace(/\s/g, '')}`;
-      message.append(link);
-      lastIndex = index + text.length;
+    for (const token of formatAmaraResponse(content)) {
+      if (token.kind === 'break') {
+        message.append(document.createElement('br'));
+      } else if (token.kind === 'bold') {
+        const bold = document.createElement('strong');
+        bold.textContent = token.text;
+        message.append(bold);
+      } else if (token.kind === 'link') {
+        const link = document.createElement('a');
+        link.textContent = token.text;
+        link.href = token.href;
+        message.append(link);
+      } else {
+        message.append(document.createTextNode(token.text));
+      }
     }
-    message.append(document.createTextNode(content.slice(lastIndex)));
   };
 
   const addMessage = (content: string, role: 'user' | 'assistant') => {
