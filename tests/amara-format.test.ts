@@ -52,7 +52,7 @@ describe('Amara response formatting', () => {
   it('uses the approved local crest rather than a legacy external logo path', async () => {
     const component = await readFile(new URL('../src/components/AmaraChat.astro', import.meta.url), 'utf8');
     expect(component).toContain("import crest from '../assets/amus-crest.png'");
-    expect(component).toContain('<Image class="amara__crest" src={crest}');
+    expect(component).toContain('<Image class="amara__crest" src={crest} width={42} height={42} densities={[1, 2]} quality="high" fit="contain"');
     expect(component).not.toContain('/images/logo.png');
     expect(component).not.toContain('https://amuscollegeschool.com/images/logo.png');
   });

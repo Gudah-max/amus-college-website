@@ -15,7 +15,7 @@ import '../styles/amara.css';
   </button>
   <dialog class="amara__dialog" id="amara-dialog" aria-labelledby="amara-title" data-amara-dialog>
     <header class="amara__header">
-      <Image class="amara__crest" src={crest} width={40} height={40} alt="Amus College School crest" loading="eager" />
+      <Image class="amara__crest" src={crest} width={42} height={42} densities={[1, 2]} quality="high" fit="contain" alt="Amus College School crest" loading="eager" />
       <div><h2 id="amara-title">Amara</h2><p>Amus College School Assistant</p></div>
       <button type="button" data-amara-close aria-label="Close Amara chat">×</button>
     </header>
