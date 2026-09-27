@@ -1,6 +1,7 @@
 ---
 import '../styles/tokens.css';
 import '../styles/global.css';
+import AmaraChat from '../components/AmaraChat.astro';
 
 interface Props {
   title: string;
@@ -11,6 +12,9 @@ interface Props {
 
 const { title, description, canonical = '/', robots = 'index,follow' } = Astro.props;
 const canonicalUrl = new URL(canonical, Astro.site);
+// Deliberately opt-in for Deploy Previews. This shared public layout prevents
+// page-by-page drift and emits no Amara markup or client script while disabled.
+const amaraEnabled = import.meta.env.PUBLIC_AMARA_ENABLED === 'true' && robots === 'index,follow';
 ---
 <!doctype html>
 <html lang="en">
@@ -32,5 +36,6 @@ const canonicalUrl = new URL(canonical, Astro.site);
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <slot />
+    {amaraEnabled && <AmaraChat />}
   </body>
 </html>
