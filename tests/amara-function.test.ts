@@ -70,6 +70,8 @@ describe('Amara Netlify function', () => {
     expect(AMARA_SYSTEM_PROMPT).toContain('do not freely generate Luganda');
     expect(AMARA_SYSTEM_PROMPT).toContain('do not claim fluency in Luganda');
     expect(AMARA_SYSTEM_PROMPT).toContain('Do not use a title, heading, bullets or a combined total for this simple question.');
+    expect(AMARA_SYSTEM_PROMPT).toContain('For scholarship questions that need a next step');
+    expect(AMARA_SYSTEM_PROMPT).toContain('Do not add phone numbers, email addresses, office hours or other contact channels to that answer.');
     expect(languageGuidanceFor('Nnyinza ntya okusaba ekifo mu S1?')).toContain('simple English');
   });
   it('uses a useful safe fallback when the provider is unavailable', async () => {
