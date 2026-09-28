@@ -5,6 +5,7 @@ import learning from '../assets/learning.webp';
 import boarding from '../assets/boarding.webp';
 import boardingDetail from '../assets/boarding-detail.webp';
 import sportAerial from '../assets/amus-college-football-campus-aerial.webp';
+import sportsChampions from '../assets/amus-champions-trophy.png';
 import sportsLeadUganda from '../assets/sports-lead-uganda-team.webp';
 import sportsAction from '../assets/sports-action.webp';
 import beyond from '../assets/amus-student-celebration.webp';
@@ -42,6 +43,7 @@ export const media = {
   boarding: { src: boarding, source: 'students_at_dinnig_hall.webp', purpose: 'boarding life', alt: 'Students sharing a meal together at Amus', status: 'working-source' },
   boardingDetail: { src: boardingDetail, source: 'girls_dormitory.webp', purpose: 'boarding detail', alt: 'Amus boarding accommodation', status: 'working-source' },
   sportAerial: { src: sportAerial, source: 'amus-college-football-campus-aerial.png', purpose: 'sports feature', alt: 'Amus College School football pitch and campus viewed from above', status: 'approved' },
+  sportsChampions: { src: sportsChampions, source: 'amus-champions-trophy.png', purpose: 'homepage sports feature', alt: 'Amus College School players celebrating with a trophy', status: 'approved' },
   sportsLeadUganda: { src: sportsLeadUganda, source: 'sports-lead-uganda-team.png', purpose: 'sports page lead image', alt: 'Amus College School students on the football field during a sports event', status: 'approved' },
   sportsAction: { src: sportsAction, source: 'action_shot_feassa_2024.webp', purpose: 'sports action', alt: 'Amus students competing in sport', status: 'working-source' },
   beyond: { src: beyond, source: 'amus-student-celebration.png', purpose: 'beyond classroom', alt: 'Amus College School students celebrating together during a school activity', status: 'approved' },
